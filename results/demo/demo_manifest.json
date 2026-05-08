@@ -1,0 +1,30 @@
+{
+  "cohorts": [
+    "demo_cohort_1",
+    "demo_cohort_2",
+    "demo_cohort_3",
+    "demo_cohort_4"
+  ],
+  "n_genes": 88,
+  "planted_genes": [
+    "AXL",
+    "NGFR",
+    "ITGA3",
+    "HLA-A",
+    "HLA-B",
+    "B2M",
+    "GZMB",
+    "PRF1",
+    "NKG7",
+    "PDCD1",
+    "LAG3",
+    "HAVCR2",
+    "COL1A1",
+    "FN1",
+    "TGFB1",
+    "S100A8",
+    "S100A9",
+    "LILRB2"
+  ],
+  "label_encoding": "0=responder/sensitive, 1=non-responder/resistant"
+}

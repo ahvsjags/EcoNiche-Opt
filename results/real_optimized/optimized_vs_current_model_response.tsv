@@ -1,0 +1,2 @@
+mean_delta	ci_low	ci_high	p_value	comparison	metric	n_samples	optimized_global_AUROC	current_global_AUROC	optimized_mean_lodo_AUROC	current_mean_lodo_AUROC	mean_lodo_delta	status
+0.17578152195683924	0.09251578748345617	0.2536309825602302	0.0	EcoNiche-Opt-ImmuneComposite_vs_current_full_model	response_AUROC	346	0.6215846994535519	0.44575699132111857	0.6517278820716321	0.5151574201261702	0.13657046194546196	computed_from_pipeline

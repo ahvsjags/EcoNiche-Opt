@@ -1,0 +1,4 @@
+ligand	receptor	source_state	target_state
+CXCL12	CXCR4	caf_ecm_exclusion	tnk_effector
+TGFB1	TGFBR1	caf_ecm_exclusion	tnk_effector
+IL10	IL10RA	myeloid_suppression	tnk_effector

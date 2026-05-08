@@ -1,0 +1,4 @@
+path	is_valid	missing_columns
+D:\EcoNiche-Opt\results\real\lodo_predictions.tsv	True	
+D:\EcoNiche-Opt\results\real\lodo_metrics.tsv	True	
+D:\EcoNiche-Opt\results\real\econiche_module.tsv	True	

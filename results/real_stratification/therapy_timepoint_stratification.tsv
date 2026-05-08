@@ -1,0 +1,17 @@
+stratum	value	n_samples	n_responders	n_nonresponders	AUROC	AUPRC	status
+all	all	227	64	163	0.3803680981595092	0.6415626896936337	computed_from_pipeline
+cohort	GSE115821	8	2	6	0.5	0.8	computed_from_pipeline
+cohort	GSE136961	21	9	12	0.4444444444444444	0.6348504375884407	computed_from_pipeline
+cohort	GSE168204	21	9	12	0.36111111111111105	0.5153943218087955	computed_from_pipeline
+cohort	GSE176307	88	16	72	0.44878472222222227	0.8222345263938268	computed_from_pipeline
+cohort	GSE78220	27	14	13	0.5659340659340659	0.6170548672969021	computed_from_pipeline
+cohort	GSE91061	62	14	48	0.4375	0.7431020214888507	computed_from_pipeline
+therapy	ICB	96	18	78	0.4430199430199431	0.8019105713767686	computed_from_pipeline
+therapy	anti-PD1	110	37	73	0.42021473528322845	0.6198730320194046	computed_from_pipeline
+therapy	anti-PD1_based	21	9	12	0.36111111111111105	0.5153943218087955	computed_from_pipeline
+timepoint	pretreatment	144	41	103	0.37343121004025576	0.6507201279082462	computed_from_pipeline
+timepoint	pretreatment;on_treatment	21	9	12	0.36111111111111105	0.5153943218087955	computed_from_pipeline
+timepoint	pretreatment;on_treatment;progression	62	14	48	0.4375	0.7431020214888507	computed_from_pipeline
+cancer_type	NSCLC	21	9	12	0.4444444444444444	0.6348504375884407	computed_from_pipeline
+cancer_type	melanoma	118	39	79	0.33820188250567995	0.5835445860522522	computed_from_pipeline
+cancer_type	urothelial_cancer	88	16	72	0.44878472222222227	0.8222345263938268	computed_from_pipeline

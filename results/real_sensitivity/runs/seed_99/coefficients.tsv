@@ -1,0 +1,8 @@
+feature	coefficient
+intercept	0.5706530430208538
+tumor_dedifferentiation	-0.19710249047562167
+antigen_presentation_mhc	-0.21840150678744014
+tnk_effector	-0.4294218140415472
+tcell_dysfunction	0.10638939226501659
+caf_ecm_exclusion	1.4763583418788386
+myeloid_suppression	0.7447109469604501

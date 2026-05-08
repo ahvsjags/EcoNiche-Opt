@@ -1,0 +1,8 @@
+metric	n_settings	estimate_mean	estimate_sd	estimate_min	estimate_max	status
+AUPRC	7	1.0	0.0	1.0	1.0	computed_from_pipeline
+AUROC	7	1.0	0.0	1.0	1.0	computed_from_pipeline
+Brier	7	4.548821456937374e-06	2.763151727472853e-06	8.519051717606679e-08	6.296094126118609e-06	computed_from_pipeline
+ECE	7	0.00020593608563059166	7.303381217377355e-05	6.632278991544639e-05	0.0002512632594452488	computed_from_pipeline
+F1	7	1.0	0.0	1.0	1.0	computed_from_pipeline
+MCC	7	1.0	0.0	1.0	1.0	computed_from_pipeline
+balanced_accuracy	7	1.0	0.0	1.0	1.0	computed_from_pipeline

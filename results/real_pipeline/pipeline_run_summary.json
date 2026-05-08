@@ -1,0 +1,11 @@
+{
+  "failed_stages": [],
+  "generated_utc": "2026-05-05T04:49:19.437493+00:00",
+  "out_dir": "results\\real_pipeline",
+  "registry": "config\\data_registry.yml",
+  "results_dir": "results\\real",
+  "status_counts": {
+    "PASS": 14,
+    "SKIPPED": 11
+  }
+}

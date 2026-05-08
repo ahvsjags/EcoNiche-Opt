@@ -1,0 +1,9 @@
+stratum	value	n_samples	n_responders	n_nonresponders	AUROC	AUPRC	status
+all	all	192	96	96	1.0	1.0	computed_from_pipeline
+cohort	demo_cohort_1	48	24	24	1.0	0.9999999999999999	computed_from_pipeline
+cohort	demo_cohort_2	48	24	24	1.0	0.9999999999999999	computed_from_pipeline
+cohort	demo_cohort_3	48	24	24	1.0	0.9999999999999999	computed_from_pipeline
+cohort	demo_cohort_4	48	24	24	1.0	0.9999999999999999	computed_from_pipeline
+therapy	unknown	192	96	96	1.0	1.0	computed_from_pipeline
+timepoint	unknown	192	96	96	1.0	1.0	computed_from_pipeline
+cancer_type	unknown	192	96	96	1.0	1.0	computed_from_pipeline

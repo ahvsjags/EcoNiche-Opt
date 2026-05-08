@@ -1,0 +1,9 @@
+id	is_valid	missing_fields
+data_registry	True	
+geo_public	True	
+ena_public	True	
+controlled_optional	True	
+ucsc_xena_tcga	True	
+gdc_api	True	
+enrichr_lincs	True	
+dgidb	True	

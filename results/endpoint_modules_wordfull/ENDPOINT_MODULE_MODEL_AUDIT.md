@@ -1,0 +1,385 @@
+# Endpoint-Stratified Module Model Audit
+
+This audit separates endpoint definitions, cancer/therapy strata, the Word-spec signed-rank ecological graph model, module-level priors, strong immune signatures, calibration, and decision-curve outputs.
+
+## Endpoint Definitions
+
+- strict_recist: CR/PR/MR/R/DCB vs PD/NR/NDB; SD is excluded.
+- primary_recist: CR/PR/MR/R/DCB vs SD/PD/NR/NDB; this is the conservative primary endpoint.
+- clinical_benefit: CR/PR/MR/SD/R/DCB vs PD/NR/NDB.
+
+## Main Result Snapshot
+
+- clinical_benefit / melanoma_anti_pd1_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.455, mean fold AUROC=0.428, ECE=0.231; best comparator=APM AUROC=0.608, delta=-0.153.
+- clinical_benefit / melanoma_binary_response_stress: EcoNiche-Opt-WordFullGraph pooled AUROC=0.596, mean fold AUROC=0.556, ECE=0.219; best comparator=EcoNiche-Opt-WordNoInteraction AUROC=0.677, delta=-0.081.
+- clinical_benefit / melanoma_core_high_evidence: EcoNiche-Opt-WordFullGraph pooled AUROC=0.517, mean fold AUROC=0.478, ECE=0.239; best comparator=APM AUROC=0.653, delta=-0.136.
+- clinical_benefit / melanoma_core_plus_phs000452: EcoNiche-Opt-WordFullGraph pooled AUROC=0.509, mean fold AUROC=0.469, ECE=0.114; best comparator=APM AUROC=0.612, delta=-0.104.
+- clinical_benefit / melanoma_recist_supported_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.515, mean fold AUROC=0.488, ECE=0.199; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.640, delta=-0.125.
+- clinical_benefit / pan_cancer_response_all: EcoNiche-Opt-WordFullGraph pooled AUROC=0.568, mean fold AUROC=0.621, ECE=0.073; best comparator=EcoNiche-Opt-ModuleIFNConsensus AUROC=0.625, delta=-0.057.
+- clinical_benefit / pan_cancer_without_secondary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.529, mean fold AUROC=0.548, ECE=0.083; best comparator=EcoNiche-Opt-AdaptiveConsensus AUROC=0.621, delta=-0.092.
+- clinical_benefit / secondary_confounded_transfer: EcoNiche-Opt-WordFullGraph pooled AUROC=0.580, mean fold AUROC=0.614, ECE=0.035; best comparator=CXCL9 AUROC=0.643, delta=-0.063.
+- primary_recist / melanoma_anti_pd1_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.506, mean fold AUROC=0.456, ECE=0.187; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.641, delta=-0.135.
+- primary_recist / melanoma_binary_response_stress: EcoNiche-Opt-WordFullGraph pooled AUROC=0.596, mean fold AUROC=0.556, ECE=0.219; best comparator=EcoNiche-Opt-WordNoInteraction AUROC=0.677, delta=-0.081.
+- primary_recist / melanoma_core_high_evidence: EcoNiche-Opt-WordFullGraph pooled AUROC=0.559, mean fold AUROC=0.546, ECE=0.335; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.705, delta=-0.146.
+- primary_recist / melanoma_core_plus_phs000452: EcoNiche-Opt-WordFullGraph pooled AUROC=0.477, mean fold AUROC=0.475, ECE=0.192; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.619, delta=-0.141.
+- primary_recist / melanoma_recist_supported_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.501, mean fold AUROC=0.551, ECE=0.159; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.685, delta=-0.184.
+- primary_recist / pan_cancer_response_all: EcoNiche-Opt-WordFullGraph pooled AUROC=0.613, mean fold AUROC=0.577, ECE=0.156; best comparator=EcoNiche-Opt-WordNoInteraction AUROC=0.643, delta=-0.030.
+- primary_recist / pan_cancer_without_secondary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.566, mean fold AUROC=0.541, ECE=0.225; best comparator=EcoNiche-Opt-AdaptiveConsensus AUROC=0.646, delta=-0.080.
+- primary_recist / secondary_confounded_transfer: EcoNiche-Opt-WordFullGraph pooled AUROC=0.595, mean fold AUROC=0.658, ECE=0.189; best comparator=CXCL9 AUROC=0.629, delta=-0.034.
+- strict_recist / melanoma_anti_pd1_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.512, mean fold AUROC=0.422, ECE=0.205; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.635, delta=-0.123.
+- strict_recist / melanoma_binary_response_stress: EcoNiche-Opt-WordFullGraph pooled AUROC=0.596, mean fold AUROC=0.556, ECE=0.219; best comparator=EcoNiche-Opt-WordNoInteraction AUROC=0.677, delta=-0.081.
+- strict_recist / melanoma_core_high_evidence: EcoNiche-Opt-WordFullGraph pooled AUROC=0.575, mean fold AUROC=0.548, ECE=0.249; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.707, delta=-0.132.
+- strict_recist / melanoma_core_plus_phs000452: EcoNiche-Opt-WordFullGraph pooled AUROC=0.495, mean fold AUROC=0.460, ECE=0.139; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.634, delta=-0.139.
+- strict_recist / melanoma_recist_supported_primary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.569, mean fold AUROC=0.566, ECE=0.197; best comparator=EcoNiche-Opt-ModulePriorFixed AUROC=0.690, delta=-0.120.
+- strict_recist / pan_cancer_response_all: EcoNiche-Opt-WordFullGraph pooled AUROC=0.618, mean fold AUROC=0.614, ECE=0.110; best comparator=EcoNiche-Opt-WordNoInteraction AUROC=0.657, delta=-0.040.
+- strict_recist / pan_cancer_without_secondary: EcoNiche-Opt-WordFullGraph pooled AUROC=0.559, mean fold AUROC=0.545, ECE=0.170; best comparator=EcoNiche-Opt-AdaptiveConsensus AUROC=0.654, delta=-0.095.
+- strict_recist / secondary_confounded_transfer: EcoNiche-Opt-WordFullGraph pooled AUROC=0.574, mean fold AUROC=0.624, ECE=0.180; best comparator=CXCL9 AUROC=0.643, delta=-0.069.
+
+## Strong Signature Claim Gate
+
+- clinical_benefit / melanoma_anti_pd1_primary vs APM: target AUROC=0.455, baseline AUROC=0.608, bootstrap delta=-0.152, 95% CI [-0.271, -0.028], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.455, baseline AUROC=0.600, bootstrap delta=-0.145, 95% CI [-0.261, -0.024], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs CXCL9: target AUROC=0.455, baseline AUROC=0.583, bootstrap delta=-0.128, 95% CI [-0.258, -0.002], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs TIG: target AUROC=0.455, baseline AUROC=0.583, bootstrap delta=-0.128, 95% CI [-0.258, -0.005], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs TIDE_dysfunction: target AUROC=0.455, baseline AUROC=0.581, bootstrap delta=-0.127, 95% CI [-0.244, -0.009], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs IFNG: target AUROC=0.455, baseline AUROC=0.580, bootstrap delta=-0.125, 95% CI [-0.256, 0.000], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.455, baseline AUROC=0.577, bootstrap delta=-0.122, 95% CI [-0.250, 0.001], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs CYT: target AUROC=0.455, baseline AUROC=0.567, bootstrap delta=-0.113, 95% CI [-0.231, 0.006], FDR q=0.089; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs PDCD1LG2: target AUROC=0.455, baseline AUROC=0.562, bootstrap delta=-0.107, 95% CI [-0.235, 0.010], FDR q=0.105; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.455, baseline AUROC=0.552, bootstrap delta=-0.096, 95% CI [-0.186, -0.005], FDR q=0.088; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.455, baseline AUROC=0.525, bootstrap delta=-0.070, 95% CI [-0.148, 0.003], FDR q=0.089; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs TIDE_exclusion: target AUROC=0.455, baseline AUROC=0.501, bootstrap delta=-0.046, 95% CI [-0.183, 0.101], FDR q=0.562; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs IPRES: target AUROC=0.455, baseline AUROC=0.483, bootstrap delta=-0.028, 95% CI [-0.166, 0.116], FDR q=0.741; target is not above this comparator.
+- clinical_benefit / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.455, baseline AUROC=0.455, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.596, baseline AUROC=0.677, bootstrap delta=-0.082, 95% CI [-0.200, 0.030], FDR q=0.713; target is not above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs PDCD1LG2: target AUROC=0.596, baseline AUROC=0.641, bootstrap delta=-0.046, 95% CI [-0.253, 0.152], FDR q=0.756; target is not above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.596, baseline AUROC=0.596, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.596, baseline AUROC=0.581, bootstrap delta=0.013, 95% CI [-0.221, 0.250], FDR q=0.940; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs TIG: target AUROC=0.596, baseline AUROC=0.551, bootstrap delta=0.043, 95% CI [-0.226, 0.310], FDR q=0.871; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.596, baseline AUROC=0.540, bootstrap delta=0.060, 95% CI [-0.150, 0.269], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs CYT: target AUROC=0.596, baseline AUROC=0.520, bootstrap delta=0.074, 95% CI [-0.190, 0.350], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs IFNG: target AUROC=0.596, baseline AUROC=0.515, bootstrap delta=0.078, 95% CI [-0.190, 0.344], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs APM: target AUROC=0.596, baseline AUROC=0.500, bootstrap delta=0.094, 95% CI [-0.179, 0.373], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs CXCL9: target AUROC=0.596, baseline AUROC=0.490, bootstrap delta=0.104, 95% CI [-0.183, 0.390], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs TIDE_dysfunction: target AUROC=0.596, baseline AUROC=0.470, bootstrap delta=0.125, 95% CI [-0.137, 0.372], FDR q=0.756; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.596, baseline AUROC=0.404, bootstrap delta=0.189, 95% CI [-0.111, 0.495], FDR q=0.713; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs TIDE_exclusion: target AUROC=0.596, baseline AUROC=0.323, bootstrap delta=0.276, 95% CI [-0.116, 0.639], FDR q=0.713; target is above this comparator.
+- clinical_benefit / melanoma_binary_response_stress vs IPRES: target AUROC=0.596, baseline AUROC=0.227, bootstrap delta=0.373, 95% CI [-0.005, 0.706], FDR q=0.713; target is above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs APM: target AUROC=0.517, baseline AUROC=0.653, bootstrap delta=-0.137, 95% CI [-0.270, -0.007], FDR q=0.234; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.517, baseline AUROC=0.643, bootstrap delta=-0.126, 95% CI [-0.256, -0.007], FDR q=0.234; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs CXCL9: target AUROC=0.517, baseline AUROC=0.609, bootstrap delta=-0.092, 95% CI [-0.226, 0.041], FDR q=0.420; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs IFNG: target AUROC=0.517, baseline AUROC=0.604, bootstrap delta=-0.087, 95% CI [-0.218, 0.041], FDR q=0.420; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs TIDE_dysfunction: target AUROC=0.517, baseline AUROC=0.599, bootstrap delta=-0.083, 95% CI [-0.230, 0.055], FDR q=0.420; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs TIG: target AUROC=0.517, baseline AUROC=0.597, bootstrap delta=-0.081, 95% CI [-0.218, 0.050], FDR q=0.420; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.517, baseline AUROC=0.585, bootstrap delta=-0.068, 95% CI [-0.208, 0.073], FDR q=0.554; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.517, baseline AUROC=0.580, bootstrap delta=-0.062, 95% CI [-0.117, -0.004], FDR q=0.234; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs CYT: target AUROC=0.517, baseline AUROC=0.560, bootstrap delta=-0.044, 95% CI [-0.187, 0.091], FDR q=0.738; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs PDCD1LG2: target AUROC=0.517, baseline AUROC=0.555, bootstrap delta=-0.038, 95% CI [-0.185, 0.109], FDR q=0.780; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.517, baseline AUROC=0.553, bootstrap delta=-0.036, 95% CI [-0.087, 0.019], FDR q=0.420; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs TIDE_exclusion: target AUROC=0.517, baseline AUROC=0.533, bootstrap delta=-0.016, 95% CI [-0.156, 0.119], FDR q=0.954; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs IPRES: target AUROC=0.517, baseline AUROC=0.524, bootstrap delta=-0.007, 95% CI [-0.150, 0.127], FDR q=0.964; target is not above this comparator.
+- clinical_benefit / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.517, baseline AUROC=0.517, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs APM: target AUROC=0.509, baseline AUROC=0.612, bootstrap delta=-0.102, 95% CI [-0.174, -0.031], FDR q=0.036; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.509, baseline AUROC=0.611, bootstrap delta=-0.102, 95% CI [-0.176, -0.024], FDR q=0.036; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs CXCL9: target AUROC=0.509, baseline AUROC=0.610, bootstrap delta=-0.100, 95% CI [-0.187, -0.015], FDR q=0.078; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs IFNG: target AUROC=0.509, baseline AUROC=0.599, bootstrap delta=-0.089, 95% CI [-0.169, -0.007], FDR q=0.093; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs TIG: target AUROC=0.509, baseline AUROC=0.592, bootstrap delta=-0.082, 95% CI [-0.158, -0.000], FDR q=0.100; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs TIDE_dysfunction: target AUROC=0.509, baseline AUROC=0.590, bootstrap delta=-0.080, 95% CI [-0.156, -0.002], FDR q=0.100; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.509, baseline AUROC=0.589, bootstrap delta=-0.079, 95% CI [-0.159, 0.004], FDR q=0.115; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs CYT: target AUROC=0.509, baseline AUROC=0.576, bootstrap delta=-0.067, 95% CI [-0.144, 0.011], FDR q=0.137; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs PDCD1LG2: target AUROC=0.509, baseline AUROC=0.564, bootstrap delta=-0.054, 95% CI [-0.141, 0.031], FDR q=0.270; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.509, baseline AUROC=0.547, bootstrap delta=-0.038, 95% CI [-0.090, 0.015], FDR q=0.210; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.509, baseline AUROC=0.509, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs IPRES: target AUROC=0.509, baseline AUROC=0.484, bootstrap delta=0.022, 95% CI [-0.093, 0.141], FDR q=0.760; target is above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs TIDE_exclusion: target AUROC=0.509, baseline AUROC=0.477, bootstrap delta=0.029, 95% CI [-0.087, 0.153], FDR q=0.722; target is above this comparator.
+- clinical_benefit / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.509, baseline AUROC=0.468, bootstrap delta=0.041, 95% CI [-0.021, 0.103], FDR q=0.270; target is above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.515, baseline AUROC=0.640, bootstrap delta=-0.124, 95% CI [-0.245, -0.005], FDR q=0.336; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs APM: target AUROC=0.515, baseline AUROC=0.636, bootstrap delta=-0.119, 95% CI [-0.246, 0.003], FDR q=0.336; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs TIDE_dysfunction: target AUROC=0.515, baseline AUROC=0.608, bootstrap delta=-0.091, 95% CI [-0.219, 0.028], FDR q=0.400; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs CXCL9: target AUROC=0.515, baseline AUROC=0.602, bootstrap delta=-0.086, 95% CI [-0.223, 0.047], FDR q=0.400; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs IFNG: target AUROC=0.515, baseline AUROC=0.595, bootstrap delta=-0.079, 95% CI [-0.217, 0.052], FDR q=0.400; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs TIG: target AUROC=0.515, baseline AUROC=0.594, bootstrap delta=-0.079, 95% CI [-0.212, 0.052], FDR q=0.400; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.515, baseline AUROC=0.579, bootstrap delta=-0.063, 95% CI [-0.201, 0.070], FDR q=0.429; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs CYT: target AUROC=0.515, baseline AUROC=0.578, bootstrap delta=-0.063, 95% CI [-0.194, 0.058], FDR q=0.429; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.515, baseline AUROC=0.564, bootstrap delta=-0.050, 95% CI [-0.122, 0.016], FDR q=0.400; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.515, baseline AUROC=0.553, bootstrap delta=-0.039, 95% CI [-0.116, 0.041], FDR q=0.429; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs PDCD1LG2: target AUROC=0.515, baseline AUROC=0.551, bootstrap delta=-0.036, 95% CI [-0.173, 0.098], FDR q=0.684; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs TIDE_exclusion: target AUROC=0.515, baseline AUROC=0.539, bootstrap delta=-0.024, 95% CI [-0.164, 0.118], FDR q=0.833; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs IPRES: target AUROC=0.515, baseline AUROC=0.532, bootstrap delta=-0.017, 95% CI [-0.157, 0.117], FDR q=0.862; target is not above this comparator.
+- clinical_benefit / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.515, baseline AUROC=0.515, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.568, baseline AUROC=0.623, bootstrap delta=-0.055, 95% CI [-0.100, -0.007], FDR q=0.077; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs IFNG: target AUROC=0.568, baseline AUROC=0.621, bootstrap delta=-0.052, 95% CI [-0.098, -0.005], FDR q=0.081; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs TIG: target AUROC=0.568, baseline AUROC=0.620, bootstrap delta=-0.051, 95% CI [-0.096, -0.006], FDR q=0.077; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs CXCL9: target AUROC=0.568, baseline AUROC=0.617, bootstrap delta=-0.048, 95% CI [-0.096, -0.001], FDR q=0.086; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.568, baseline AUROC=0.614, bootstrap delta=-0.047, 95% CI [-0.071, -0.022], FDR q=0.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.568, baseline AUROC=0.614, bootstrap delta=-0.045, 95% CI [-0.090, 0.004], FDR q=0.115; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs TIDE_dysfunction: target AUROC=0.568, baseline AUROC=0.604, bootstrap delta=-0.036, 95% CI [-0.086, 0.021], FDR q=0.235; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.568, baseline AUROC=0.598, bootstrap delta=-0.030, 95% CI [-0.065, 0.004], FDR q=0.126; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs APM: target AUROC=0.568, baseline AUROC=0.596, bootstrap delta=-0.027, 95% CI [-0.075, 0.023], FDR q=0.391; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs PDCD1LG2: target AUROC=0.568, baseline AUROC=0.596, bootstrap delta=-0.027, 95% CI [-0.079, 0.032], FDR q=0.425; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs CYT: target AUROC=0.568, baseline AUROC=0.586, bootstrap delta=-0.018, 95% CI [-0.065, 0.030], FDR q=0.511; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.568, baseline AUROC=0.568, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_response_all vs IPRES: target AUROC=0.568, baseline AUROC=0.472, bootstrap delta=0.096, 95% CI [0.023, 0.166], FDR q=0.036; target is above this comparator.
+- clinical_benefit / pan_cancer_response_all vs TIDE_exclusion: target AUROC=0.568, baseline AUROC=0.462, bootstrap delta=0.106, 95% CI [0.039, 0.178], FDR q=0.000; target is above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.529, baseline AUROC=0.620, bootstrap delta=-0.092, 95% CI [-0.149, -0.037], FDR q=0.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs TIG: target AUROC=0.529, baseline AUROC=0.618, bootstrap delta=-0.090, 95% CI [-0.149, -0.030], FDR q=0.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs IFNG: target AUROC=0.529, baseline AUROC=0.615, bootstrap delta=-0.088, 95% CI [-0.148, -0.025], FDR q=0.021; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs TIDE_dysfunction: target AUROC=0.529, baseline AUROC=0.608, bootstrap delta=-0.081, 95% CI [-0.151, -0.012], FDR q=0.045; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs CXCL9: target AUROC=0.529, baseline AUROC=0.608, bootstrap delta=-0.080, 95% CI [-0.141, -0.017], FDR q=0.021; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.529, baseline AUROC=0.605, bootstrap delta=-0.077, 95% CI [-0.141, -0.010], FDR q=0.036; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs APM: target AUROC=0.529, baseline AUROC=0.587, bootstrap delta=-0.061, 95% CI [-0.128, 0.006], FDR q=0.100; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs PDCD1LG2: target AUROC=0.529, baseline AUROC=0.584, bootstrap delta=-0.056, 95% CI [-0.132, 0.018], FDR q=0.206; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.529, baseline AUROC=0.584, bootstrap delta=-0.055, 95% CI [-0.098, -0.014], FDR q=0.029; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.529, baseline AUROC=0.580, bootstrap delta=-0.051, 95% CI [-0.092, -0.011], FDR q=0.027; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs CYT: target AUROC=0.529, baseline AUROC=0.575, bootstrap delta=-0.046, 95% CI [-0.109, 0.017], FDR q=0.206; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.529, baseline AUROC=0.529, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs TIDE_exclusion: target AUROC=0.529, baseline AUROC=0.488, bootstrap delta=0.039, 95% CI [-0.053, 0.128], FDR q=0.407; target is above this comparator.
+- clinical_benefit / pan_cancer_without_secondary vs IPRES: target AUROC=0.529, baseline AUROC=0.483, bootstrap delta=0.044, 95% CI [-0.045, 0.131], FDR q=0.389; target is above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs CXCL9: target AUROC=0.580, baseline AUROC=0.643, bootstrap delta=-0.062, 95% CI [-0.134, 0.015], FDR q=0.376; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs IFNG: target AUROC=0.580, baseline AUROC=0.637, bootstrap delta=-0.056, 95% CI [-0.133, 0.024], FDR q=0.376; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.580, baseline AUROC=0.635, bootstrap delta=-0.055, 95% CI [-0.146, 0.038], FDR q=0.418; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs TIG: target AUROC=0.580, baseline AUROC=0.634, bootstrap delta=-0.053, 95% CI [-0.130, 0.025], FDR q=0.376; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.580, baseline AUROC=0.629, bootstrap delta=-0.049, 95% CI [-0.116, 0.022], FDR q=0.376; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs APM: target AUROC=0.580, baseline AUROC=0.616, bootstrap delta=-0.035, 95% CI [-0.126, 0.054], FDR q=0.693; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs PDCD1LG2: target AUROC=0.580, baseline AUROC=0.615, bootstrap delta=-0.033, 95% CI [-0.138, 0.079], FDR q=0.702; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs CYT: target AUROC=0.580, baseline AUROC=0.609, bootstrap delta=-0.029, 95% CI [-0.120, 0.061], FDR q=0.702; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs TIDE_dysfunction: target AUROC=0.580, baseline AUROC=0.598, bootstrap delta=-0.017, 95% CI [-0.107, 0.077], FDR q=0.852; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.580, baseline AUROC=0.592, bootstrap delta=-0.013, 95% CI [-0.037, 0.011], FDR q=0.445; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.580, baseline AUROC=0.584, bootstrap delta=-0.003, 95% CI [-0.047, 0.040], FDR q=0.949; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.580, baseline AUROC=0.580, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs IPRES: target AUROC=0.580, baseline AUROC=0.438, bootstrap delta=0.142, 95% CI [0.032, 0.253], FDR q=0.036; target is above this comparator.
+- clinical_benefit / secondary_confounded_transfer vs TIDE_exclusion: target AUROC=0.580, baseline AUROC=0.405, bootstrap delta=0.175, 95% CI [0.071, 0.277], FDR q=0.000; target is above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.506, baseline AUROC=0.641, bootstrap delta=-0.136, 95% CI [-0.222, -0.045], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs TIG: target AUROC=0.506, baseline AUROC=0.626, bootstrap delta=-0.121, 95% CI [-0.212, -0.032], FDR q=0.040; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs CXCL9: target AUROC=0.506, baseline AUROC=0.625, bootstrap delta=-0.120, 95% CI [-0.216, -0.026], FDR q=0.040; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs IFNG: target AUROC=0.506, baseline AUROC=0.619, bootstrap delta=-0.114, 95% CI [-0.211, -0.021], FDR q=0.043; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs APM: target AUROC=0.506, baseline AUROC=0.614, bootstrap delta=-0.108, 95% CI [-0.204, -0.011], FDR q=0.049; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.506, baseline AUROC=0.613, bootstrap delta=-0.108, 95% CI [-0.198, -0.015], FDR q=0.040; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs TIDE_dysfunction: target AUROC=0.506, baseline AUROC=0.612, bootstrap delta=-0.108, 95% CI [-0.198, -0.018], FDR q=0.040; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs CYT: target AUROC=0.506, baseline AUROC=0.608, bootstrap delta=-0.103, 95% CI [-0.199, -0.015], FDR q=0.043; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs PDCD1LG2: target AUROC=0.506, baseline AUROC=0.595, bootstrap delta=-0.091, 95% CI [-0.187, 0.004], FDR q=0.093; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.506, baseline AUROC=0.584, bootstrap delta=-0.078, 95% CI [-0.149, -0.016], FDR q=0.040; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs IPRES: target AUROC=0.506, baseline AUROC=0.515, bootstrap delta=-0.010, 95% CI [-0.144, 0.126], FDR q=1.000; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.506, baseline AUROC=0.506, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs TIDE_exclusion: target AUROC=0.506, baseline AUROC=0.499, bootstrap delta=0.006, 95% CI [-0.132, 0.141], FDR q=1.000; target is above this comparator.
+- primary_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.506, baseline AUROC=0.471, bootstrap delta=0.034, 95% CI [-0.028, 0.102], FDR q=0.383; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.596, baseline AUROC=0.677, bootstrap delta=-0.082, 95% CI [-0.200, 0.030], FDR q=0.713; target is not above this comparator.
+- primary_recist / melanoma_binary_response_stress vs PDCD1LG2: target AUROC=0.596, baseline AUROC=0.641, bootstrap delta=-0.046, 95% CI [-0.253, 0.152], FDR q=0.756; target is not above this comparator.
+- primary_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.596, baseline AUROC=0.596, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / melanoma_binary_response_stress vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.596, baseline AUROC=0.581, bootstrap delta=0.013, 95% CI [-0.221, 0.250], FDR q=0.940; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs TIG: target AUROC=0.596, baseline AUROC=0.551, bootstrap delta=0.043, 95% CI [-0.226, 0.310], FDR q=0.871; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.596, baseline AUROC=0.540, bootstrap delta=0.060, 95% CI [-0.150, 0.269], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs CYT: target AUROC=0.596, baseline AUROC=0.520, bootstrap delta=0.074, 95% CI [-0.190, 0.350], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs IFNG: target AUROC=0.596, baseline AUROC=0.515, bootstrap delta=0.078, 95% CI [-0.190, 0.344], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs APM: target AUROC=0.596, baseline AUROC=0.500, bootstrap delta=0.094, 95% CI [-0.179, 0.373], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs CXCL9: target AUROC=0.596, baseline AUROC=0.490, bootstrap delta=0.104, 95% CI [-0.183, 0.390], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs TIDE_dysfunction: target AUROC=0.596, baseline AUROC=0.470, bootstrap delta=0.125, 95% CI [-0.137, 0.372], FDR q=0.756; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.596, baseline AUROC=0.404, bootstrap delta=0.189, 95% CI [-0.111, 0.495], FDR q=0.713; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs TIDE_exclusion: target AUROC=0.596, baseline AUROC=0.323, bootstrap delta=0.276, 95% CI [-0.116, 0.639], FDR q=0.713; target is above this comparator.
+- primary_recist / melanoma_binary_response_stress vs IPRES: target AUROC=0.596, baseline AUROC=0.227, bootstrap delta=0.373, 95% CI [-0.005, 0.706], FDR q=0.713; target is above this comparator.
+- primary_recist / melanoma_core_high_evidence vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.559, baseline AUROC=0.705, bootstrap delta=-0.150, 95% CI [-0.277, -0.026], FDR q=0.216; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs CXCL9: target AUROC=0.559, baseline AUROC=0.666, bootstrap delta=-0.110, 95% CI [-0.239, 0.016], FDR q=0.228; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs TIG: target AUROC=0.559, baseline AUROC=0.666, bootstrap delta=-0.110, 95% CI [-0.239, 0.017], FDR q=0.228; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs IFNG: target AUROC=0.559, baseline AUROC=0.664, bootstrap delta=-0.108, 95% CI [-0.237, 0.015], FDR q=0.228; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs APM: target AUROC=0.559, baseline AUROC=0.664, bootstrap delta=-0.109, 95% CI [-0.237, 0.019], FDR q=0.228; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs TIDE_dysfunction: target AUROC=0.559, baseline AUROC=0.655, bootstrap delta=-0.099, 95% CI [-0.227, 0.031], FDR q=0.238; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.559, baseline AUROC=0.632, bootstrap delta=-0.075, 95% CI [-0.207, 0.051], FDR q=0.402; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs CYT: target AUROC=0.559, baseline AUROC=0.630, bootstrap delta=-0.074, 95% CI [-0.199, 0.053], FDR q=0.402; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.559, baseline AUROC=0.603, bootstrap delta=-0.045, 95% CI [-0.088, -0.005], FDR q=0.216; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs PDCD1LG2: target AUROC=0.559, baseline AUROC=0.591, bootstrap delta=-0.034, 95% CI [-0.170, 0.103], FDR q=0.849; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs IPRES: target AUROC=0.559, baseline AUROC=0.567, bootstrap delta=-0.010, 95% CI [-0.158, 0.145], FDR q=0.974; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.559, baseline AUROC=0.559, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.559, baseline AUROC=0.553, bootstrap delta=0.004, 95% CI [-0.071, 0.071], FDR q=0.974; target is above this comparator.
+- primary_recist / melanoma_core_high_evidence vs TIDE_exclusion: target AUROC=0.559, baseline AUROC=0.544, bootstrap delta=0.011, 95% CI [-0.148, 0.166], FDR q=0.974; target is above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.477, baseline AUROC=0.619, bootstrap delta=-0.140, 95% CI [-0.214, -0.067], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs CXCL9: target AUROC=0.477, baseline AUROC=0.613, bootstrap delta=-0.134, 95% CI [-0.213, -0.056], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs IFNG: target AUROC=0.477, baseline AUROC=0.600, bootstrap delta=-0.121, 95% CI [-0.200, -0.045], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs TIG: target AUROC=0.477, baseline AUROC=0.600, bootstrap delta=-0.121, 95% CI [-0.196, -0.044], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs APM: target AUROC=0.477, baseline AUROC=0.593, bootstrap delta=-0.113, 95% CI [-0.190, -0.038], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs TIDE_dysfunction: target AUROC=0.477, baseline AUROC=0.583, bootstrap delta=-0.104, 95% CI [-0.179, -0.032], FDR q=0.010; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs CYT: target AUROC=0.477, baseline AUROC=0.582, bootstrap delta=-0.104, 95% CI [-0.172, -0.031], FDR q=0.007; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.477, baseline AUROC=0.576, bootstrap delta=-0.097, 95% CI [-0.177, -0.019], FDR q=0.027; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.477, baseline AUROC=0.543, bootstrap delta=-0.065, 95% CI [-0.106, -0.025], FDR q=0.007; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs PDCD1LG2: target AUROC=0.477, baseline AUROC=0.543, bootstrap delta=-0.063, 95% CI [-0.145, 0.018], FDR q=0.188; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs IPRES: target AUROC=0.477, baseline AUROC=0.522, bootstrap delta=-0.048, 95% CI [-0.159, 0.064], FDR q=0.499; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs TIDE_exclusion: target AUROC=0.477, baseline AUROC=0.503, bootstrap delta=-0.029, 95% CI [-0.147, 0.082], FDR q=0.704; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.477, baseline AUROC=0.477, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.477, baseline AUROC=0.471, bootstrap delta=0.006, 95% CI [-0.056, 0.066], FDR q=0.858; target is above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.501, baseline AUROC=0.685, bootstrap delta=-0.182, 95% CI [-0.259, -0.104], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs CXCL9: target AUROC=0.501, baseline AUROC=0.649, bootstrap delta=-0.147, 95% CI [-0.236, -0.055], FDR q=0.008; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs TIDE_dysfunction: target AUROC=0.501, baseline AUROC=0.646, bootstrap delta=-0.143, 95% CI [-0.234, -0.053], FDR q=0.006; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs TIG: target AUROC=0.501, baseline AUROC=0.644, bootstrap delta=-0.142, 95% CI [-0.234, -0.047], FDR q=0.000; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs APM: target AUROC=0.501, baseline AUROC=0.642, bootstrap delta=-0.139, 95% CI [-0.241, -0.041], FDR q=0.008; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs IFNG: target AUROC=0.501, baseline AUROC=0.640, bootstrap delta=-0.137, 95% CI [-0.227, -0.044], FDR q=0.008; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs CYT: target AUROC=0.501, baseline AUROC=0.624, bootstrap delta=-0.123, 95% CI [-0.216, -0.023], FDR q=0.025; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.501, baseline AUROC=0.620, bootstrap delta=-0.119, 95% CI [-0.212, -0.026], FDR q=0.033; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs PDCD1LG2: target AUROC=0.501, baseline AUROC=0.589, bootstrap delta=-0.089, 95% CI [-0.187, 0.012], FDR q=0.122; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs IPRES: target AUROC=0.501, baseline AUROC=0.573, bootstrap delta=-0.074, 95% CI [-0.209, 0.067], FDR q=0.370; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.501, baseline AUROC=0.547, bootstrap delta=-0.046, 95% CI [-0.112, 0.020], FDR q=0.221; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.501, baseline AUROC=0.546, bootstrap delta=-0.043, 95% CI [-0.134, 0.043], FDR q=0.383; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs TIDE_exclusion: target AUROC=0.501, baseline AUROC=0.539, bootstrap delta=-0.039, 95% CI [-0.182, 0.104], FDR q=0.601; target is not above this comparator.
+- primary_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.501, baseline AUROC=0.501, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.613, baseline AUROC=0.643, bootstrap delta=-0.031, 95% CI [-0.051, -0.009], FDR q=0.012; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.613, baseline AUROC=0.629, bootstrap delta=-0.016, 95% CI [-0.064, 0.033], FDR q=0.906; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs CXCL9: target AUROC=0.613, baseline AUROC=0.628, bootstrap delta=-0.014, 95% CI [-0.061, 0.038], FDR q=0.906; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs IFNG: target AUROC=0.613, baseline AUROC=0.628, bootstrap delta=-0.014, 95% CI [-0.059, 0.036], FDR q=0.906; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs TIG: target AUROC=0.613, baseline AUROC=0.624, bootstrap delta=-0.010, 95% CI [-0.055, 0.037], FDR q=0.906; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.613, baseline AUROC=0.616, bootstrap delta=-0.003, 95% CI [-0.050, 0.048], FDR q=0.925; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.613, baseline AUROC=0.613, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / pan_cancer_response_all vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.613, baseline AUROC=0.608, bootstrap delta=0.004, 95% CI [-0.015, 0.023], FDR q=0.906; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs TIDE_dysfunction: target AUROC=0.613, baseline AUROC=0.608, bootstrap delta=0.006, 95% CI [-0.043, 0.057], FDR q=0.925; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs APM: target AUROC=0.613, baseline AUROC=0.605, bootstrap delta=0.009, 95% CI [-0.040, 0.060], FDR q=0.923; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs PDCD1LG2: target AUROC=0.613, baseline AUROC=0.599, bootstrap delta=0.014, 95% CI [-0.041, 0.071], FDR q=0.906; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs CYT: target AUROC=0.613, baseline AUROC=0.583, bootstrap delta=0.030, 95% CI [-0.019, 0.078], FDR q=0.713; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs IPRES: target AUROC=0.613, baseline AUROC=0.479, bootstrap delta=0.134, 95% CI [0.055, 0.207], FDR q=0.000; target is above this comparator.
+- primary_recist / pan_cancer_response_all vs TIDE_exclusion: target AUROC=0.613, baseline AUROC=0.448, bootstrap delta=0.165, 95% CI [0.087, 0.239], FDR q=0.000; target is above this comparator.
+- primary_recist / pan_cancer_without_secondary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.566, baseline AUROC=0.642, bootstrap delta=-0.075, 95% CI [-0.140, -0.012], FDR q=0.096; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs IFNG: target AUROC=0.566, baseline AUROC=0.637, bootstrap delta=-0.070, 95% CI [-0.142, -0.004], FDR q=0.098; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs TIG: target AUROC=0.566, baseline AUROC=0.635, bootstrap delta=-0.067, 95% CI [-0.131, -0.006], FDR q=0.096; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs CXCL9: target AUROC=0.566, baseline AUROC=0.634, bootstrap delta=-0.067, 95% CI [-0.136, -0.003], FDR q=0.096; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs TIDE_dysfunction: target AUROC=0.566, baseline AUROC=0.631, bootstrap delta=-0.064, 95% CI [-0.135, 0.005], FDR q=0.111; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.566, baseline AUROC=0.627, bootstrap delta=-0.061, 95% CI [-0.125, 0.003], FDR q=0.111; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs PDCD1LG2: target AUROC=0.566, baseline AUROC=0.610, bootstrap delta=-0.043, 95% CI [-0.113, 0.028], FDR q=0.271; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs APM: target AUROC=0.566, baseline AUROC=0.606, bootstrap delta=-0.041, 95% CI [-0.109, 0.027], FDR q=0.317; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.566, baseline AUROC=0.591, bootstrap delta=-0.024, 95% CI [-0.057, 0.008], FDR q=0.219; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.566, baseline AUROC=0.590, bootstrap delta=-0.024, 95% CI [-0.060, 0.013], FDR q=0.271; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs CYT: target AUROC=0.566, baseline AUROC=0.582, bootstrap delta=-0.014, 95% CI [-0.077, 0.053], FDR q=0.678; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.566, baseline AUROC=0.566, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / pan_cancer_without_secondary vs IPRES: target AUROC=0.566, baseline AUROC=0.490, bootstrap delta=0.079, 95% CI [-0.015, 0.175], FDR q=0.186; target is above this comparator.
+- primary_recist / pan_cancer_without_secondary vs TIDE_exclusion: target AUROC=0.566, baseline AUROC=0.458, bootstrap delta=0.110, 95% CI [0.009, 0.203], FDR q=0.096; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs CXCL9: target AUROC=0.595, baseline AUROC=0.629, bootstrap delta=-0.033, 95% CI [-0.103, 0.031], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs IFNG: target AUROC=0.595, baseline AUROC=0.620, bootstrap delta=-0.023, 95% CI [-0.089, 0.038], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs TIG: target AUROC=0.595, baseline AUROC=0.618, bootstrap delta=-0.021, 95% CI [-0.086, 0.040], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.595, baseline AUROC=0.613, bootstrap delta=-0.017, 95% CI [-0.068, 0.033], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs APM: target AUROC=0.595, baseline AUROC=0.610, bootstrap delta=-0.014, 95% CI [-0.077, 0.057], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.595, baseline AUROC=0.604, bootstrap delta=-0.008, 95% CI [-0.091, 0.067], FDR q=0.885; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.595, baseline AUROC=0.595, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- primary_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.595, baseline AUROC=0.590, bootstrap delta=0.007, 95% CI [-0.057, 0.069], FDR q=0.885; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs CYT: target AUROC=0.595, baseline AUROC=0.589, bootstrap delta=0.007, 95% CI [-0.071, 0.081], FDR q=0.885; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.595, baseline AUROC=0.589, bootstrap delta=0.007, 95% CI [-0.031, 0.048], FDR q=0.885; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs PDCD1LG2: target AUROC=0.595, baseline AUROC=0.578, bootstrap delta=0.018, 95% CI [-0.076, 0.112], FDR q=0.885; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs TIDE_dysfunction: target AUROC=0.595, baseline AUROC=0.573, bootstrap delta=0.024, 95% CI [-0.052, 0.099], FDR q=0.885; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs IPRES: target AUROC=0.595, baseline AUROC=0.448, bootstrap delta=0.145, 95% CI [0.029, 0.262], FDR q=0.126; target is above this comparator.
+- primary_recist / secondary_confounded_transfer vs TIDE_exclusion: target AUROC=0.595, baseline AUROC=0.425, bootstrap delta=0.169, 95% CI [0.057, 0.282], FDR q=0.108; target is above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.512, baseline AUROC=0.635, bootstrap delta=-0.126, 95% CI [-0.236, -0.014], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs APM: target AUROC=0.512, baseline AUROC=0.618, bootstrap delta=-0.109, 95% CI [-0.228, 0.015], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs TIG: target AUROC=0.512, baseline AUROC=0.616, bootstrap delta=-0.105, 95% CI [-0.218, 0.009], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs IFNG: target AUROC=0.512, baseline AUROC=0.613, bootstrap delta=-0.102, 95% CI [-0.221, 0.012], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs CXCL9: target AUROC=0.512, baseline AUROC=0.611, bootstrap delta=-0.100, 95% CI [-0.218, 0.017], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs TIDE_dysfunction: target AUROC=0.512, baseline AUROC=0.609, bootstrap delta=-0.099, 95% CI [-0.214, 0.015], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.512, baseline AUROC=0.605, bootstrap delta=-0.095, 95% CI [-0.209, 0.022], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs CYT: target AUROC=0.512, baseline AUROC=0.602, bootstrap delta=-0.093, 95% CI [-0.205, 0.022], FDR q=0.183; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs PDCD1LG2: target AUROC=0.512, baseline AUROC=0.589, bootstrap delta=-0.079, 95% CI [-0.194, 0.039], FDR q=0.252; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.512, baseline AUROC=0.551, bootstrap delta=-0.039, 95% CI [-0.097, 0.019], FDR q=0.252; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.512, baseline AUROC=0.519, bootstrap delta=-0.007, 95% CI [-0.085, 0.067], FDR q=0.980; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.512, baseline AUROC=0.512, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs TIDE_exclusion: target AUROC=0.512, baseline AUROC=0.502, bootstrap delta=0.007, 95% CI [-0.139, 0.151], FDR q=0.980; target is above this comparator.
+- strict_recist / melanoma_anti_pd1_primary vs IPRES: target AUROC=0.512, baseline AUROC=0.500, bootstrap delta=0.007, 95% CI [-0.130, 0.147], FDR q=0.980; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.596, baseline AUROC=0.677, bootstrap delta=-0.082, 95% CI [-0.200, 0.030], FDR q=0.713; target is not above this comparator.
+- strict_recist / melanoma_binary_response_stress vs PDCD1LG2: target AUROC=0.596, baseline AUROC=0.641, bootstrap delta=-0.046, 95% CI [-0.253, 0.152], FDR q=0.756; target is not above this comparator.
+- strict_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.596, baseline AUROC=0.596, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / melanoma_binary_response_stress vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.596, baseline AUROC=0.581, bootstrap delta=0.013, 95% CI [-0.221, 0.250], FDR q=0.940; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs TIG: target AUROC=0.596, baseline AUROC=0.551, bootstrap delta=0.043, 95% CI [-0.226, 0.310], FDR q=0.871; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.596, baseline AUROC=0.540, bootstrap delta=0.060, 95% CI [-0.150, 0.269], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs CYT: target AUROC=0.596, baseline AUROC=0.520, bootstrap delta=0.074, 95% CI [-0.190, 0.350], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs IFNG: target AUROC=0.596, baseline AUROC=0.515, bootstrap delta=0.078, 95% CI [-0.190, 0.344], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs APM: target AUROC=0.596, baseline AUROC=0.500, bootstrap delta=0.094, 95% CI [-0.179, 0.373], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs CXCL9: target AUROC=0.596, baseline AUROC=0.490, bootstrap delta=0.104, 95% CI [-0.183, 0.390], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs TIDE_dysfunction: target AUROC=0.596, baseline AUROC=0.470, bootstrap delta=0.125, 95% CI [-0.137, 0.372], FDR q=0.756; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.596, baseline AUROC=0.404, bootstrap delta=0.189, 95% CI [-0.111, 0.495], FDR q=0.713; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs TIDE_exclusion: target AUROC=0.596, baseline AUROC=0.323, bootstrap delta=0.276, 95% CI [-0.116, 0.639], FDR q=0.713; target is above this comparator.
+- strict_recist / melanoma_binary_response_stress vs IPRES: target AUROC=0.596, baseline AUROC=0.227, bootstrap delta=0.373, 95% CI [-0.005, 0.706], FDR q=0.713; target is above this comparator.
+- strict_recist / melanoma_core_high_evidence vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.575, baseline AUROC=0.707, bootstrap delta=-0.132, 95% CI [-0.269, -0.009], FDR q=0.552; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs APM: target AUROC=0.575, baseline AUROC=0.676, bootstrap delta=-0.103, 95% CI [-0.246, 0.036], FDR q=0.552; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs IFNG: target AUROC=0.575, baseline AUROC=0.653, bootstrap delta=-0.079, 95% CI [-0.227, 0.052], FDR q=0.580; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs CXCL9: target AUROC=0.575, baseline AUROC=0.653, bootstrap delta=-0.078, 95% CI [-0.227, 0.058], FDR q=0.580; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs TIG: target AUROC=0.575, baseline AUROC=0.649, bootstrap delta=-0.074, 95% CI [-0.219, 0.056], FDR q=0.580; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs TIDE_dysfunction: target AUROC=0.575, baseline AUROC=0.644, bootstrap delta=-0.068, 95% CI [-0.208, 0.065], FDR q=0.583; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.575, baseline AUROC=0.624, bootstrap delta=-0.050, 95% CI [-0.207, 0.091], FDR q=0.747; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs CYT: target AUROC=0.575, baseline AUROC=0.613, bootstrap delta=-0.037, 95% CI [-0.187, 0.104], FDR q=0.805; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.575, baseline AUROC=0.612, bootstrap delta=-0.037, 95% CI [-0.086, 0.012], FDR q=0.552; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.575, baseline AUROC=0.591, bootstrap delta=-0.017, 95% CI [-0.083, 0.045], FDR q=0.805; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs PDCD1LG2: target AUROC=0.575, baseline AUROC=0.585, bootstrap delta=-0.010, 95% CI [-0.160, 0.133], FDR q=0.968; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.575, baseline AUROC=0.575, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / melanoma_core_high_evidence vs IPRES: target AUROC=0.575, baseline AUROC=0.554, bootstrap delta=0.021, 95% CI [-0.142, 0.181], FDR q=0.882; target is above this comparator.
+- strict_recist / melanoma_core_high_evidence vs TIDE_exclusion: target AUROC=0.575, baseline AUROC=0.545, bootstrap delta=0.028, 95% CI [-0.131, 0.180], FDR q=0.828; target is above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.495, baseline AUROC=0.634, bootstrap delta=-0.139, 95% CI [-0.214, -0.065], FDR q=0.000; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs CXCL9: target AUROC=0.495, baseline AUROC=0.625, bootstrap delta=-0.130, 95% CI [-0.214, -0.049], FDR q=0.010; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs APM: target AUROC=0.495, baseline AUROC=0.616, bootstrap delta=-0.122, 95% CI [-0.203, -0.040], FDR q=0.010; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs IFNG: target AUROC=0.495, baseline AUROC=0.612, bootstrap delta=-0.117, 95% CI [-0.200, -0.035], FDR q=0.012; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs TIG: target AUROC=0.495, baseline AUROC=0.608, bootstrap delta=-0.113, 95% CI [-0.191, -0.035], FDR q=0.012; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs TIDE_dysfunction: target AUROC=0.495, baseline AUROC=0.598, bootstrap delta=-0.102, 95% CI [-0.178, -0.022], FDR q=0.022; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.495, baseline AUROC=0.592, bootstrap delta=-0.096, 95% CI [-0.180, -0.012], FDR q=0.042; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs CYT: target AUROC=0.495, baseline AUROC=0.588, bootstrap delta=-0.093, 95% CI [-0.167, -0.017], FDR q=0.029; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.495, baseline AUROC=0.572, bootstrap delta=-0.077, 95% CI [-0.120, -0.035], FDR q=0.009; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs PDCD1LG2: target AUROC=0.495, baseline AUROC=0.561, bootstrap delta=-0.065, 95% CI [-0.143, 0.027], FDR q=0.194; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs IPRES: target AUROC=0.495, baseline AUROC=0.503, bootstrap delta=-0.011, 95% CI [-0.126, 0.108], FDR q=0.986; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.495, baseline AUROC=0.495, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.495, baseline AUROC=0.488, bootstrap delta=0.006, 95% CI [-0.061, 0.074], FDR q=0.986; target is above this comparator.
+- strict_recist / melanoma_core_plus_phs000452 vs TIDE_exclusion: target AUROC=0.495, baseline AUROC=0.487, bootstrap delta=0.006, 95% CI [-0.114, 0.127], FDR q=0.995; target is above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.569, baseline AUROC=0.690, bootstrap delta=-0.119, 95% CI [-0.222, -0.020], FDR q=0.198; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs APM: target AUROC=0.569, baseline AUROC=0.651, bootstrap delta=-0.081, 95% CI [-0.204, 0.040], FDR q=0.457; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs TIDE_dysfunction: target AUROC=0.569, baseline AUROC=0.644, bootstrap delta=-0.074, 95% CI [-0.193, 0.038], FDR q=0.457; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs CXCL9: target AUROC=0.569, baseline AUROC=0.639, bootstrap delta=-0.069, 95% CI [-0.181, 0.045], FDR q=0.457; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs IFNG: target AUROC=0.569, baseline AUROC=0.636, bootstrap delta=-0.065, 95% CI [-0.180, 0.047], FDR q=0.457; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs TIG: target AUROC=0.569, baseline AUROC=0.635, bootstrap delta=-0.065, 95% CI [-0.174, 0.048], FDR q=0.457; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.569, baseline AUROC=0.635, bootstrap delta=-0.065, 95% CI [-0.122, -0.012], FDR q=0.198; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs CYT: target AUROC=0.569, baseline AUROC=0.621, bootstrap delta=-0.050, 95% CI [-0.173, 0.064], FDR q=0.642; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.569, baseline AUROC=0.613, bootstrap delta=-0.042, 95% CI [-0.160, 0.080], FDR q=0.666; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.569, baseline AUROC=0.601, bootstrap delta=-0.029, 95% CI [-0.108, 0.042], FDR q=0.642; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs PDCD1LG2: target AUROC=0.569, baseline AUROC=0.581, bootstrap delta=-0.010, 95% CI [-0.134, 0.122], FDR q=0.976; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.569, baseline AUROC=0.569, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs IPRES: target AUROC=0.569, baseline AUROC=0.562, bootstrap delta=0.008, 95% CI [-0.148, 0.161], FDR q=0.976; target is above this comparator.
+- strict_recist / melanoma_recist_supported_primary vs TIDE_exclusion: target AUROC=0.569, baseline AUROC=0.548, bootstrap delta=0.020, 95% CI [-0.130, 0.178], FDR q=0.974; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.618, baseline AUROC=0.657, bootstrap delta=-0.040, 95% CI [-0.067, -0.013], FDR q=0.000; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.618, baseline AUROC=0.642, bootstrap delta=-0.025, 95% CI [-0.072, 0.023], FDR q=0.702; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs IFNG: target AUROC=0.618, baseline AUROC=0.636, bootstrap delta=-0.019, 95% CI [-0.069, 0.029], FDR q=0.711; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs TIG: target AUROC=0.618, baseline AUROC=0.635, bootstrap delta=-0.018, 95% CI [-0.067, 0.028], FDR q=0.711; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs CXCL9: target AUROC=0.618, baseline AUROC=0.635, bootstrap delta=-0.018, 95% CI [-0.066, 0.031], FDR q=0.711; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.618, baseline AUROC=0.631, bootstrap delta=-0.015, 95% CI [-0.041, 0.013], FDR q=0.702; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.618, baseline AUROC=0.628, bootstrap delta=-0.011, 95% CI [-0.061, 0.038], FDR q=0.820; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.618, baseline AUROC=0.618, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / pan_cancer_response_all vs TIDE_dysfunction: target AUROC=0.618, baseline AUROC=0.616, bootstrap delta=0.000, 95% CI [-0.052, 0.052], FDR q=1.000; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs APM: target AUROC=0.618, baseline AUROC=0.611, bootstrap delta=0.007, 95% CI [-0.048, 0.058], FDR q=0.914; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs PDCD1LG2: target AUROC=0.618, baseline AUROC=0.609, bootstrap delta=0.008, 95% CI [-0.049, 0.066], FDR q=0.914; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs CYT: target AUROC=0.618, baseline AUROC=0.594, bootstrap delta=0.023, 95% CI [-0.028, 0.073], FDR q=0.711; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs IPRES: target AUROC=0.618, baseline AUROC=0.475, bootstrap delta=0.144, 95% CI [0.069, 0.220], FDR q=0.000; target is above this comparator.
+- strict_recist / pan_cancer_response_all vs TIDE_exclusion: target AUROC=0.618, baseline AUROC=0.450, bootstrap delta=0.169, 95% CI [0.093, 0.250], FDR q=0.000; target is above this comparator.
+- strict_recist / pan_cancer_without_secondary vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.559, baseline AUROC=0.651, bootstrap delta=-0.092, 95% CI [-0.161, -0.027], FDR q=0.045; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs TIG: target AUROC=0.559, baseline AUROC=0.645, bootstrap delta=-0.086, 95% CI [-0.155, -0.017], FDR q=0.046; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs IFNG: target AUROC=0.559, baseline AUROC=0.642, bootstrap delta=-0.084, 95% CI [-0.154, -0.010], FDR q=0.046; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.559, baseline AUROC=0.637, bootstrap delta=-0.078, 95% CI [-0.131, -0.026], FDR q=0.045; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs CXCL9: target AUROC=0.559, baseline AUROC=0.637, bootstrap delta=-0.078, 95% CI [-0.149, -0.004], FDR q=0.080; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs TIDE_dysfunction: target AUROC=0.559, baseline AUROC=0.635, bootstrap delta=-0.077, 95% CI [-0.152, -0.004], FDR q=0.080; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.559, baseline AUROC=0.632, bootstrap delta=-0.073, 95% CI [-0.150, -0.002], FDR q=0.086; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs PDCD1LG2: target AUROC=0.559, baseline AUROC=0.618, bootstrap delta=-0.059, 95% CI [-0.139, 0.017], FDR q=0.182; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs APM: target AUROC=0.559, baseline AUROC=0.608, bootstrap delta=-0.050, 95% CI [-0.126, 0.024], FDR q=0.229; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs CYT: target AUROC=0.559, baseline AUROC=0.589, bootstrap delta=-0.031, 95% CI [-0.106, 0.045], FDR q=0.470; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.559, baseline AUROC=0.586, bootstrap delta=-0.027, 95% CI [-0.061, 0.004], FDR q=0.127; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.559, baseline AUROC=0.559, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / pan_cancer_without_secondary vs IPRES: target AUROC=0.559, baseline AUROC=0.486, bootstrap delta=0.073, 95% CI [-0.019, 0.163], FDR q=0.152; target is above this comparator.
+- strict_recist / pan_cancer_without_secondary vs TIDE_exclusion: target AUROC=0.559, baseline AUROC=0.469, bootstrap delta=0.089, 95% CI [-0.006, 0.187], FDR q=0.111; target is above this comparator.
+- strict_recist / secondary_confounded_transfer vs CXCL9: target AUROC=0.574, baseline AUROC=0.643, bootstrap delta=-0.067, 95% CI [-0.154, 0.013], FDR q=0.372; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs IFNG: target AUROC=0.574, baseline AUROC=0.635, bootstrap delta=-0.059, 95% CI [-0.148, 0.019], FDR q=0.372; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs EcoNiche-Opt-ModulePriorFixed: target AUROC=0.574, baseline AUROC=0.632, bootstrap delta=-0.057, 95% CI [-0.133, 0.017], FDR q=0.372; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs TIG: target AUROC=0.574, baseline AUROC=0.632, bootstrap delta=-0.057, 95% CI [-0.146, 0.026], FDR q=0.372; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs EcoNiche-Opt-ImmuneComposite: target AUROC=0.574, baseline AUROC=0.625, bootstrap delta=-0.049, 95% CI [-0.148, 0.048], FDR q=0.587; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs APM: target AUROC=0.574, baseline AUROC=0.618, bootstrap delta=-0.043, 95% CI [-0.134, 0.051], FDR q=0.619; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs CYT: target AUROC=0.574, baseline AUROC=0.602, bootstrap delta=-0.027, 95% CI [-0.128, 0.070], FDR q=0.725; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordNoInteraction: target AUROC=0.574, baseline AUROC=0.600, bootstrap delta=-0.026, 95% CI [-0.104, 0.049], FDR q=0.725; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs PDCD1LG2: target AUROC=0.574, baseline AUROC=0.597, bootstrap delta=-0.021, 95% CI [-0.136, 0.093], FDR q=0.813; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordUnsignedGraph: target AUROC=0.574, baseline AUROC=0.592, bootstrap delta=-0.017, 95% CI [-0.082, 0.047], FDR q=0.725; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs TIDE_dysfunction: target AUROC=0.574, baseline AUROC=0.590, bootstrap delta=-0.014, 95% CI [-0.121, 0.086], FDR q=0.813; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs EcoNiche-Opt-WordNoBioObjective: target AUROC=0.574, baseline AUROC=0.574, bootstrap delta=0.000, 95% CI [0.000, 0.000], FDR q=1.000; target is not above this comparator.
+- strict_recist / secondary_confounded_transfer vs IPRES: target AUROC=0.574, baseline AUROC=0.445, bootstrap delta=0.129, 95% CI [0.021, 0.238], FDR q=0.234; target is above this comparator.
+- strict_recist / secondary_confounded_transfer vs TIDE_exclusion: target AUROC=0.574, baseline AUROC=0.408, bootstrap delta=0.165, 95% CI [0.048, 0.273], FDR q=0.072; target is above this comparator.
+
+## Label Sensitivity Audit
+
+- clinical_benefit: used=554, dropped=0, responders=274, nonresponders=280.
+- primary_recist: used=554, dropped=0, responders=200, nonresponders=354.
+- strict_recist: used=480, dropped=74, responders=200, nonresponders=280.
+
+## Interpretation Guardrail
+
+Do not claim superiority over all existing models unless the paired strong-signature comparisons are positive and FDR-supported in the pre-specified primary stratum. The Word-spec graph terms should be claimed as component gains only where the ablation table supports them.

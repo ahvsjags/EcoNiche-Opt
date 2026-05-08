@@ -1,0 +1,3 @@
+endpoint	stratum	target_model	baseline_family	n_samples	target_AUROC	mean_signature_AUROC	mean_delta_vs_signature_family	ci_low	ci_high	one_sided_p	two_sided_p	n_signatures	two_sided_fdr_q	one_sided_fdr_q	claim_level
+primary_recist	melanoma_core_high_evidence	EcoNiche-Opt-HeuristicEcology	eight_strong_signatures	117	0.7049025769956003	0.6317960402262728	0.07341550358799613	0.03150313158125656	0.11210558088657187	0.0006	0.0012	8	0.002	0.001	family_two_sided_FDR_supported
+primary_recist	melanoma_recist_supported_primary	EcoNiche-Opt-HeuristicEcology	eight_strong_signatures	131	0.6845588235294118	0.6196997549019608	0.06449025519724563	0.02452079325838018	0.10265347439297784	0.001	0.002	8	0.002	0.001	family_two_sided_FDR_supported

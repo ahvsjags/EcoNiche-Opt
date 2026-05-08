@@ -1,0 +1,5 @@
+cohort	n_samples	n_genes	missing_fraction
+demo_cohort_1	48	88	0.0
+demo_cohort_2	48	88	0.0
+demo_cohort_3	48	88	0.0
+demo_cohort_4	48	88	0.0

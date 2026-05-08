@@ -1,0 +1,3 @@
+endpoint	model_name	selection_scope	inner_mean_AUROC	inner_min_AUROC	inner_sd_AUROC	selected_as_primary_locked	claim_status
+strict_recist	EcoNiche-Opt-HeuristicEcology-LockedPanel	discovery_lodo_only	0.7098243099387265	0.6483516483516484	0.08424717492189827	True	locked_primary
+strict_recist	EcoNiche-Opt-PD1LikeTransferHead	discovery_lodo_only	0.6598274532485059	0.5439560439560439	0.12632708597369147	False	secondary_model_development_rescue

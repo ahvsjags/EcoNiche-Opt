@@ -1,0 +1,18 @@
+{
+  "auc_mean": 0.4935696055487722,
+  "auc_sd": 0.10776896047886632,
+  "auprc_mean": 0.6919521858286991,
+  "batch": 0.0,
+  "cell_specificity": 0.5,
+  "cindex_mean": 0.0,
+  "ece_mean": 0.3716224608928788,
+  "leakage": 0.0,
+  "lr": 0.0,
+  "network": 0.0,
+  "pathway": 0.0,
+  "redundancy": 0.0,
+  "score": 0.772332193341147,
+  "size": 0.0,
+  "stability": 0.5,
+  "therapy_confounding": 0.0
+}

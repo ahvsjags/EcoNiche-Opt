@@ -1,0 +1,7 @@
+state	coefficient	mode
+tumor_dedifferentiation	0.21546333401024972	melanoma_trained
+antigen_presentation_mhc	-0.11525965608678575	melanoma_trained
+tnk_effector	0.017999809887460236	melanoma_trained
+tcell_dysfunction	0.5714541412398363	melanoma_trained
+caf_ecm_exclusion	0.32727746437438354	melanoma_trained
+myeloid_suppression	0.3477443800141204	melanoma_trained
