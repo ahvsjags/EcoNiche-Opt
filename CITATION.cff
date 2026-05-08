@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: EcoNiche-Opt
+message: "If you use this scaffold, cite the repository and the underlying public datasets."
+type: software
+authors:
+  - name: EcoNiche-Opt contributors
+version: 0.3.0
+date-released: 2026-05-08

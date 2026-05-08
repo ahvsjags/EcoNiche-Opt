@@ -1,0 +1,17 @@
+include README.md
+include LICENSE
+include CITATION.cff
+graft src
+graft r-package/EcoNicheOpt
+graft tests
+recursive-exclude data *
+recursive-exclude results *
+recursive-exclude deliverables *
+recursive-exclude figures *
+recursive-exclude tables *
+recursive-exclude paper *
+recursive-exclude tmp *
+recursive-exclude .snakemake *
+recursive-exclude .pytest_cache *
+global-exclude *.py[cod]
+global-exclude __pycache__
