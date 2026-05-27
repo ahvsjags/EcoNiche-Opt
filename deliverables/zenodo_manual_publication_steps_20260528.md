@@ -1,13 +1,13 @@
 # Zenodo publication steps for EcoNiche-Opt v0.3.4
 
-Status: RESULT_PENDING until Zenodo mints a real DOI.
+Status: DOI minted as `10.5281/zenodo.20419694`.
 
 ## Frozen GitHub release
 
 - Repository: https://github.com/ahvsjags/EcoNiche-Opt
 - Release tag: v0.3.4-gpu-lipid-pair-rescue-20260528
 - Release URL: https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/v0.3.4-gpu-lipid-pair-rescue-20260528
-- Verified tag commit: f7d8dc0ca3fbd42224e5d21b7fdec8f182247883
+- Verified tag commit: 41474ce611e18a739aaba6dd0bf13afb22ca5d4a
 - Version: 0.3.4
 
 ## Recommended Zenodo route
@@ -17,8 +17,8 @@ Status: RESULT_PENDING until Zenodo mints a real DOI.
 3. Enable archiving for `ahvsjags/EcoNiche-Opt`.
 4. Confirm that the release `v0.3.4-gpu-lipid-pair-rescue-20260528` is archived.
 5. If Zenodo does not archive the existing release automatically, create a new GitHub release using the same tag after integration is enabled, or use the manual upload route below.
-6. After Zenodo publishes the record, copy the minted DOI. It must match the pattern `10.5281/zenodo.<record_id>`.
-7. Replace `RESULT_PENDING` in `CITATION.cff`, manuscript Code availability, README/release notes, and `deliverables/zenodo_release_metadata_20260527/zenodo_release_manifest.json`.
+6. Zenodo DOI: `10.5281/zenodo.20419694` (https://doi.org/10.5281/zenodo.20419694).
+7. The DOI has been written into `CITATION.cff`, manuscript Code availability, README/release notes, and `deliverables/zenodo_release_metadata_20260527/zenodo_release_manifest.json`.
 8. Rerun:
 
 ```powershell
@@ -59,4 +59,4 @@ Do not upload controlled-access raw data, licensed data, local caches, or expres
 
 ## Claim boundary
 
-The GitHub release is complete and public. The Zenodo DOI is not complete until the record is published by Zenodo. Until then, manuscript and citation files must retain `RESULT_PENDING` or omit the DOI.
+The GitHub release is complete and public. The Zenodo DOI has been minted as `10.5281/zenodo.20419694` and can be cited as https://doi.org/10.5281/zenodo.20419694.

@@ -1,14 +1,14 @@
 check	is_valid	detail
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	69056
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	395445
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	775706
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	69153
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	395497
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	776187
 exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3607723
 exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	654218
 exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12235
 exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38140
 exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	654218
-main_docx_not_older_than_markdown	True	docx=1779903784.1392398;md=1779903783.0980742
-main_pdf_not_older_than_docx	True	pdf=1779920769.4941678;docx=1779903784.1392398
+main_docx_not_older_than_markdown	True	docx=1779924670.587117;md=1779924669.5194051
+main_pdf_not_older_than_docx	True	pdf=1779924697.5334802;docx=1779924670.587117
 exists:Figure_1.png	True	932292
 exists:Figure_2.png	True	739513
 exists:Figure_3.png	True	777168

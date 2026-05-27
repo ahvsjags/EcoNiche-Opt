@@ -1278,24 +1278,27 @@ def build_audit(
         "zenodo_checklist": "deliverables/zenodo_release_metadata_20260527/ZENODO_RELEASE_CHECKLIST.md",
     }
     missing_zenodo_metadata = [name for name, path in zenodo_metadata_files.items() if not _exists(path)]
+    zenodo_pattern = re.compile(r"10\.5281/zenodo\.\d+")
+    zenodo_doi = str(zenodo_manifest.get("zenodo_doi", "missing"))
+    zenodo_status = str(zenodo_manifest.get("doi_status", "missing"))
+    zenodo_pending_ok = zenodo_doi == "RESULT_PENDING" and zenodo_status == "metadata_prepared_no_doi_minted"
+    zenodo_minted_ok = bool(zenodo_pattern.fullmatch(zenodo_doi)) and zenodo_status == "doi_minted"
     _add(
         rows,
         "translation",
-        "Zenodo release metadata is prepared without DOI fabrication",
+        "Zenodo release metadata is prepared or DOI minted without fabrication",
         _status(
             not missing_zenodo_metadata
-            and zenodo_manifest.get("zenodo_doi") == "RESULT_PENDING"
-            and zenodo_manifest.get("doi_status") == "metadata_prepared_no_doi_minted"
+            and (zenodo_pending_ok or zenodo_minted_ok)
         ),
         "missing={}; doi_status={}; zenodo_doi={}".format(
             ",".join(missing_zenodo_metadata) if missing_zenodo_metadata else "none",
-            zenodo_manifest.get("doi_status", "missing"),
-            zenodo_manifest.get("zenodo_doi", "missing"),
+            zenodo_status,
+            zenodo_doi,
         ),
-        "After the frozen GitHub release is archived, replace RESULT_PENDING with the minted DOI in citation and manuscript files.",
+        "Pending status must remain RESULT_PENDING; minted status must use a real Zenodo DOI in citation and manuscript files.",
     )
     zenodo_found = False
-    zenodo_pattern = re.compile(r"10\.5281/zenodo\.\d+")
     for path in ["CITATION.cff", "README.md", "DATA_RESULTS_FIGURES_UPLOAD_NOTES.md"]:
         full = ROOT / path
         if full.exists() and zenodo_pattern.search(full.read_text(encoding="utf-8", errors="ignore")):

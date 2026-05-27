@@ -26,6 +26,8 @@ READINESS = SUBMISSION_DIR / "communications_medicine_submission_readiness.md"
 RELEASE_TAG = "v0.3.4-gpu-lipid-pair-rescue-20260528"
 REPO = "https://github.com/ahvsjags/EcoNiche-Opt"
 ARCHIVE = f"{REPO}/archive/refs/tags/{RELEASE_TAG}.zip"
+ZENODO_DOI = "10.5281/zenodo.20419694"
+ZENODO_URL = f"https://doi.org/{ZENODO_DOI}"
 
 
 FIGURE_SOURCE_MAP = [
@@ -123,6 +125,8 @@ def make_source_data() -> None:
                 {"field": "repository", "value": REPO},
                 {"field": "release_tag", "value": RELEASE_TAG},
                 {"field": "release_archive", "value": ARCHIVE},
+                {"field": "zenodo_doi", "value": ZENODO_DOI},
+                {"field": "zenodo_url", "value": ZENODO_URL},
                 {"field": "contents", "value": "Source data for main Figures 1-7, major Supplementary Figures 1-10, and Supplementary Tables 1-24."},
                 {"field": "provenance", "value": "All sheets are generated from registered TSV outputs under tables/article and figure_manifest.tsv."},
             ]
@@ -226,7 +230,7 @@ def make_checklists() -> None:
         ("Statistics", "Blinding", "Locked external scoring computes predictions before external labels are used for metric calculation."),
         ("Statistics", "Statistical tests", "Paired bootstrap/DeLong-compatible comparisons and Benjamini-Hochberg FDR correction are described."),
         ("Data", "Data availability", "Public and restricted datasets are listed with access status; source data workbook is provided."),
-        ("Code", "Code availability", f"Repository {REPO}; release tag {RELEASE_TAG}; release archive {ARCHIVE}."),
+        ("Code", "Code availability", f"Repository {REPO}; release tag {RELEASE_TAG}; release archive {ARCHIVE}; archived DOI {ZENODO_DOI} ({ZENODO_URL})."),
         ("Software", "Core software", "Python package econiche_opt v0.3.4; R wrapper via reticulate; GPU biological-prior rescue and lipid/PI3K pair rescue packages and scripts listed in Code availability."),
         ("Reporting", "Guidelines", "STROBE, TRIPOD and REMARK checklists are supplied for the observational biomarker prediction study."),
     ]
@@ -286,6 +290,7 @@ def make_reporting_summary_docx() -> None:
             f"Repository: {REPO}",
             f"Manuscript release tag: {RELEASE_TAG}",
             f"Release-specific source archive: {ARCHIVE}",
+            f"Archived release DOI: {ZENODO_DOI} ({ZENODO_URL}).",
             "Core commands include python -m pip install -e ., python -m pytest -q, python -m econiche_opt.cli make-demo, and python -m econiche_opt.cli validate-project --mode demo.",
         ],
         "Reporting guidelines": [
@@ -313,7 +318,7 @@ def make_readiness_note() -> None:
         "- Abstract: structured as Background, Methods, Results and Conclusions; 250-word limit checked in the manuscript source.",
         "- Plain language summary: added immediately after the Abstract and kept near the 120-word guide.",
         "- Transparent peer review: cover letter states opt-in.",
-        f"- Code availability: repository, release tag and release-specific archive are listed ({ARCHIVE}).",
+        f"- Code availability: repository, release tag, release-specific archive and Zenodo DOI are listed ({ARCHIVE}; {ZENODO_URL}).",
         "- Source data: Source_Data.xlsx covers Figures 1-7, Supplementary Figures 1-10 and Supplementary Tables 1-24.",
         "- Reporting files: Nature Portfolio Reporting Summary document plus STROBE, TRIPOD and REMARK checklist workbook.",
         "",

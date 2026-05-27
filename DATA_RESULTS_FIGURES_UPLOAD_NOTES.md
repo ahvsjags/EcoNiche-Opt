@@ -40,6 +40,4 @@ controlled, licensed, or oversized data. Regeneration and download paths remain
 documented in the package and pipeline documentation.
 
 Release status: the current local manuscript/package version is
-`v0.3.4-gpu-lipid-pair-rescue-20260528`. Zenodo metadata are prepared with
-`zenodo_doi=RESULT_PENDING`; no DOI should be cited until Zenodo or an
-institutional archive mints a real identifier.
+`v0.3.4-gpu-lipid-pair-rescue-20260528`. Zenodo metadata are archived with DOI `10.5281/zenodo.20419694` (https://doi.org/10.5281/zenodo.20419694).

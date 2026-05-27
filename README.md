@@ -153,3 +153,9 @@ python scripts/paper/generate_methods_text.py
 - Patient identifiers are checked for train/test leakage.
 - Missing real results are emitted as `RESULT_PENDING`; unavailable baselines are emitted as `unavailable_with_reason`.
 - Perturbation outputs are candidate hypotheses only, not treatment recommendations.
+
+<!-- ZENODO_DOI_START -->
+Frozen release DOI: `10.5281/zenodo.20419694` (https://doi.org/10.5281/zenodo.20419694).
+
+This DOI refers to the archived public software and shareable reproducibility materials. Controlled-access or licensed source datasets remain governed by their original repositories.
+<!-- ZENODO_DOI_END -->
