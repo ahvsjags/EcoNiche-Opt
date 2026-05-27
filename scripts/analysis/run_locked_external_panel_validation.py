@@ -135,15 +135,20 @@ def _fit_thresholds(
             continue
         y_train = pd.concat(y_parts)
         raw_train_score = pd.concat(train_scores).reindex(y_train.index)
-        p_train = _predict_training_only_calibrated(raw_train_score, y_train)
+        calibrator = _fit_monotone_calibrator(raw_train_score, y_train)
+        p_train = _predict_with_calibrator(raw_train_score, calibrator)
         if y_train.nunique() < 2:
             continue
         threshold = select_threshold(y_train.to_numpy(dtype=int), p_train.to_numpy(dtype=float))
         train_metrics = compute_binary_metrics(y_train, p_train, threshold=threshold)
+        calibration_coef = float(calibrator.coef_[0, 0]) if calibrator is not None else 1.0
+        calibration_intercept = float(calibrator.intercept_[0]) if calibrator is not None else 0.0
         thresholds[model] = {
             "threshold": float(threshold),
-            "calibrator": _fit_monotone_calibrator(raw_train_score, y_train),
+            "calibrator": calibrator,
             "calibration": "discovery_only_platt",
+            "calibration_coef": calibration_coef,
+            "calibration_intercept": calibration_intercept,
             "training_n": int(len(y_train)),
             "training_responders": int(y_train.sum()),
             "training_nonresponders": int((y_train == 0).sum()),

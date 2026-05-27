@@ -154,6 +154,24 @@ def cmd_score_package_model(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_score_locked_validation(args: argparse.Namespace) -> int:
+    script_args = [
+        "--package-dir",
+        args.package_dir,
+        "--expression",
+        args.expression,
+        "--sample-manifest",
+        args.sample_manifest,
+        "--out-dir",
+        args.out_dir,
+    ]
+    if args.clinical_annotation:
+        script_args.extend(["--clinical-annotation", args.clinical_annotation])
+    if args.transpose:
+        script_args.append("--transpose")
+    return _run_script("scripts/validation/score_locked_validation_cohort.py", *script_args)
+
+
 def cmd_run_benchmark(args: argparse.Namespace) -> int:
     _run_script("scripts/benchmark/run_lodo.py")
     _run_script("scripts/benchmark/bootstrap_compare.py")
@@ -370,6 +388,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--transpose", action="store_true")
     p.add_argument("--coverage-out", help="Optional feature coverage TSV")
     p.set_defaults(func=cmd_score_package_model)
+
+    p = sub.add_parser("score-locked-validation")
+    p.add_argument("--package-dir", default="deliverables/prospective_validation", help="Frozen validation package directory")
+    p.add_argument("--expression", required=True, help="TSV/CSV expression matrix; samples rows, genes columns by default")
+    p.add_argument("--sample-manifest", required=True, help="Assay/sample manifest matching the prospective validation template")
+    p.add_argument("--clinical-annotation", help="Optional clinical annotation table with endpoint labels for metric reporting")
+    p.add_argument("--out-dir", required=True, help="Output directory for locked validation scores and audits")
+    p.add_argument("--transpose", action="store_true", help="Use when expression has genes as rows and samples as columns")
+    p.set_defaults(func=cmd_score_locked_validation)
 
     p = sub.add_parser("run-benchmark")
     p.add_argument("--demo", action="store_true")

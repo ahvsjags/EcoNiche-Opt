@@ -73,6 +73,23 @@ econiche-opt score-package-model \
 `--transpose` if genes are rows and samples are columns. `labels.tsv` should
 contain `sample_id`, `response_label`, and optionally `cohort`.
 
+For an independent clinical cohort scored with the frozen 62-gene validation
+package, use the locked scorer. This command does not retrain, recalibrate, or
+select thresholds on the validation cohort:
+
+```bash
+econiche-opt score-locked-validation \
+  --package-dir deliverables/prospective_validation \
+  --expression independent_expression.tsv \
+  --sample-manifest assay_sample_manifest.tsv \
+  --clinical-annotation clinical_annotation.tsv \
+  --out-dir results/independent_locked_validation
+```
+
+The intended locked-validation context is pretreatment melanoma tumor tissue
+before anti-PD-1 or anti-PD-1-based therapy. Blood, PBMC, plasma, serum, or
+on-treatment samples require a separately trained and validated model.
+
 ## R Interface
 
 An R wrapper is provided in `r-package/EcoNicheOpt` through `reticulate`:

@@ -47,6 +47,8 @@ def _threshold_spec(threshold_path: Path) -> list[dict[str, object]]:
         "endpoint",
         "threshold",
         "calibration",
+        "calibration_coef",
+        "calibration_intercept",
         "training_n",
         "training_responders",
         "training_nonresponders",
@@ -286,6 +288,21 @@ Generated artifacts:
 - `validation_readiness_checklist.tsv`: pre-scoring readiness gate.
 
 The primary clinical scenario is pretreatment melanoma tumor tissue before anti-PD-1/anti-PD-1-based therapy. Blood, plasma, serum, PBMC, or on-treatment samples require a separately trained and validated model before clinical claims can be made.
+
+## Locked Scoring Command
+
+After the sample manifest, clinical annotation, and expression matrix pass the pre-scoring gate, score the independent cohort without retraining:
+
+```bash
+python -m econiche_opt.cli score-locked-validation \
+  --package-dir deliverables/prospective_validation \
+  --expression independent_expression.tsv \
+  --sample-manifest assay_sample_manifest.tsv \
+  --clinical-annotation clinical_annotation.tsv \
+  --out-dir results/independent_locked_validation
+```
+
+The command writes sample-level endpoint probabilities, locked threshold calls, module scores, panel coverage, manifest audit rows, optional AUROC/calibration metrics when labels are supplied, and decision-curve outputs. It never performs feature selection, threshold tuning, calibration fitting, or model refitting on the independent cohort.
 """
 
 

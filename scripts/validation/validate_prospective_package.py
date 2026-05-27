@@ -93,6 +93,12 @@ def validate_package(package_dir: str | Path) -> pd.DataFrame:
         rows.append(_row("spec_panel_unique_genes", spec.get("panel_unique_genes") == 62, str(spec.get("panel_unique_genes"))))
         rows.append(_row("spec_endpoints", endpoints == EXPECTED_ENDPOINTS, ",".join(sorted(endpoints))))
         rows.append(_row("spec_comparators", comparators == EXPECTED_COMPARATORS, ",".join(sorted(comparators))))
+        missing_calibration = [
+            str(item.get("endpoint"))
+            for item in spec.get("endpoint_thresholds", [])
+            if not {"calibration_coef", "calibration_intercept"}.issubset(item)
+        ]
+        rows.append(_row("spec_calibration_parameters", not missing_calibration, ",".join(missing_calibration)))
 
     hash_path = root / "locked_scoring_spec.sha256"
     if spec_path.exists() and hash_path.exists():

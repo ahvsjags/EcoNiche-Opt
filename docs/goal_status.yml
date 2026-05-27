@@ -3,8 +3,8 @@ version: 0.3.1
 goal_status_schema: 1
 last_updated: 2026-05-27
 summary:
-  total_goals: 85
-  completed: 85
+  total_goals: 86
+  completed: 86
   interface_completed: 0
   blocked: 0
   pending: 0
@@ -763,3 +763,11 @@ goals:
     tests_run: [python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv --out deliverables/prospective_validation, python scripts/validation/validate_prospective_package.py --package-dir deliverables/prospective_validation, python -m pytest -q tests/test_prospective_validation_package.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
     blocking_issues: []
     notes: Expanded the independent validation package from a minimal future-validation scaffold into a clinician-facing tumor-tissue intake and assay package. The package now locks the calibrated thresholds, release tag, release commit, 62-unique-gene panel, sample/clinical templates, RECIST endpoint labels, tumor-tissue SOP, clinical partner checklist, readiness checklist, SHA256 hash, predeclared comparators, and no-leakage validation boundary. It explicitly states that blood, PBMC, plasma, serum, on-treatment biopsies, and non-ICB cohorts require a separately trained model rather than validating the current tumor-tissue score.
+  GOAL-085:
+    title: Locked independent validation scoring entrypoint
+    priority: P0
+    status: completed
+    files_changed: [scripts/analysis/run_locked_external_panel_validation.py, scripts/reporting/make_prospective_validation_package.py, scripts/validation/score_locked_validation_cohort.py, scripts/validation/validate_prospective_package.py, src/econiche_opt/cli.py, tests/test_prospective_validation_package.py, README.md, deliverables/prospective_validation/README.md, deliverables/prospective_validation/locked_scoring_spec.json, deliverables/prospective_validation/locked_scoring_spec.sha256, results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv]
+    tests_run: [python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation_calibrated_20260519, python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv --out deliverables/prospective_validation, python scripts/validation/validate_prospective_package.py --package-dir deliverables/prospective_validation, python -m pytest -q tests/test_prospective_validation_package.py, python -m py_compile scripts/validation/score_locked_validation_cohort.py scripts/validation/validate_prospective_package.py scripts/analysis/run_locked_external_panel_validation.py scripts/reporting/make_prospective_validation_package.py src/econiche_opt/cli.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
+    blocking_issues: []
+    notes: Added a no-refit locked validation scorer for independent cohorts. The CLI command score-locked-validation verifies the frozen scoring-spec hash, audits the sample manifest, computes module scores from the locked 62-gene panel, applies discovery-only Platt calibration coefficients and endpoint thresholds, writes sample-level probabilities and calls, reports panel/module coverage, and computes optional AUROC/calibration/decision-curve metrics when clinical labels are supplied. Calibration coefficients are now exported from the locked external validation pipeline into locked_thresholds.tsv and the prospective scoring spec.
