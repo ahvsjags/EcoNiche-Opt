@@ -3,8 +3,8 @@ version: 0.3.4
 goal_status_schema: 1
 last_updated: 2026-05-28
 summary:
-  total_goals: 118
-  completed: 118
+  total_goals: 119
+  completed: 119
   interface_completed: 0
   blocked: 0
   pending: 0
@@ -1127,3 +1127,35 @@ goals:
       - python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml
     blocking_issues: []
     notes: "Stopped the interrupted long GPU ecology-optimizer process and removed the empty aborted output directory. Updated top-tier auditing so older no-leakage exploratory routes are counted as registered negative audits rather than live target failures, while the frozen v0.3.4 lipid/PI3K rescue remains the promoted target-satisfying model. The top-tier audit now reports 44 PASS, 0 PARTIAL, and 1 GAP. Tightened the Zenodo check to require a real DOI pattern rather than a placeholder mention, updated pyproject and CITATION to v0.3.4, regenerated Zenodo metadata with zenodo_doi=RESULT_PENDING, and rebuilt Communications Medicine source-data/checklist assets. Fixed a headless plotting regression by forcing Matplotlib Agg in the plotting utility. A real Zenodo DOI remains pending and must not be cited until minted."
+  GOAL-118:
+    title: GitHub v0.3.4 public release publication and verification
+    priority: P0
+    status: completed
+    files_changed:
+      - scripts/release/sync_public_release_repo.py
+      - scripts/reporting/make_zenodo_release_metadata.py
+      - scripts/validation/audit_top_tier_targets.py
+      - scripts/documents/make_jtm_submission.py
+      - scripts/documents/make_word_from_manuscript.py
+      - deliverables/github_release_status_20260528.json
+      - deliverables/zenodo_release_metadata_20260527/
+      - deliverables/top_tier_target_audit_20260527.tsv
+      - deliverables/top_tier_target_audit_20260527.md
+      - paper/econiche_opt_manuscript_en_v1_20260509.md
+      - paper/econiche_opt_manuscript_en_v1_20260509.docx
+      - paper/econiche_opt_supporting_en_v1_20260509.docx
+      - paper/Journal of Translational Medicine投稿/
+      - paper/communications_medicine_submission/
+      - github_release/econiche-opt-package-20260508/
+      - docs/goal_status.yml
+    tests_run:
+      - python scripts/release/sync_public_release_repo.py --target github_release/econiche-opt-package-20260508
+      - git push origin HEAD:main
+      - git push --force origin refs/tags/v0.3.4-gpu-lipid-pair-rescue-20260528
+      - gh release create/edit v0.3.4-gpu-lipid-pair-rescue-20260528
+      - gh release view v0.3.4-gpu-lipid-pair-rescue-20260528 --repo ahvsjags/EcoNiche-Opt
+      - python scripts/validation/audit_top_tier_targets.py
+      - python scripts/validation/audit_submission_package.py
+      - python -m pytest -q tests/test_top_tier_target_audit.py tests/test_zenodo_release_metadata.py
+    blocking_issues: []
+    notes: "Published the public v0.3.4 release assets to https://github.com/ahvsjags/EcoNiche-Opt. The release repository main branch was updated to commit 400206422b11904c38ca01d1278d60204c66554e and the frozen tag v0.3.4-gpu-lipid-pair-rescue-20260528 was aligned to that commit. Created the GitHub release at https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/v0.3.4-gpu-lipid-pair-rescue-20260528 and verified by GitHub API that it is published, non-draft, non-prerelease, and that the tag object SHA matches the expected commit. Updated repository URLs from 3272464246/EcoNiche-Opt to ahvsjags/EcoNiche-Opt in the manuscript/release metadata. The top-tier audit now reports 45 PASS, 0 PARTIAL, and 1 GAP; the remaining GAP is a real Zenodo DOI."

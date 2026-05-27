@@ -1,0 +1,15 @@
+﻿{
+    "status":  "published",
+    "repository":  "https://github.com/ahvsjags/EcoNiche-Opt",
+    "release_tag":  "v0.3.4-gpu-lipid-pair-rescue-20260528",
+    "release_url":  "https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/v0.3.4-gpu-lipid-pair-rescue-20260528",
+    "target_commitish":  "main",
+    "tag_object_sha":  "400206422b11904c38ca01d1278d60204c66554e",
+    "tag_object_type":  "commit",
+    "expected_commit":  "400206422b11904c38ca01d1278d60204c66554e",
+    "tag_matches_expected":  true,
+    "is_draft":  false,
+    "is_prerelease":  false,
+    "published_at":  "2026-05-27T22:37:48Z",
+    "checked_at":  "2026-05-28T06:38:47.2354749+08:00"
+}

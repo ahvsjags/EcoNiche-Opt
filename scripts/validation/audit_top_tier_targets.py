@@ -49,7 +49,7 @@ def _read_json(path: str) -> dict[str, object]:
     full = ROOT / path
     if not full.exists():
         return {}
-    with full.open(encoding="utf-8") as handle:
+    with full.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
 
@@ -1245,6 +1245,31 @@ def build_audit(
             lipid_pair_spec.get("release_tag", "missing") if lipid_pair_spec else "missing",
         ),
         "Use this as the current locked external-rescue package; keep cBio Liu as scoring-only evidence and do not change the BA guardrail after external review.",
+    )
+    github_release = _read_json("deliverables/github_release_status_20260528.json")
+    github_release_ok = (
+        github_release.get("status") == "published"
+        and github_release.get("release_tag") == "v0.3.4-gpu-lipid-pair-rescue-20260528"
+        and github_release.get("tag_matches_expected") is True
+        and github_release.get("is_draft") is False
+        and github_release.get("is_prerelease") is False
+        and str(github_release.get("release_url", "")).startswith("https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/")
+    )
+    _add(
+        rows,
+        "translation",
+        "GitHub release exists for the frozen v0.3.4 package",
+        _status(github_release_ok, partial=bool(github_release)),
+        "status={}; tag={}; url={}; tag_sha={}; expected={}; draft={}; prerelease={}".format(
+            github_release.get("status", "missing"),
+            github_release.get("release_tag", "missing"),
+            github_release.get("release_url", "missing"),
+            github_release.get("tag_object_sha", "missing"),
+            github_release.get("expected_commit", "missing"),
+            github_release.get("is_draft", "missing"),
+            github_release.get("is_prerelease", "missing"),
+        ),
+        "Use this release URL in Code availability; archive this GitHub release in Zenodo before replacing RESULT_PENDING with a DOI.",
     )
     zenodo_manifest = _read_json("deliverables/zenodo_release_metadata_20260527/zenodo_release_manifest.json")
     zenodo_metadata_files = {

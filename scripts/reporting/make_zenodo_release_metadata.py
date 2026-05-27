@@ -17,9 +17,9 @@ def _git_commit() -> str:
         return "UNAVAILABLE_LOCAL_GIT"
 
 
-def build_metadata(out: Path, release_tag: str, repository_url: str) -> dict[str, object]:
+def build_metadata(out: Path, release_tag: str, repository_url: str, commit_override: str | None = None) -> dict[str, object]:
     out.mkdir(parents=True, exist_ok=True)
-    commit = _git_commit()
+    commit = commit_override or _git_commit()
     metadata = {
         "title": "EcoNiche-Opt: locked immune-ecology transcriptomic scoring framework",
         "upload_type": "software",
@@ -122,9 +122,10 @@ def main() -> None:
     parser.add_argument("--out", default="deliverables/zenodo_release_metadata_20260527")
     parser.add_argument("--release-tag", default="v0.3.4-gpu-lipid-pair-rescue-20260528")
     parser.add_argument("--repository-url", default="https://github.com/ahvsjags/EcoNiche-Opt")
+    parser.add_argument("--commit", default=None)
     args = parser.parse_args()
 
-    manifest = build_metadata(ROOT / args.out, args.release_tag, args.repository_url)
+    manifest = build_metadata(ROOT / args.out, args.release_tag, args.repository_url, args.commit)
     print(json.dumps(manifest, ensure_ascii=False))
 
 
