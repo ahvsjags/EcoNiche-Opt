@@ -1,7 +1,7 @@
 # Zenodo Release Checklist
 
 - Release tag: `v0.3.4-gpu-lipid-pair-rescue-20260528`
-- Commit: `400206422b11904c38ca01d1278d60204c66554e`
+- Commit: `2829a0d971d57efd4f8c123d9632988cf3dab634`
 - Repository URL: https://github.com/ahvsjags/EcoNiche-Opt
 - DOI status: `RESULT_PENDING` until Zenodo mints a DOI.
 
