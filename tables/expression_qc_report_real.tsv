@@ -1,0 +1,15 @@
+cohort	n_samples	n_genes	status	source_file
+GSE91061	62	22187	processed	D:\EcoNiche-Opt\data\raw\GSE91061\suppl\GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv.gz
+GSE78220	27	25265	processed	D:\EcoNiche-Opt\data\raw\GSE78220\suppl\GSE78220_PatientFPKM.xlsx
+GSE145996	0	19734	metadata_needs_manual_curation	D:\EcoNiche-Opt\data\raw\GSE145996\suppl\GSE145996_Melanoma_Immune_FPKM.txt.gz
+GSE168204	21	75251	processed	D:\EcoNiche-Opt\data\raw\GSE168204\suppl\GSE168204_MGH_counts.csv.gz
+GSE115821	8	75249	processed	D:\EcoNiche-Opt\data\raw\GSE115821\suppl\GSE115821_MGH_counts.csv.gz
+GSE93157	0	0	unusable_expression_shape	D:\EcoNiche-Opt\data\raw\GSE93157\suppl\GSE93157_raw_data_values.txt.gz
+GSE244982	0	18759	metadata_needs_manual_curation	D:\EcoNiche-Opt\data\raw\GSE244982\suppl\GSE244982_ProcessedData_bulkRNAseq.txt.gz
+GSE136961	21	390	processed	D:\EcoNiche-Opt\data\raw\GSE136961\suppl\GSE136961_TPM.tsv.gz
+GSE176307	88	16383	processed	D:\EcoNiche-Opt\data\raw\GSE176307\suppl\GSE176307_BACI_log_trans_normalized_RNAseq.csv.gz
+GSE67501	11	1	unusable_expression_shape	D:\EcoNiche-Opt\data\raw\GSE67501\suppl\GSE67501_Non-normalized_data.txt.gz
+GSE121810	0	37036	metadata_needs_manual_curation	D:\EcoNiche-Opt\data\raw\GSE121810\suppl\GSE121810_Prins.PD1NeoAdjv.Jul2018.HUGO.PtID.xlsx
+GSE140901	0	0	unusable_expression_shape	D:\EcoNiche-Opt\data\raw\GSE140901\suppl\GSE140901_processed_data.txt.gz
+GSE165252	0	62300	metadata_needs_manual_curation	D:\EcoNiche-Opt\data\raw\GSE165252\suppl\GSE165252_vst_PERFECT.txt.gz
+GSE183924	0	28052	metadata_needs_manual_curation	D:\EcoNiche-Opt\data\raw\GSE183924\suppl\GSE183924_FPKM.txt.gz

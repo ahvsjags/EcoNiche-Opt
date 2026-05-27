@@ -1,0 +1,6 @@
+mode: demo
+random_state: 42
+processed_dir: data/processed/bulk
+results_dir: results/demo
+registry: config/data_registry.yml
+allow_interface_completed: true

@@ -6,7 +6,6 @@ __pycache__/
 *.egg-info/
 build/
 dist/
-data/raw/controlled/
 data/raw/
 data/processed/**/*.expr.tsv
 data/processed/**/*expression*.tsv
@@ -17,10 +16,8 @@ data/external/*
 results/**/processed_inputs/
 results/**/*.expr.tsv
 figures/**/*.tiff
-tables/
-paper/*.docx
-paper/*.pdf
 deliverables/*.zip
 results/tmp/
 tmp/
+github_release/
 .snakemake/

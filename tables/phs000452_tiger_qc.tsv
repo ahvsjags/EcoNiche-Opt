@@ -1,0 +1,2 @@
+cohort	n_samples	n_genes	n_patients	n_responders_CR_PR_MR	n_nonresponders_SD_PD	response_raw_counts	excluded_ipi_like_rows	status	source_expression	source_clinical
+PHS000452_LIU_LIKE_PRE	121	47708	121	50	71	CR:16;MR:2;PD:55;PR:32;SD:16	32	processed_patient_like_subset	D:\EcoNiche-Opt\data\external\TIGER_phs000452\Melanoma-phs000452.expression.tsv	D:\EcoNiche-Opt\data\external\TIGER_phs000452\Melanoma-phs000452.clinical.tsv

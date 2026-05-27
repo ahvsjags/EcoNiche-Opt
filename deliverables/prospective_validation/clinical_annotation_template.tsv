@@ -1,0 +1,2 @@
+subject_id	sample_id	response_raw	best_overall_response_date	progression_date	last_follow_up_date	dcbr_6mo	recist_version	label_source_document	curation_notes
+SUBJECT001	SUBJECT001_BL_RNA	CR/PR/SD/PD	YYYY-MM-DD	YYYY-MM-DD_or_blank	YYYY-MM-DD	DCB/NDB_or_blank	RECIST 1.1	source_file_or_eCRF_id	

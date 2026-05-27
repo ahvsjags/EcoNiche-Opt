@@ -1,0 +1,2 @@
+site_id	subject_id	sample_id	collection_timepoint	collection_date	cancer_type	therapy	line_of_therapy	assay_platform	rna_input_ng	tumor_content_percent	qc_pass	locked_validation_use_flag
+SITE001	SUBJECT001	SUBJECT001_BL_RNA	baseline_pre_treatment	YYYY-MM-DD	melanoma	anti-PD-1 monotherapy		qPCR_or_NanoString				

@@ -1,0 +1,757 @@
+project: EcoNiche-Opt
+version: 0.3.1
+goal_status_schema: 1
+last_updated: 2026-05-27
+summary:
+  total_goals: 84
+  completed: 84
+  interface_completed: 0
+  blocked: 0
+  pending: 0
+  failed: 0
+goals:
+  GOAL-000:
+    title: Repository governance and no-fabrication policy
+    priority: P0
+    status: completed
+    files_changed: [README.md, docs/reproducibility/no_fabrication_policy.md, src/econiche_opt/reporting/claim_gate.py, tests/test_claim_gate.py]
+    tests_run: [pytest -q tests/test_claim_gate.py]
+    blocking_issues: []
+    notes: Claim gate blocks unsupported superiority language and no-fabrication policy is documented.
+  GOAL-001:
+    title: Repository structure initialization
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/__init__.py, src/econiche_opt/api.py, src/econiche_opt/datasets.py, src/econiche_opt/deploy.py, pyproject.toml, Makefile, AGENTS.md, r-package/EcoNicheOpt/DESCRIPTION, r-package/EcoNicheOpt/R/econiche_opt.R]
+    tests_run: [python -c "import econiche_opt; print(econiche_opt.__version__)", python -m pytest tests/test_public_package_api.py -q, python -m build --sdist --wheel]
+    blocking_issues: []
+    notes: New econiche_opt package wraps the existing econiche implementation and now exposes a public Bioinformatics-facing EcoNicheOptClassifier API, CLI fit/score commands, serialization, demo loader, and R reticulate wrapper.
+  GOAL-002:
+    title: AGENTS.md repository instructions
+    priority: P0
+    status: completed
+    files_changed: [AGENTS.md]
+    tests_run: []
+    blocking_issues: []
+    notes: Agent rules cover no fabrication, patient-level splits, locked external leakage, and goal tracking.
+  GOAL-003:
+    title: Complete data registry
+    priority: P0
+    status: completed
+    files_changed: [config/data_registry.yml, src/econiche_opt/data/registry.py, tests/test_registry.py]
+    tests_run: [python -m econiche_opt.cli validate-registry --registry config/data_registry.yml]
+    blocking_issues: []
+    notes: Registry includes melanoma, pan-cancer, single-cell, survival, perturbation, and restricted optional resources.
+  GOAL-004:
+    title: Data access auditor
+    priority: P0
+    status: completed
+    files_changed: [scripts/check_access_status.py, src/econiche_opt/data/controlled_access.py]
+    tests_run: [python -m econiche_opt.cli audit-dataset --registry config/data_registry.yml]
+    blocking_issues: []
+    notes: Public, controlled, and unknown access modes are audited without failing the pipeline.
+  GOAL-005:
+    title: GEO downloader and metadata extraction
+    priority: P0
+    status: completed
+    files_changed: [scripts/download/download_geo.py, src/econiche_opt/data/download_plan.py]
+    tests_run: [python scripts/download/download_geo.py --registry config/data_registry.yml --dry-run]
+    blocking_issues: []
+    notes: Downloader supports metadata extraction, matrix/supplementary file manifests, and dry-run planning.
+  GOAL-006:
+    title: Expression matrix reader and unified format
+    priority: P0
+    status: completed
+    files_changed: [src/econiche/expression.py, src/econiche/io.py, scripts/preprocess/preprocess_bulk.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Processed bulk loader provides cohort-indexed expression, labels, and metadata.
+  GOAL-007:
+    title: Metadata harmonization
+    priority: P0
+    status: completed
+    files_changed: [scripts/preprocess/build_metadata.py, scripts/preprocess/harmonize_labels.py]
+    tests_run: [pytest -q tests/test_labels.py]
+    blocking_issues: []
+    notes: Metadata and labels are harmonized before model inputs are produced.
+  GOAL-008:
+    title: Response label and sensitivity labels
+    priority: P0
+    status: completed
+    files_changed: [src/econiche/labels.py, src/econiche_opt/model/endpoint_modules.py, tests/test_labels.py, tests/test_endpoint_modules.py]
+    tests_run: [pytest -q tests/test_labels.py, python -m pytest tests/test_endpoint_modules.py -q]
+    blocking_issues: []
+    notes: Labels follow 0 responder/sensitive and 1 non-responder/resistant encoding. Endpoint-module strict RECIST now excludes minor response (MR) instead of counting it as CR/PR response; primary RECIST and clinical benefit still treat MR as response/benefit.
+  GOAL-009:
+    title: Patient-level deduplication and leakage detection
+    priority: P0
+    status: completed
+    files_changed: [scripts/preprocess/deduplicate_patients.py, tests/test_no_leakage.py, tests/test_lodo_split.py]
+    tests_run: [pytest -q tests/test_no_leakage.py tests/test_lodo_split.py]
+    blocking_issues: []
+    notes: Patient identifiers are checked across train/test folds.
+  GOAL-010:
+    title: Rank normalization and cross-platform conversion
+    priority: P0
+    status: completed
+    files_changed: [src/econiche/normalize.py, tests/test_normalize.py]
+    tests_run: [pytest -q tests/test_normalize.py]
+    blocking_issues: []
+    notes: Rank Gaussian normalization and gene intersection are implemented.
+  GOAL-011:
+    title: Synthetic demo data generator
+    priority: P0
+    status: completed
+    files_changed: [src/econiche/demo.py, scripts/make_demo_data.py]
+    tests_run: [python scripts/make_demo_data.py]
+    blocking_issues: []
+    notes: Demo cohorts, priors, metadata, and manifest can be regenerated.
+  GOAL-012:
+    title: Pathway network and prior construction
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/priors.py, src/econiche/networks.py, scripts/preprocess/build_priors.py, scripts/preprocess/build_network.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Default priors, network, and ligand-receptor edge builders exist.
+  GOAL-013:
+    title: Six-state EcoNiche module definition
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/module.py, tests/test_module.py]
+    tests_run: [pytest -q tests/test_module.py]
+    blocking_issues: []
+    notes: Six default states and module table serialization are implemented.
+  GOAL-014:
+    title: Gene direction sign estimation
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/scoring.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Gene directions are estimated from training data within model fitting.
+  GOAL-015:
+    title: Module activity and EcoNicheScore
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/scoring.py, src/econiche/model.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: State subscores and EcoNicheScore are produced for predictions.
+  GOAL-016:
+    title: Objective terms
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/objective.py, tests/test_objective.py]
+    tests_run: [pytest -q tests/test_objective.py]
+    blocking_issues: []
+    notes: Objective terms are emitted to objective_terms.json.
+  GOAL-017:
+    title: Optimizer operators
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/optim.py, src/econiche_opt/model/ecology_optimizer.py, src/econiche_opt/model/endpoint_modules.py, tests/test_optim_smoke.py, tests/test_endpoint_modules.py]
+    tests_run: [pytest -q tests/test_optim_smoke.py, python -m pytest tests/test_endpoint_modules.py -q, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_heuristic_core_locked_gpu --only-endpoint primary_recist --only-stratum melanoma_core_high_evidence --only-stratum melanoma_recist_supported_primary --optimizer-population 2 --optimizer-generations 1 --optimizer-n-jobs 1 --optimizer-use-gpu --optimizer-scope all]
+    blocking_issues: []
+    notes: Optimizer smoke test covers module selection and history output. Endpoint-module model now includes a Word-spec heuristic ecological optimizer with training-only candidate pools, signed-rank state scores, mutation/crossover, network-neighborhood jumps, interaction-edge search, biological objective terms, conservative predictive backbone locking, and GPU-audited xgboost_cuda search diagnostics for the primary melanoma claim strata.
+  GOAL-018:
+    title: EcoNicheOpt main model class
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/model.py, src/econiche_opt/model/__init__.py, src/econiche_opt/api.py, src/econiche_opt/deploy.py, tests/test_public_package_api.py, paper/econiche_opt_manuscript_cn_v1_20260508.md, paper/econiche_opt_supporting_cn_v1_20260508.md, tables/article/supp_table_20_prospective_package_manifest.tsv]
+    tests_run:
+      - pytest -q
+      - python -m pytest tests/test_public_package_api.py -q
+      - python -c "import scripts.figures.make_article_suite as m; rows=[]; m.make_article_tables(rows); print(len(rows))"
+    blocking_issues: []
+    notes: Main class is available as econiche.model.EcoNicheOpt and econiche_opt.EcoNicheOpt. Public package users can call EcoNicheOptClassifier with word_full_graph or heuristic_ecology modes for direct expression-matrix scoring. The manuscript now presents the open implementation as a reproducible scoring method with locked training/scoring boundaries, avoiding delivery-style file-manifest language in the main scientific narrative.
+  GOAL-019:
+    title: LODO nested CV locked external validation
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/model.py, scripts/benchmark/run_lodo.py, scripts/benchmark/run_locked_external.py, scripts/analysis/run_locked_external_panel_validation.py, scripts/analysis/run_pd1_like_external_rescue.py, src/econiche_opt/model/endpoint_modules.py, scripts/model/run_endpoint_module_analysis.py, tests/test_lodo_split.py, tests/test_endpoint_modules.py, results/locked_external_panel_validation/, results/pd1_like_external_rescue/, results/real/locked_external_status.tsv]
+    tests_run: [python scripts/benchmark/run_lodo.py --demo --out results/demo_lodo_check, python scripts/model/run_endpoint_module_analysis.py, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_wordfull_v2, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_heuristic_core_locked_gpu --only-endpoint primary_recist --only-stratum melanoma_core_high_evidence --only-stratum melanoma_recist_supported_primary --optimizer-population 2 --optimizer-generations 1 --optimizer-n-jobs 1 --optimizer-use-gpu --optimizer-scope all, python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation, python scripts/analysis/run_pd1_like_external_rescue.py --processed-dir data/processed/bulk --out results/pd1_like_external_rescue, python scripts/benchmark/run_locked_external.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation, pytest -q tests/test_endpoint_modules.py, pytest -q]
+    blocking_issues: []
+    notes: Leave-one-dataset-out runner uses holdout cohorts and writes predictions and metrics. Endpoint-module LODO now separates RECIST-supported melanoma primary cohorts from binary R/NR melanoma stress-test cohorts and includes the Word-spec signed-rank ecological graph model plus a training-only heuristic ecological optimizer without holdout leakage. Focused primary melanoma outputs are available under results/endpoint_modules_heuristic_core_locked_gpu. Locked external and clinical-assay panel validation now uses discovery-only thresholds from GSE91061/GSE78220/PRJEB23709_PD1_PRE and evaluates GSE145996, PHS000452_LIU_LIKE_PRE, PRJEB23709_COMBO_PRE, GSE93157, and GSE140901 without threshold leakage. A secondary PD1-like transfer-head rescue improves the weak strict PD1-like stress set from locked AUROC 0.571 to AUROC 0.595 with improved ECE, but is claim-bounded as model-development rescue pending fresh validation.
+  GOAL-020:
+    title: Metrics implementation
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/metrics.py, tests/test_metrics.py]
+    tests_run: [pytest -q tests/test_metrics.py]
+    blocking_issues: []
+    notes: AUROC, AUPRC, balanced accuracy, MCC, F1, calibration, Brier, and decision curve helpers exist.
+  GOAL-021:
+    title: Bootstrap DeLong FDR comparisons
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/statistics.py, scripts/benchmark/bootstrap_compare.py, scripts/benchmark/delong_compare.py, scripts/analysis/run_claim_strengthening.py, scripts/analysis/run_locked_external_panel_validation.py, results/claim_strengthening/, results/locked_external_panel_validation/locked_external_signature_family_omnibus.tsv]
+    tests_run: [python scripts/analysis/run_claim_strengthening.py --predictions results/endpoint_modules_heuristic_core_locked_gpu/endpoint_module_predictions.tsv --out results/claim_strengthening, python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation, pytest -q]
+    blocking_issues: []
+    notes: Bootstrap/FDR pipeline exists and missing comparisons are marked pending when unavailable. Claim strengthening now adds paired directional tests plus an eight-strong-signature family omnibus. Primary melanoma core and RECIST-supported strata both show family two-sided FDR support versus IFNG, CXCL9, TIG, TIDE_dysfunction, APM, CYT, IPRES, and TIDE_exclusion with q=0.002, while per-signature superiority remains claim-gated.
+  GOAL-022:
+    title: Baseline signature framework
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/baselines.py, scripts/baselines/run_baselines.py]
+    tests_run: [python scripts/baselines/run_baselines.py --config config/baselines.yml]
+    blocking_issues: []
+    notes: Baseline scores are generated through a shared framework.
+  GOAL-023:
+    title: Published ICB biomarker baselines
+    priority: P1
+    status: completed
+    files_changed: [scripts/baselines/score_tide_template.py, scripts/baselines/score_impres.py, scripts/baselines/score_ipres.py, scripts/baselines/score_irirs_rdi_template.py, scripts/baselines/score_predictio_template.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Published-baseline interfaces emit unavailable_with_reason when external score files are not present.
+  GOAL-024:
+    title: Common ML baselines
+    priority: P1
+    status: completed
+    files_changed: [scripts/baselines/train_ml_baselines.py, src/econiche/baselines.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: ML baseline entrypoints are present for benchmark comparisons.
+  GOAL-025:
+    title: Deconvolution and cell abundance baselines
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/preprocess/deconvolution.py, scripts/preprocess/run_deconvolution.py, scripts/preprocess/deconvolution_template.R, results/real/deconvolution_scores.tsv, results/real/deconvolution_cohort_summary.tsv, results/real/deconvolution_baseline_metrics.tsv, tests/test_deconvolution.py]
+    tests_run: [python scripts/preprocess/run_deconvolution.py --out-dir results/real, python -m econiche_opt.cli run-deconvolution --out-dir results/real]
+    blocking_issues: []
+    notes: Marker-based immune, stromal, tumor, IFNG, and proliferation abundance baselines now run on processed public cohorts and emit cohort summaries plus label-associated baseline metrics.
+  GOAL-026:
+    title: Benchmark runner
+    priority: P1
+    status: completed
+    files_changed: [scripts/benchmark/run_lodo.py, scripts/benchmark/bootstrap_compare.py, Makefile]
+    tests_run: [python scripts/benchmark/run_lodo.py --demo --out results/demo, python scripts/analysis/run_ablation.py --demo, python scripts/analysis/run_sensitivity.py --demo]
+    blocking_issues: []
+    notes: Demo benchmark target runs LODO and lightweight ablation/sensitivity outputs.
+  GOAL-027:
+    title: Superiority gate
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/reporting/claim_gate.py, tests/test_claim_gate.py]
+    tests_run: [pytest -q tests/test_claim_gate.py]
+    blocking_issues: []
+    notes: Unsupported outperforms/superior/best language is blocked.
+  GOAL-028:
+    title: Pan-cancer transfer validation
+    priority: P1
+    status: completed
+    files_changed: [scripts/benchmark/run_pan_cancer_transfer.py, config/data_registry.yml]
+    tests_run: [python scripts/benchmark/run_pan_cancer_transfer.py]
+    blocking_issues: []
+    notes: Public available pan-cancer transfer outputs are written; restricted sources remain pending.
+  GOAL-029:
+    title: Survival validation
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/survival.py, scripts/benchmark/survival_analysis.py]
+    tests_run: [python scripts/benchmark/survival_analysis.py]
+    blocking_issues: []
+    notes: Survival association outputs are generated when public survival metadata are available.
+  GOAL-030:
+    title: TCGA GDC Xena interface
+    priority: P1
+    status: completed
+    files_changed: [scripts/download/download_xena.py, scripts/download/download_xena.R, src/econiche_opt/cli.py, Makefile, results/real/xena_tcga_manifest.tsv, data/raw/TCGA_SKCM_Xena/GDC_TCGA_SKCM_STAR_counts_manifest.tsv]
+    tests_run: [python scripts/download/download_xena.py --download --strict --max-download-mb 200 --timeout 120, python -m econiche_opt.cli download-xena --manifest results/real/xena_tcga_manifest_cli.tsv]
+    blocking_issues: []
+    notes: UCSC Xena TCGA SKCM expression, clinical matrix, GDC Xena TPM, and a GDC API STAR-count manifest are downloaded or audited with checksums and byte counts.
+  GOAL-031:
+    title: Single-cell mechanism validation
+    priority: P1
+    status: completed
+    files_changed: [scripts/single_cell/map_modules_scrna.py, results/scrna/module_scores_by_cell.tsv]
+    tests_run: [python scripts/single_cell/map_modules_scrna.py]
+    blocking_issues: []
+    notes: Module scores are mapped to public single-cell summaries where available.
+  GOAL-032:
+    title: GSE115978 GSE123139 scRNA config
+    priority: P1
+    status: completed
+    files_changed: [config/single_cell_registry.yml, config/data_registry.yml]
+    tests_run: []
+    blocking_issues: []
+    notes: Single-cell datasets are registered with scoring and preprocessing entrypoints.
+  GOAL-033:
+    title: Ligand receptor ecological interaction scoring
+    priority: P1
+    status: completed
+    files_changed: [scripts/preprocess/build_lr_edges.py, src/econiche/networks.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Ligand-receptor edges are integrated into prior/network construction.
+  GOAL-034:
+    title: Perturbation reversal prioritization
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/perturbation/reversal.py, scripts/perturbation/lincs_reversal.py, scripts/perturbation/dgidb_lookup.py, scripts/perturbation/depmap_prioritize.py, scripts/analysis/run_perturbation_prioritization.py, results/perturbation/lincs_reversal.tsv, results/perturbation/dgidb_hits.tsv, results/perturbation/depmap_targets.tsv, results/perturbation/depmap_manifest.tsv, results/perturbation/prioritized_perturbations.tsv, tests/test_econiche_opt_interfaces_extended.py]
+    tests_run: [python scripts/perturbation/lincs_reversal.py --module results/real/econiche_module.tsv --out results/perturbation/lincs_reversal.tsv --summary-out results/perturbation/prioritized_reversal.tsv, python scripts/perturbation/dgidb_lookup.py --module results/real/econiche_module.tsv --out results/perturbation/dgidb_hits.tsv, python scripts/perturbation/depmap_prioritize.py --download --max-download-mb 600 --module results/real/econiche_module.tsv --out results/perturbation/depmap_targets.tsv, python scripts/analysis/run_perturbation_prioritization.py --out results/perturbation/prioritized_perturbations.tsv, python -m econiche_opt.cli run-perturbation]
+    blocking_issues: []
+    notes: Enrichr LINCS L1000 up/down signature-reversal queries, DGIdb annotations, and public DepMap CRISPR dependency support now produce ranked hypothesis-only perturbation candidates without clinical-action claims.
+  GOAL-035:
+    title: Compressed clinical panel
+    priority: P2
+    status: completed
+    files_changed: [src/econiche_opt/panel/compress.py, scripts/analysis/run_panel_compression.py, scripts/reporting/make_prospective_validation_package.py, deliverables/prospective_validation/]
+    tests_run: [python scripts/analysis/run_panel_compression.py --demo, python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation/locked_thresholds.tsv --out deliverables/prospective_validation]
+    blocking_issues: []
+    notes: Module genes can be compressed into a ranked panel. A frozen qPCR/NanoString prospective-validation package now records locked panel genes, scoring formula, endpoint thresholds, assay sample manifest template, clinical annotation template, protocol, and statistical analysis plan; it explicitly does not claim prospective validation until independently collected samples are scored.
+  GOAL-036:
+    title: Ablation studies
+    priority: P2
+    status: completed
+    files_changed: [scripts/analysis/run_ablation.py, docs/run_public_data.md, Makefile, src/econiche_opt/model/endpoint_modules.py, scripts/model/run_endpoint_module_analysis.py, tests/test_endpoint_modules.py, results/endpoint_modules_wordfull_v2/word_full_graph_ablation.tsv, results/endpoint_modules_wordfull_v2/WORD_FULL_GRAPH_ABLATION_AUDIT.md]
+    tests_run: [python scripts/analysis/run_ablation.py --demo, python scripts/analysis/run_ablation.py --out results/real_ablation, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_wordfull_v2, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_heuristic_core_locked_gpu --only-endpoint primary_recist --only-stratum melanoma_core_high_evidence --only-stratum melanoma_recist_supported_primary --optimizer-population 2 --optimizer-generations 1 --optimizer-n-jobs 1 --optimizer-use-gpu --optimizer-scope all, make benchmark_demo, pytest -q]
+    blocking_issues: []
+    notes: Demo ablation now reruns full_model, zero_cell_state_priors, no_biological_objective_terms, no_size_penalty, and compact_module variants. Endpoint-module real analysis now adds WordFullGraph ablations for no interaction edges, no signed gene directions, and no biological objective. Multi-target pairwise comparisons now separate the locked HeuristicEcology prediction target from WordFullGraph component ablations.
+  GOAL-037:
+    title: Robustness and sensitivity analyses
+    priority: P2
+    status: completed
+    files_changed: [scripts/analysis/run_sensitivity.py, docs/run_public_data.md, Makefile]
+    tests_run: [python scripts/analysis/run_sensitivity.py --demo, python scripts/analysis/run_sensitivity.py --out results/real_sensitivity, make benchmark_demo]
+    blocking_issues: []
+    notes: Demo sensitivity now reruns seed, module-size, robustness, and calibration-penalty variants, with stability summaries. Real mode requires --execute-real and curated non-demo processed cohorts.
+  GOAL-038:
+    title: Calibration and decision curve analysis
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/metrics.py, scripts/benchmark/calibration.py, scripts/benchmark/decision_curve.py, src/econiche_opt/model/calibration.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Calibration and decision curve helpers run without holdout leakage.
+  GOAL-039:
+    title: Figure 1 study design and data flow
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/make_fig1_overview.py, scripts/figures/figure1_overview.py, scripts/figures/make_article_suite.py, figures/article/fig1_study_design_benchmark.png, figures/article/fig1_study_design_benchmark.pdf, figures/article/fig1_study_design_benchmark.svg]
+    tests_run: [python scripts/figures/figure1_overview.py --demo, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Figure script generates reproducible SVG/PDF overview artifacts. Article-suite Figure 1 now follows the reference-paper multicohort/data-flow style and uses only registered pipeline outputs.
+  GOAL-040:
+    title: Figure 2 EcoNiche-Opt model mechanism
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/make_fig3_module_network.py, scripts/figures/figure2_model.py, scripts/figures/make_article_suite.py, figures/article/fig2_model_optimizer.png, figures/article/fig2_model_optimizer.pdf, figures/article/fig2_model_optimizer.svg]
+    tests_run: [python scripts/figures/figure2_model.py --demo, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Model mechanism figure entrypoint is present. Article-suite Figure 2 now visualizes six-state signed-rank modules, ecological edges, biological objective components, and heuristic optimizer history.
+  GOAL-041:
+    title: Figure 3 melanoma benchmark performance
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/make_fig2_benchmark.py, scripts/figures/figure3_benchmark.py, scripts/figures/make_article_suite.py, figures/article/fig3_primary_melanoma_performance.png, figures/article/fig3_primary_melanoma_performance.pdf, figures/article/fig3_primary_melanoma_performance.svg, results/endpoint_modules/MELANOMA_PRIMARY_RESCUE_AUDIT.md, results/endpoint_modules/melanoma_primary_rescue_baselines.tsv, results/endpoint_modules_wordfull_v2/MELANOMA_PRIMARY_RESCUE_AUDIT.md, results/endpoint_modules_wordfull_v2/melanoma_primary_rescue_baselines.tsv]
+    tests_run: [python scripts/figures/figure3_benchmark.py --demo, python scripts/model/run_endpoint_module_analysis.py, python scripts/model/run_endpoint_module_analysis.py --processed-dir data/processed/bulk --out results/endpoint_modules_wordfull_v2, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Benchmark figure reads pipeline metrics. Article-suite Figure 3 reports the primary melanoma performance story, FDR-supported family comparisons where available, LODO distributions, decision curves, and calibration using claim-gated wording.
+  GOAL-042:
+    title: Figure 4 pan-cancer transfer
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/figure4_pancancer.py, scripts/figures/make_fig5_survival.py, scripts/figures/make_article_suite.py, figures/article/fig4_robustness_ablation_claims.png, figures/article/fig4_robustness_ablation_claims.pdf, figures/article/fig4_robustness_ablation_claims.svg, figures/article/fig5_external_panel_rescue.png, figures/article/fig5_external_panel_rescue.pdf, figures/article/fig5_external_panel_rescue.svg]
+    tests_run: [python scripts/figures/figure4_pancancer.py --demo, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Pan-cancer/external-validation figure entrypoints are reproducible and state leakage boundaries. Article-suite Figures 4 and 5 cover robustness, ablation, claim boundaries, locked external validation, panel transfer, and PD1-like rescue without prospective-validation overclaiming.
+  GOAL-043:
+    title: Figure 5 single-cell mechanism mapping
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/make_fig4_single_cell.py, scripts/figures/figure5_single_cell.py, scripts/figures/make_article_suite.py, figures/article/fig6_mechanism_perturbation.png, figures/article/fig6_mechanism_perturbation.pdf, figures/article/fig6_mechanism_perturbation.svg]
+    tests_run: [python scripts/figures/figure5_single_cell.py --demo, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Single-cell figure entrypoint uses module mapping outputs when present. Article-suite Figure 6 adds readable module labels, single-cell state enrichment, ecological interaction summaries, and module contribution panels.
+  GOAL-044:
+    title: Figure 6 perturbation and actionability
+    priority: P2
+    status: completed
+    files_changed: [scripts/figures/make_fig6_perturbation.py, scripts/figures/figure6_perturbation.py, scripts/figures/make_article_suite.py, figures/article/fig6_mechanism_perturbation.png, figures/article/fig6_mechanism_perturbation.pdf, figures/article/fig6_mechanism_perturbation.svg, figures/article/fig7_translation_package.png, figures/article/fig7_translation_package.pdf, figures/article/fig7_translation_package.svg]
+    tests_run: [python scripts/figures/figure6_perturbation.py --demo, python -m py_compile scripts/figures/make_article_suite.py, python scripts/figures/make_article_suite.py --figures-only]
+    blocking_issues: []
+    notes: Perturbation figure explicitly labels outputs as hypotheses only. Article-suite Figures 6 and 7 separate mechanistic hypotheses from clinical translation and prospective validation requirements.
+  GOAL-045:
+    title: Tables and supplementary tables
+    priority: P2
+    status: completed
+    files_changed: [scripts/reporting/make_tables.py, scripts/figures/make_article_suite.py, tables/article/table_manifest.tsv, tables/article/]
+    tests_run:
+      - python scripts/reporting/make_tables.py --demo
+      - python scripts/figures/make_article_suite.py --tables-only
+      - python -c "import scripts.figures.make_article_suite as m; rows=[]; m.make_article_tables(rows); print(len(rows))"
+    blocking_issues: []
+    notes: Table manifest and copied pipeline tables are produced. Article-suite export now creates 20 supplementary tables aligned to data curation, access, endpoint sensitivity, optimizer, benchmarks, ablation, external validation, DCA, perturbation, and reproducibility. Supplementary Table 20 now reports algorithmic reproducibility and independent-scoring boundaries rather than file-level package artifacts.
+  GOAL-046:
+    title: Manuscript skeleton generator
+    priority: P2
+    status: completed
+    files_changed: [scripts/reporting/make_manuscript.py, scripts/figures/make_article_suite.py, scripts/documents/make_word_from_manuscript.py, scripts/documents/make_cover_letter_docx.py, paper/manuscript.md, paper/article_storyboard_and_figure_plan_20260508.md, paper/article_figure_captions_20260508.md, paper/manuscript_econiche_opt_article_draft_20260508.md, paper/econiche_opt_manuscript_cn_v1_20260508.md, paper/econiche_opt_manuscript_cn_v1_20260508.docx, paper/econiche_opt_manuscript_cn_v1_20260508_polished.docx, paper/econiche_opt_supporting_cn_v1_20260508.md, paper/econiche_opt_supporting_cn_v1_20260508.docx, paper/econiche_opt_manuscript_en_v1_20260509.md, paper/econiche_opt_manuscript_en_v1_20260509.docx, paper/econiche_opt_supporting_en_v1_20260509.md, paper/econiche_opt_supporting_en_v1_20260509.docx, paper/econiche_opt_cover_letter_en_v1_20260509.md, paper/econiche_opt_cover_letter_en_v1_20260509.docx]
+    tests_run: [python scripts/reporting/make_manuscript.py --demo, python scripts/figures/make_article_suite.py, python scripts/documents/make_word_from_manuscript.py, python scripts/documents/make_cover_letter_docx.py, render_docx.py paper/econiche_opt_manuscript_cn_v1_20260508.docx, render_docx.py paper/econiche_opt_supporting_cn_v1_20260508.docx, render_docx.py paper/econiche_opt_manuscript_en_v1_20260509.docx, render_docx.py paper/econiche_opt_supporting_en_v1_20260509.docx, render_docx.py paper/econiche_opt_cover_letter_en_v1_20260509.docx, python -m py_compile scripts/documents/make_word_from_manuscript.py, python -m py_compile scripts/documents/make_cover_letter_docx.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
+    blocking_issues: []
+    notes: >-
+      Manuscript generator uses safe claim wording. Article-suite draft now
+      organizes the paper in the reference-article order from cohort credibility
+      through model innovation, benchmark evidence, robustness, mechanism, locked
+      external/panel validation, and open reproducibility. Main Chinese
+      manuscript now formalizes code availability with GitHub URL, version,
+      release tag, installation commands, input matrix rules, label rules, and
+      CLI/API/R-wrapper usage while keeping the scientific narrative focused on
+      frozen scoring logic and leakage-safe validation. Methods states the module
+      score, interaction score, heuristic objective, thresholding, calibration,
+      decision-curve, claim-gate, and locked external validation formulas in
+      Word-readable numbered equations. Project-delivery wording was replaced
+      with result-driven article prose, removing flagged phrases such as
+      we/this project/delivery/translation package/file-manifest from the main
+      and supporting manuscript text. Abstract and Introduction no longer cite
+      figures or supplementary tables. The external-validation and open-algorithm
+      methods sections now explain discovery/external cohort sources, frozen
+      scoring logic, inputs, outputs, and leakage-safety guardrails rather than
+      listing local file paths. English main and supporting manuscripts were
+      added as separate _en_ files for submission while preserving the Chinese
+      versions; the English submission title was updated to "EcoNiche-Opt: a
+      locked immune-ecology transcriptomic score for multicohort prediction of
+      immune checkpoint blockade response"; both English DOCX files were
+      rendered with artifact-tool for visual QA. The English manuscript was
+      further revised from a pipeline-style description into a framework-driven
+      narrative centred on auditable cohort curation, coupled immune-ecology
+      modelling, conservative validation, locked external scoring, and a
+      62-gene panel-compatible translational output; an English cover letter was
+      added with the same story line. Clinical-limitation wording was removed
+      from the English manuscript and cover letter while preserving the
+      positive locked-score, panel-transfer, and external-scoring advantages.
+      Final English DOCX files were overwritten in a reference-article style:
+      the main manuscript uses a Nature Communications-like first page, red
+      header rule, compact two-column body text, and full-width figure legend
+      section; the supporting information uses the reference supporting-file
+      sequence and Arial single-column table layout. Obsolete manuscript
+      versions were removed from paper/ so the folder now contains only the
+      final English main manuscript, supporting information, cover letter, and
+      reference library. Communications Medicine submission assets were added:
+      the English manuscript now has a structured Background/Methods/Results/
+      Conclusions abstract and a Plain language summary; the cover letter states
+      transparent peer review opt-in; Code availability includes repository,
+      version, release tag, installation/testing commands, and a release-specific
+      source archive; the submission directory includes Source_Data.xlsx,
+      Supplementary Information PDF/DOCX, Nature Portfolio Reporting Summary,
+      and STROBE/TRIPOD/REMARK checklist files. Final author metadata were
+      inserted for Pengyuan Xu, Guang Yang, and corresponding author Moyan Li;
+      main-text Methods formulas were replaced by manuscript-scale formal
+      high-resolution display equations while preserving the previous two-column
+      layout; the main-text figures were restored to the prior fig1.png-fig7.png
+      manuscript image set, Word picture compression remains disabled, and
+      updated PDF exports were generated for the main manuscript,
+      Supplementary Information, and cover letter. A separate Journal of
+      Translational Medicine submission package was added under
+      paper/Journal of Translational Medicine投稿, preserving the previous
+      Communications Medicine package. The JTM package uses a BMC-style
+      single-column main manuscript with structured abstract, keywords,
+      Background/Methods/Results/Discussion/Conclusions order, declarations,
+      line numbers, page numbers, separate main figures, additional files,
+      source data, reporting checklists, and a journal-specific cover letter.
+      Communications Medicine return-request statements were added to the main
+      manuscript: Author contributions now state that P.X. led data collection,
+      analysis, model development, figure/table generation, and drafting; G.Y.
+      assisted with manuscript formatting, presentation, and submission
+      preparation; and M.L. supervised, screened, reviewed, guided
+      interpretation, and revised the manuscript. Funding states that no
+      specific funding was received, and Competing interests states that the
+      authors declare no competing interests.
+  GOAL-047:
+    title: Reproducibility report
+    priority: P2
+    status: completed
+    files_changed: [src/econiche_opt/reporting/reproducibility.py, scripts/reporting/make_reproducibility_report.py, scripts/figures/make_article_suite.py, paper/article_suite_audit_20260508.md, paper/article_figure_resolution_audit_20260508.tsv, figures/article/figure_manifest.tsv, tables/article/table_manifest.tsv, deliverables/article_package_manifest_20260508.tsv, deliverables/EcoNiche-Opt_article_package_20260508.zip]
+    tests_run: [python scripts/reporting/make_reproducibility_report.py --demo, python scripts/figures/make_article_suite.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml, python -m econiche_opt.cli validate-project --mode real, python -m pytest -q]
+    blocking_issues: []
+    notes: Report records commands and data access policy. Article-suite audit records generated figures, supplementary figures, supplementary tables, and claim-boundary status; figure exports were upgraded to 600-DPI PNG/TIFF plus PDF/SVG vector outputs with resolution audit; final ZIP package and package manifest are available under deliverables for delivery review.
+  GOAL-048:
+    title: Complete CLI command set
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/cli.py, tests/test_econiche_opt_cli.py]
+    tests_run: [python -m econiche_opt.cli --help]
+    blocking_issues: []
+    notes: CLI includes validation, data, model, benchmark, reporting, and final project commands.
+  GOAL-049:
+    title: Makefile one-command reproduction
+    priority: P0
+    status: completed
+    files_changed: [Makefile]
+    tests_run: [make demo, make test, make benchmark_demo, make report_demo]
+    blocking_issues: []
+    notes: Make targets and underscore aliases are defined and verified in the local Windows environment with GnuWin32 Make.
+  GOAL-050:
+    title: Workflow manager
+    priority: P1
+    status: completed
+    files_changed: [workflow/Snakefile, workflow/config/demo.yml]
+    tests_run: [snakemake -n -s workflow/Snakefile --configfile workflow/config/demo.yml]
+    blocking_issues: []
+    notes: Snakemake workflow is present for demo, benchmark, report, and validation; dry-run verified with Snakemake 9.20.0.
+  GOAL-051:
+    title: Docker and conda reproducibility
+    priority: P1
+    status: completed
+    files_changed: [Dockerfile, environment.yml, requirements.txt]
+    tests_run: [Rscript --version]
+    blocking_issues: []
+    notes: Dockerfile, conda environment, and requirements define reproducible runtime dependencies; local Rscript 4.6.0 was verified.
+  GOAL-052:
+    title: Continuous integration tests
+    priority: P1
+    status: completed
+    files_changed: [.github/workflows/test.yml]
+    tests_run: []
+    blocking_issues: []
+    notes: CI installs package, runs tests, validates goals, and runs final demo validation.
+  GOAL-053:
+    title: Data manifest and split manifest
+    priority: P1
+    status: completed
+    files_changed: [results/demo/demo_manifest.json, data/processed/bulk/common_genes_primary.txt, scripts/make_demo_data.py]
+    tests_run: [python scripts/make_demo_data.py]
+    blocking_issues: []
+    notes: Demo data manifest and common gene manifest are generated.
+  GOAL-054:
+    title: Dataset-level QC reports
+    priority: P2
+    status: completed
+    files_changed: [scripts/reporting/make_qc_reports.py, src/econiche/qc.py]
+    tests_run: [python scripts/reporting/make_qc_reports.py --demo]
+    blocking_issues: []
+    notes: QC summaries include sample count, gene count, and missing fraction.
+  GOAL-055:
+    title: Module interpretability reports
+    priority: P2
+    status: completed
+    files_changed: [scripts/reporting/make_module_report.py]
+    tests_run: [python scripts/reporting/make_module_report.py --demo]
+    blocking_issues: []
+    notes: Module report summarizes genes per ecological state.
+  GOAL-056:
+    title: Failure analysis
+    priority: P2
+    status: completed
+    files_changed: [scripts/reporting/make_failure_analysis.py]
+    tests_run: [python scripts/reporting/make_failure_analysis.py --demo]
+    blocking_issues: []
+    notes: Failure analysis summarizes prediction errors by cohort when labels are present.
+  GOAL-057:
+    title: Therapy and timepoint stratification
+    priority: P2
+    status: completed
+    files_changed: [config/data_registry.yml, scripts/preprocess/harmonize_labels.py, scripts/analysis/run_stratification.py, src/econiche_opt/cli.py]
+    tests_run: [python scripts/analysis/run_stratification.py --out results/real_stratification/therapy_timepoint_stratification.tsv, python -m econiche_opt.cli run-stratification --out results/demo_stratification/therapy_timepoint_stratification.tsv --demo]
+    blocking_issues: []
+    notes: Stratification script annotates cohorts from registry therapy/timepoint/cancer type and summarizes prediction metrics by stratum.
+  GOAL-058:
+    title: Missing gene and platform compatibility
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/preprocess/gene_coverage.py, tests/test_model_safety_surfaces.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Gene coverage reporting and missing-gene fractions are implemented.
+  GOAL-059:
+    title: Configuration system
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/config.py, config/model_config.yml, config/benchmark_config.yml, config/demo_config.yml]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Model, benchmark, and demo settings are externalized.
+  GOAL-060:
+    title: Random seed and determinism
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/utils/random.py, src/econiche/module.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Random state is tracked in model config and global seed helper exists.
+  GOAL-061:
+    title: Optimizer history and diagnostics
+    priority: P1
+    status: completed
+    files_changed: [src/econiche/optim.py, scripts/model/run_econiche.py]
+    tests_run: [python -m econiche_opt.cli make-demo]
+    blocking_issues: []
+    notes: Objective history is written for each model run.
+  GOAL-062:
+    title: Result schema validator
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/validation/schema.py, schemas/predictions.yml, schemas/metrics.yml, schemas/modules.yml]
+    tests_run: [python -m econiche_opt.cli validate-results --demo]
+    blocking_issues: []
+    notes: Core predictions, metrics, and module output schemas are validated.
+  GOAL-063:
+    title: Paper methods text from config
+    priority: P2
+    status: completed
+    files_changed: [scripts/paper/generate_methods_text.py, scripts/reporting/make_manuscript.py]
+    tests_run: [python scripts/paper/generate_methods_text.py]
+    blocking_issues: []
+    notes: Methods text uses configuration and recorded pipeline settings.
+  GOAL-064:
+    title: Source citation registry
+    priority: P1
+    status: completed
+    files_changed: [config/source_registry.yml, src/econiche_opt/reporting/citations.py]
+    tests_run: [python -m econiche_opt.cli validate-sources --source-registry config/source_registry.yml]
+    blocking_issues: []
+    notes: Source registry validates data and reference source metadata.
+  GOAL-065:
+    title: Dataset download dry-run
+    priority: P0
+    status: completed
+    files_changed: [scripts/download/download_geo.py, src/econiche_opt/data/download_plan.py]
+    tests_run: [python scripts/download/download_geo.py --registry config/data_registry.yml --dry-run]
+    blocking_issues: []
+    notes: Dry-run emits a plan without network downloads.
+  GOAL-066:
+    title: Public cohort integration smoke tests
+    priority: P1
+    status: completed
+    files_changed: [docs/run_public_data.md, scripts/preprocess/preprocess_bulk.py, results/real/lodo_metrics.tsv, scripts/analysis/run_public_smoke_tests.py, src/econiche_opt/cli.py]
+    tests_run: [python scripts/analysis/run_public_smoke_tests.py --out results/audit/public_cohort_smoke_tests.tsv, python -m econiche_opt.cli run-public-smoke-tests --out results/audit/public_cohort_smoke_tests_cli.tsv]
+    blocking_issues: []
+    notes: Smoke test records PASS, RESULT_PENDING, VERIFY_ACCESS, or ACCESS_RESTRICTED for registered public and controlled entries.
+  GOAL-067:
+    title: Model serialization and reload reproducibility
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/model/io.py, tests/test_model_safety_surfaces.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Joblib save/load helper round-trips model objects.
+  GOAL-068:
+    title: Threshold selection without leakage
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/model/thresholds.py, tests/test_model_safety_surfaces.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Threshold selection helper is explicitly training-only.
+  GOAL-069:
+    title: Calibration without leakage
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/model/calibration.py, tests/test_model_safety_surfaces.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Calibrator fitting helper is explicitly training-only.
+  GOAL-070:
+    title: External precomputed scores import
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/analysis/precomputed_scores.py, schemas/precomputed_scores.yml, tests/test_model_safety_surfaces.py]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Precomputed score import validates required columns and records source file.
+  GOAL-071:
+    title: Secure handling of controlled data paths
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/data/controlled_access.py, .gitignore, docs/data_use.md]
+    tests_run: [pytest -q tests/test_model_safety_surfaces.py]
+    blocking_issues: []
+    notes: Controlled credentials are not stored; controlled raw path is ignored.
+  GOAL-072:
+    title: Documentation for real-data execution
+    priority: P1
+    status: completed
+    files_changed: [docs/run_public_data.md, docs/troubleshooting.md]
+    tests_run: []
+    blocking_issues: []
+    notes: Public data execution and troubleshooting are documented.
+  GOAL-073:
+    title: Demo end-to-end execution
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/cli.py, Makefile, scripts/make_demo_data.py]
+    tests_run: [python -m econiche_opt.cli make-demo]
+    blocking_issues: []
+    notes: Demo generates data, trains model, and writes model outputs.
+  GOAL-074:
+    title: Real-data pipeline entrypoint
+    priority: P1
+    status: completed
+    files_changed: [src/econiche_opt/cli.py, src/econiche_opt/pipeline/real.py, src/econiche_opt/pipeline/__init__.py, scripts/run_real_pipeline.py, docs/run_public_data.md, Makefile]
+    tests_run: [python -m econiche_opt.cli run-real-pipeline, make real_pipeline]
+    blocking_issues: []
+    notes: Real-data entrypoint writes a stage manifest, validates existing real outputs, runs smoke/stratification/secondary analyses, and requires explicit flags before download, preprocess, or retraining.
+  GOAL-075:
+    title: Claims and manuscript safety checks
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/reporting/safety_checks.py, scripts/reporting/make_manuscript.py, scripts/analysis/run_claim_strengthening.py, scripts/analysis/run_locked_external_panel_validation.py, scripts/analysis/run_pd1_like_external_rescue.py, tests/test_claim_gate.py, results/claim_strengthening/CLAIM_STRENGTHENING_AUDIT.md, results/locked_external_panel_validation/LOCKED_EXTERNAL_PANEL_VALIDATION_AUDIT.md, results/pd1_like_external_rescue/PD1_LIKE_EXTERNAL_RESCUE_AUDIT.md, deliverables/claim_external_validation_audit_20260508.md]
+    tests_run: [python scripts/analysis/run_claim_strengthening.py --predictions results/endpoint_modules_heuristic_core_locked_gpu/endpoint_module_predictions.tsv --out results/claim_strengthening, python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation, python scripts/analysis/run_pd1_like_external_rescue.py --processed-dir data/processed/bulk --out results/pd1_like_external_rescue, pytest -q tests/test_claim_gate.py]
+    blocking_issues: []
+    notes: Manuscript safety scanner flags unsupported superiority claims. New audits define allowed wording for family-level superiority, per-signature superiority, locked external validation, NanoString panel transfer, PD1-like rescue analysis, and the boundary that true prospective clinical validation remains a future independent study.
+  GOAL-076:
+    title: License citation and data-use notes
+    priority: P1
+    status: completed
+    files_changed: [LICENSE, CITATION.cff, docs/data_use.md, config/source_registry.yml]
+    tests_run: [python -m econiche_opt.cli validate-sources --source-registry config/source_registry.yml]
+    blocking_issues: []
+    notes: Code license, citation, and data-use policy are documented.
+  GOAL-077:
+    title: Unit test coverage floor
+    priority: P1
+    status: completed
+    files_changed: [.coveragerc, pytest.ini, pyproject.toml]
+    tests_run: [python -m pytest --cov=econiche --cov=econiche_opt --cov-report=term-missing]
+    blocking_issues: []
+    notes: Coverage configuration sets a 70 percent floor; latest verified total coverage was 72.36 percent after completing deconvolution, Xena/GDC, and LINCS/DGIdb interfaces.
+  GOAL-078:
+    title: Performance and memory safeguards
+    priority: P2
+    status: completed
+    files_changed: [src/econiche_opt/utils/resources.py]
+    tests_run: [pytest -q]
+    blocking_issues: []
+    notes: Matrix memory estimation guard is available for large expression inputs.
+  GOAL-079:
+    title: Error handling and user-friendly diagnostics
+    priority: P2
+    status: completed
+    files_changed: [src/econiche_opt/utils/diagnostics.py, src/econiche_opt/cli.py, docs/troubleshooting.md]
+    tests_run: [python -m econiche_opt.cli --help]
+    blocking_issues: []
+    notes: CLI and diagnostics provide actionable messages for missing files and validation failures.
+  GOAL-080:
+    title: Final project validation gate
+    priority: P0
+    status: completed
+    files_changed: [src/econiche_opt/validation/project.py, src/econiche_opt/cli.py, docs/goal_status.yml]
+    tests_run: [python -m econiche_opt.cli validate-project --mode demo]
+    blocking_issues: []
+    notes: Final validation checks goals, registry, source registry, docs, and demo result schemas.
+  GOAL-081:
+    title: Rejection-driven external validation calibration audit
+    priority: P0
+    status: completed
+    files_changed: [scripts/analysis/run_locked_external_panel_validation.py, results/locked_external_panel_validation_calibrated_20260519/]
+    tests_run: [python -m py_compile scripts/analysis/run_locked_external_panel_validation.py scripts/model/run_endpoint_module_analysis.py, python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation_calibrated_20260519]
+    blocking_issues: []
+    notes: Added discovery-only monotone Platt calibration to locked external/panel validation. Calibration reduces external ECE for several cohorts without using external labels for model selection, thresholding, or calibration. Discrimination in strict melanoma PD1-like external cohorts remains modest, indicating that a new independent tumor-tissue validation cohort is required for a clinical-level AUROC claim near 0.70.
+  GOAL-082:
+    title: Manuscript evidence realignment after calibrated external validation
+    priority: P0
+    status: completed
+    files_changed: [paper/econiche_opt_manuscript_en_v1_20260509.md, paper/econiche_opt_supporting_en_v1_20260509.md, scripts/figures/make_article_suite.py, scripts/documents/make_commsmed_submission_assets.py, scripts/documents/make_jtm_submission.py, scripts/documents/make_word_from_manuscript.py, src/econiche_opt/validation/goals.py, tables/article/table_manifest.tsv, tables/article/supp_table_13_aligned_panel_ablation.tsv, tables/article/supp_table_15_locked_external_metrics.tsv, tables/article/supp_table_16_nanostring_panel_transfer.tsv, paper/communications_medicine_submission/Source_Data.xlsx, paper/communications_medicine_submission/STROBE_TRIPOD_REMARK_checklists.xlsx, paper/communications_medicine_submission/EcoNiche-Opt_Supplementary_Information.docx, paper/communications_medicine_submission/EcoNiche-Opt_Supplementary_Information.pdf, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.docx, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.pdf]
+    tests_run: [python scripts/figures/make_article_suite.py, python scripts/documents/make_commsmed_submission_assets.py, python scripts/documents/make_word_from_manuscript.py, python scripts/documents/make_jtm_submission.py, python -m py_compile scripts/analysis/run_aligned_panel_ablation.py scripts/analysis/run_locked_external_panel_validation.py scripts/figures/make_article_suite.py scripts/documents/make_commsmed_submission_assets.py scripts/documents/make_jtm_submission.py scripts/documents/make_word_from_manuscript.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
+    blocking_issues: []
+    notes: Replaced old WordFullGraph performance-ablation wording with aligned locked-panel ablation evidence tied to the main melanoma model. Updated external validation q values, calibrated locked thresholds, Supplementary Table 13, Source Data, JTM manuscript DOCX/PDF, and submission figure copies to use the 600 DPI generated figure suite. Performance claims now separate FDR-supported family-level improvement, point-estimate individual-signature deltas, calibration trade-offs, and exploratory ecological-graph interpretation.
+  GOAL-083:
+    title: Public repository synchronization and release packaging
+    priority: P0
+    status: completed
+    files_changed: [.gitignore, DATA_RESULTS_FIGURES_UPLOAD_NOTES.md, CITATION.cff, pyproject.toml, r-package/EcoNicheOpt/DESCRIPTION, src/econiche_opt/__init__.py, docs/goal_status.yml, paper/Journal of Translational Medicine投稿/, paper/communications_medicine_submission/, figures/article/, results/aligned_panel_ablation_20260527/, results/locked_external_panel_validation_calibrated_20260519/, tables/article/]
+    tests_run: [git staged safety check for oversized files and excluded raw/expression data, python -m py_compile src/econiche_opt/validation/goals.py scripts/documents/make_commsmed_submission_assets.py scripts/documents/make_word_from_manuscript.py scripts/documents/make_jtm_submission.py scripts/analysis/run_aligned_panel_ablation.py scripts/analysis/run_locked_external_panel_validation.py scripts/figures/make_article_suite.py, python -m pytest -q tests/test_public_package_api.py tests/test_claim_gate.py tests/test_endpoint_modules.py, python -m econiche_opt.cli validate-project --mode demo]
+    blocking_issues: []
+    notes: Public release package records the GitHub repository, version 0.3.1, and release tag v0.3.1-jtm-20260527. Raw or controlled expression data, intermediate processed expression matrices, processed input folders, oversized TIFF exports, and external restricted data are excluded from the public repository. Submission-ready figures, tables, source data, calibrated external validation outputs, aligned panel ablation outputs, package code, R wrapper, and manuscript assets are synchronized for public review and independent scoring.

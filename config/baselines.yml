@@ -1,0 +1,24 @@
+analysis_endpoint: primary_recist
+baselines:
+  - PDL1_CD274
+  - PDCD1
+  - PDCD1LG2
+  - CXCL9
+  - HLA_DRA
+  - CTLA4
+  - CYT
+  - IFNG
+  - TIG
+  - TLS
+  - APM
+  - IPRES
+  - TIDE_dysfunction
+  - TIDE_exclusion
+  - MPS
+  - C_ECM
+  - ESCS
+  - IMPRES_template
+  - MCP_CD8_T
+  - MCP_fibroblast
+  - ElasticNet_template
+  - RandomForest_template

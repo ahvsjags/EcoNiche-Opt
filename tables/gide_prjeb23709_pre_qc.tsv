@@ -1,0 +1,3 @@
+cohort	n_samples	n_genes	n_patients	n_responders_CR_PR	n_nonresponders_SD_PD	response_raw_counts	status	source_expression	source_response_map
+PRJEB23709_PD1_PRE	41	47708	41	19	22	CR:4;PD:16;PR:15;SD:6	processed	D:\EcoNiche-Opt\data\external\TIGER_PRJEB23709\Melanoma-PRJEB23709.expression.tsv	D:\EcoNiche-Opt\data\external\PRJEB23709\gide_prjeb23709_response_map.tsv
+PRJEB23709_COMBO_PRE	32	47708	32	21	11	CR:10;PD:6;PR:11;SD:5	processed	D:\EcoNiche-Opt\data\external\TIGER_PRJEB23709\Melanoma-PRJEB23709.expression.tsv	D:\EcoNiche-Opt\data\external\PRJEB23709\gide_prjeb23709_response_map.tsv

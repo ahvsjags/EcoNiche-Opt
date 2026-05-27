@@ -1,0 +1,436 @@
+cohorts:
+  - accession: GSE91061
+    name: Riaz_antiPD1_melanoma
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [pretreatment, on_treatment, progression]
+    endpoint: [RECIST_response, PFS, OS]
+    role: discovery_or_lodo
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [discovery, internal, survival]
+    notes: "Primary analysis uses pretreatment only; patient-level split required."
+  - accession: GSE78220
+    name: Hugo_antiPD1_melanoma
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [RECIST_response]
+    role: classic_external_benchmark
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external]
+    notes: "Classic IPRES-associated melanoma anti-PD1 cohort; small sample size."
+  - accession: GSE145996
+    name: JerbyArnon_or_related_melanoma_antiPD1
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [RECIST_response]
+    role: external_small
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external]
+    notes: "Verify RNA-seq subset and RECIST metadata from downloaded records."
+  - accession: GSE168204
+    name: Du_pathway_signature_melanoma_antiPD1
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1_based
+    platform: RNA-seq
+    timepoints: [pretreatment, on_treatment]
+    endpoint: [RECIST_response]
+    role: pathway_signature_comparator
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external, baseline]
+    notes: "Use as pathway-signature comparator when processed data are available."
+  - accession: GSE115821
+    name: Auslander_IMPRES_melanoma
+    layer: A
+    cancer_type: melanoma
+    therapy: ICB
+    platform: expression
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: IMPRES_comparator
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external, baseline]
+    notes: "Verify overlap with other studies before benchmark pooling."
+  - accession: GSE93157
+    name: Prat_mixed_antiPD1_panel
+    layer: A_B
+    cancer_type: melanoma_NSCLC_HNSC
+    therapy: pembrolizumab_or_nivolumab
+    platform: NanoString_nCounter_immune_panel
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: mixed_tumor_external
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_nanostring.py
+    uses: [external, pan_cancer]
+    notes: "Use melanoma subset for melanoma external and full set for pan-cancer panel transfer."
+  - accession: PRJEB23709
+    name: Gide_melanoma_ICB
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1_or_combo
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [RECIST_response, PFS, OS]
+    role: locked_external_if_accessible
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_gide_prjeb23709.py
+    uses: [external, survival, melanoma_primary]
+    notes: "Processed expression obtained from TIGER immunotherapy download interface; PRE samples are split into anti-PD1 monotherapy and anti-PD1 plus anti-CTLA4 cohorts, with response labels cross-checked against Gide supplementary tables and ENA metadata."
+  - accession: Liu_DFCI_melanoma
+    name: Liu_NatMed_2019_melanoma
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [RECIST_response, PFS, OS]
+    role: external_validation
+    access: public_processed_via_TIGER
+    priority: high
+    download_script: http://tiger.canceromics.org/tiger/downloadtable.php?table=immunotherapy
+    preprocessing_script: scripts/preprocess/preprocess_phs000452_tiger.py
+    uses: [external, survival, melanoma_primary]
+    notes: "TIGER Melanoma-phs000452 processed expression/clinical. Only Patient-like anti-PD1 rows are modeled as PHS000452_LIU_LIKE_PRE; IPI-like rows are excluded from the primary set until source/timepoint evidence is hardened."
+  - accession: GSE244982
+    name: acquired_resistance_melanoma_progression
+    layer: A_C
+    cancer_type: melanoma
+    therapy: ICB_progression
+    platform: RNA-seq
+    timepoints: [progression]
+    endpoint: [acquired_resistance]
+    role: mechanism_only
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [mechanism]
+    notes: "Do not use for primary response prediction."
+  - accession: GSE136961
+    name: NSCLC_antiPD1_DCB_NDB
+    layer: B
+    cancer_type: NSCLC
+    therapy: anti-PD1
+    platform: expression
+    timepoints: [pretreatment]
+    endpoint: [durable_clinical_benefit]
+    role: pan_cancer_external
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer]
+    notes: "Use for cross-cancer transfer validation."
+  - accession: GSE176307
+    name: urothelial_ICB_real_world
+    layer: B
+    cancer_type: urothelial_cancer
+    therapy: ICB
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [response, survival]
+    role: pan_cancer_external
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer, survival]
+    notes: "Verify response endpoint and treated sample subset."
+  - accession: IMvigor210
+    name: IMvigor210_urothelial_atezolizumab
+    layer: B
+    cancer_type: urothelial_cancer
+    therapy: anti-PDL1_atezolizumab
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [response, PFS, OS]
+    role: pan_cancer_external_large
+    access: public_or_package_verify
+    priority: high
+    download_script: scripts/download/download_xena.R
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer, survival]
+    notes: "Optional downloader if package/source is available."
+  - accession: GSE67501
+    name: RCC_nivolumab_small
+    layer: B
+    cancer_type: renal_cell_carcinoma
+    therapy: nivolumab
+    platform: expression
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: pan_cancer_external_small
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer]
+    notes: "Small sample size; use exploratory only."
+  - accession: GSE121810
+    name: glioblastoma_pembrolizumab
+    layer: B
+    cancer_type: glioblastoma
+    therapy: pembrolizumab
+    platform: RNA-seq
+    timepoints: [baseline, on_treatment]
+    endpoint: [response, OS]
+    role: pan_cancer_external_context_specific
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer, survival]
+    notes: "Different disease biology and neoadjuvant setting; do not pool blindly."
+  - accession: GSE140901
+    name: HCC_ICI_nCounter
+    layer: B
+    cancer_type: hepatocellular_carcinoma
+    therapy: anti-PD1_or_anti-PDL1_based
+    platform: NanoString_nCounter
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: pan_cancer_external
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_nanostring.py
+    uses: [pan_cancer]
+    notes: "Panel data; intersect genes only."
+  - accession: GSE165252
+    name: PERFECT_esophageal_atezolizumab
+    layer: B
+    cancer_type: esophageal_cancer
+    therapy: atezolizumab_plus_chemoradiotherapy
+    platform: RNA-seq
+    timepoints: [baseline, on_treatment, resection]
+    endpoint: [pathologic_response, survival]
+    role: pan_cancer_dynamic
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [pan_cancer, survival]
+    notes: "Chemo-radiation confounded; use as secondary dynamic validation."
+  - accession: GSE183924
+    name: esophageal_GEj_durvalumab
+    layer: B
+    cancer_type: esophageal_or_GEj_adenocarcinoma
+    therapy: durvalumab
+    platform: RNA-seq
+    timepoints: [baseline]
+    endpoint: [relapse_free_survival]
+    role: survival_external
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [survival]
+    notes: "Survival endpoint rather than RECIST response."
+  - accession: GSE115978
+    name: melanoma_ecosystem_scRNA
+    layer: C
+    cancer_type: melanoma
+    therapy: mixed_or_ICB_context
+    platform: scRNA-seq
+    timepoints: [mixed]
+    endpoint: [cell_state, immune_evasion]
+    role: single_cell_mechanism
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/single_cell/preprocess_scrna.R
+    uses: [single_cell]
+    notes: "Use for mechanism mapping; do not use response labels for training priors."
+  - accession: GSE123139
+    name: melanoma_Tcell_states_scRNA
+    layer: C
+    cancer_type: melanoma
+    therapy: ICB_context
+    platform: scRNA-seq
+    timepoints: [mixed]
+    endpoint: [T_cell_state]
+    role: single_cell_Tcell_validation
+    access: public
+    priority: high
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/single_cell/preprocess_scrna.R
+    uses: [single_cell]
+    notes: "Use for dysfunctional CD8 T cell and effector/transitional states."
+  - accession: GSE123728
+    name: melanoma_ICB_public_candidate
+    layer: A
+    cancer_type: melanoma
+    therapy: ICB
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: candidate_external_requires_metadata_curation
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external]
+    notes: "Registry entry required by implementation contract; use only after response metadata are verified."
+  - accession: GSE165745
+    name: melanoma_ICB_public_candidate
+    layer: A
+    cancer_type: melanoma
+    therapy: ICB
+    platform: expression
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: candidate_external_requires_metadata_curation
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external]
+    notes: "Registry entry required by implementation contract; no benchmark use until patient labels pass QC."
+  - accession: GSE122220
+    name: melanoma_ICB_public_candidate
+    layer: A
+    cancer_type: melanoma
+    therapy: ICB
+    platform: RNA-seq
+    timepoints: [pretreatment]
+    endpoint: [response]
+    role: candidate_external_requires_metadata_curation
+    access: public
+    priority: medium
+    download_script: scripts/download/download_geo.py
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external]
+    notes: "Registry entry required by implementation contract; use only after accession metadata are verified."
+  - accession: TCGA_SKCM_Xena
+    name: TCGA_SKCM_UCSC_Xena
+    layer: D
+    cancer_type: melanoma
+    therapy: reference_survival
+    platform: RNA-seq
+    timepoints: [primary, metastatic]
+    endpoint: [OS, PFS]
+    role: survival_reference
+    access: public
+    priority: medium
+    download_script: scripts/download/download_xena.R
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [survival, reference]
+    notes: "Reference prognosis interface; not an ICB response benchmark."
+  - accession: GDC_TCGA_SKCM
+    name: TCGA_SKCM_GDC
+    layer: D
+    cancer_type: melanoma
+    therapy: reference_survival
+    platform: RNA-seq
+    timepoints: [primary, metastatic]
+    endpoint: [OS, PFS]
+    role: survival_reference
+    access: public
+    priority: medium
+    download_script: scripts/download/download_xena.R
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [survival, reference]
+    notes: "GDC interface placeholder; not pooled with treated ICB cohorts."
+  - accession: LINCS_L1000
+    name: LINCS_L1000_perturbation
+    layer: E
+    cancer_type: perturbation_reference
+    therapy: perturbagen
+    platform: L1000
+    timepoints: [post_perturbation]
+    endpoint: [signature_reversal]
+    role: perturbation_prioritization
+    access: public
+    priority: medium
+    download_script: scripts/download/download_lincs_template.py
+    preprocessing_script: scripts/perturbation/lincs_reversal.py
+    uses: [perturbation]
+    notes: "Candidate reversal source; outputs are hypotheses only."
+  - accession: CMap
+    name: Connectivity_Map
+    layer: E
+    cancer_type: perturbation_reference
+    therapy: perturbagen
+    platform: signature_database
+    timepoints: [post_perturbation]
+    endpoint: [signature_reversal]
+    role: perturbation_prioritization
+    access: public_or_manual
+    priority: medium
+    download_script: scripts/download/download_lincs_template.py
+    preprocessing_script: scripts/perturbation/lincs_reversal.py
+    uses: [perturbation]
+    notes: "Manual/API access may be required depending on source endpoint."
+  - accession: DepMap
+    name: DepMap_dependency
+    layer: E
+    cancer_type: dependency_reference
+    therapy: genetic_dependency
+    platform: CRISPR_screen
+    timepoints: [screen]
+    endpoint: [gene_dependency]
+    role: perturbation_prioritization
+    access: public
+    priority: medium
+    download_script: scripts/download/download_depmap_template.py
+    preprocessing_script: scripts/perturbation/depmap_prioritize.py
+    uses: [perturbation]
+    notes: "Candidate target support only, not clinical recommendation evidence."
+  - accession: DGIdb
+    name: Drug_Gene_Interaction_database
+    layer: E
+    cancer_type: actionability_reference
+    therapy: drug_gene_interaction
+    platform: database
+    timepoints: [not_applicable]
+    endpoint: [drug_gene_interaction]
+    role: actionability_annotation
+    access: public
+    priority: medium
+    download_script: scripts/perturbation/dgidb_lookup.py
+    preprocessing_script: scripts/perturbation/dgidb_lookup.py
+    uses: [perturbation]
+    notes: "Used for annotation only."
+  - accession: DrugBank_optional
+    name: DrugBank_optional
+    layer: E
+    cancer_type: actionability_reference
+    therapy: drug_gene_interaction
+    platform: database
+    timepoints: [not_applicable]
+    endpoint: [drug_gene_interaction]
+    role: optional_actionability_annotation
+    access: controlled_or_license_required
+    priority: low
+    download_script: ACCESS_RESTRICTED
+    preprocessing_script: scripts/perturbation/dgidb_lookup.py
+    uses: [perturbation]
+    notes: "Optional licensed resource; never replaced with fabricated interactions."

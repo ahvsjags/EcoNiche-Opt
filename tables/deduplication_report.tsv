@@ -1,0 +1,4 @@
+set	n_samples	n_patients
+primary	0	0
+secondary_on_treatment	0	0
+progression	0	0

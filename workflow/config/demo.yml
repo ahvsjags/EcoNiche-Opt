@@ -1,0 +1,4 @@
+mode: demo
+registry: config/data_registry.yml
+results_dir: results/demo
+random_state: 42

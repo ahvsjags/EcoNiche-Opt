@@ -1,0 +1,9 @@
+name: precomputed_scores
+required_columns:
+  - sample_id
+  - model
+  - score
+recommended_columns:
+  - cohort
+  - patient_id
+  - source

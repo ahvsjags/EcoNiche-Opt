@@ -1,0 +1,19 @@
+primary_validation: leave_one_dataset_out
+nested_cv:
+  enabled: true
+  tune_within_training_only: true
+locked_external:
+  forbid_training_leakage: true
+metrics:
+  - AUROC
+  - AUPRC
+  - balanced_accuracy
+  - MCC
+  - F1
+  - sensitivity
+  - specificity
+  - ECE
+  - Brier
+statistics:
+  comparison: paired_bootstrap
+  fdr: benjamini_hochberg

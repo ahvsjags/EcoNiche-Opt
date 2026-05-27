@@ -6,7 +6,6 @@ from typing import Any
 import pandas as pd
 import yaml
 
-EXPECTED_GOALS = [f"GOAL-{idx:03d}" for idx in range(81)]
 ALLOWED_STATUSES = {
     "pending",
     "completed",
@@ -19,6 +18,22 @@ ALLOWED_STATUSES = {
 }
 
 
+def expected_goal_ids(data: dict[str, Any]) -> list[str]:
+    """Validate the contiguous GOAL-000..GOAL-N range recorded in goal_status.yml."""
+    goals = data.get("goals", {})
+    numeric_ids: list[int] = []
+    for goal_id in goals:
+        if isinstance(goal_id, str) and goal_id.startswith("GOAL-"):
+            try:
+                numeric_ids.append(int(goal_id.split("-", 1)[1]))
+            except ValueError:
+                continue
+    if not numeric_ids:
+        total = int(data.get("summary", {}).get("total_goals", 0) or 0)
+        return [f"GOAL-{idx:03d}" for idx in range(total)]
+    return [f"GOAL-{idx:03d}" for idx in range(max(numeric_ids) + 1)]
+
+
 def load_goal_status(path: str | Path) -> dict[str, Any]:
     with Path(path).open("r", encoding="utf-8") as handle:
         return yaml.safe_load(handle) or {}
@@ -28,7 +43,7 @@ def validate_goal_status(path: str | Path, demo_mode: bool = True) -> pd.DataFra
     data = load_goal_status(path)
     goals = data.get("goals", {})
     rows = []
-    for goal_id in EXPECTED_GOALS:
+    for goal_id in expected_goal_ids(data):
         goal = goals.get(goal_id)
         if goal is None:
             rows.append({"goal_id": goal_id, "is_valid": False, "issue": "missing_goal"})

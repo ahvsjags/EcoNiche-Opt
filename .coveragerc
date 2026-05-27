@@ -1,0 +1,12 @@
+[run]
+source =
+    src/econiche
+    src/econiche_opt
+branch = True
+
+[report]
+fail_under = 70
+show_missing = True
+omit =
+    */__pycache__/*
+    tests/*

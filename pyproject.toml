@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "econiche-opt"
-version = "0.3.0"
+version = "0.3.1"
 description = "EcoNiche-Opt package for multicohort ICB response benchmarking and ecological module scoring."
 readme = "README.md"
 requires-python = ">=3.10"

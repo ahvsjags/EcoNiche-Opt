@@ -1,0 +1,8 @@
+name: predictions
+required_columns:
+  - sample_id
+  - patient_id
+  - cohort
+  - pred_prob
+  - pred_label
+  - EcoNicheScore

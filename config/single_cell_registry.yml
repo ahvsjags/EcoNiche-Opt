@@ -1,0 +1,11 @@
+datasets:
+  - accession: GSE115978
+    role: melanoma_ecosystem_mapping
+    status: public_interface
+    preprocessing: scripts/single_cell/preprocess_scrna.R
+    scoring: scripts/single_cell/map_modules_scrna.py
+  - accession: GSE123139
+    role: t_cell_state_validation
+    status: public_interface
+    preprocessing: scripts/single_cell/preprocess_scrna.R
+    scoring: scripts/single_cell/map_modules_scrna.py

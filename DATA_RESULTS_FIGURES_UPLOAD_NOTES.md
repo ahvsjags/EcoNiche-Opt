@@ -14,6 +14,13 @@ Included:
 - `results/`: generated benchmark, validation, claim-gate, perturbation, and audit tables, excluding duplicated processed expression inputs.
 - `figures/article/`: PNG/PDF/SVG manuscript figure exports.
 
+Authoritative current result directories for the submitted manuscript include
+`results/endpoint_modules_heuristic_core_locked_gpu/`,
+`results/aligned_panel_ablation_20260527/`, and
+`results/locked_external_panel_validation_calibrated_20260519/`. Older
+un-calibrated validation folders are retained only as historical pipeline
+outputs and are not the source for the current manuscript claims.
+
 Excluded:
 
 - `data/raw/`

@@ -1,0 +1,38 @@
+configfile: "workflow/config/demo.yml"
+
+rule all:
+    input:
+        "results/demo/lodo_metrics.tsv",
+        "paper/demo_reproducibility_report.md",
+        "paper/demo_manuscript.md"
+
+rule demo:
+    output:
+        "results/demo/lodo_metrics.tsv"
+    shell:
+        "python -m econiche_opt.cli make-demo"
+
+rule benchmark_demo:
+    input:
+        "results/demo/lodo_metrics.tsv"
+    output:
+        "results/demo_ablation/ablation_metrics.tsv"
+    shell:
+        "python scripts/analysis/run_ablation.py --demo"
+
+rule report_demo:
+    input:
+        "results/demo/lodo_metrics.tsv"
+    output:
+        "paper/demo_reproducibility_report.md",
+        "paper/demo_manuscript.md"
+    shell:
+        "python scripts/reporting/make_reproducibility_report.py --demo && python scripts/reporting/make_manuscript.py --demo"
+
+rule validate:
+    input:
+        "results/demo/lodo_metrics.tsv"
+    output:
+        "results/audit/project_validation.tsv"
+    shell:
+        "python -m econiche_opt.cli validate-project --mode demo > {output}"

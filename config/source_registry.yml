@@ -1,0 +1,46 @@
+sources:
+  - id: data_registry
+    type: registry
+    title: EcoNiche-Opt dataset registry
+    source: config/data_registry.yml
+    access_status: local
+  - id: geo_public
+    type: public_database
+    title: Gene Expression Omnibus public cohorts
+    source: https://www.ncbi.nlm.nih.gov/geo/
+    access_status: public
+  - id: ena_public
+    type: public_database
+    title: European Nucleotide Archive public metadata
+    source: https://www.ebi.ac.uk/ena/browser/home
+    access_status: public
+  - id: tiger_immunotherapy
+    type: public_database
+    title: TIGER immunotherapy processed expression and clinical download tables
+    source: http://tiger.canceromics.org/tiger/downloadtable.php?table=immunotherapy
+    access_status: public
+  - id: controlled_optional
+    type: controlled_or_licensed_database
+    title: Controlled or licensed optional resources
+    source: data access approval required
+    access_status: ACCESS_RESTRICTED
+  - id: ucsc_xena_tcga
+    type: public_database
+    title: UCSC Xena TCGA and GDC public data hubs
+    source: https://xenabrowser.net/datapages/
+    access_status: public
+  - id: gdc_api
+    type: public_database
+    title: NCI Genomic Data Commons API
+    source: https://api.gdc.cancer.gov/
+    access_status: public
+  - id: enrichr_lincs
+    type: public_database
+    title: Enrichr LINCS L1000 perturbation libraries
+    source: https://maayanlab.cloud/Enrichr/
+    access_status: public
+  - id: dgidb
+    type: public_database
+    title: Drug-Gene Interaction Database
+    source: https://dgidb.org/
+    access_status: public

@@ -4,5 +4,5 @@ message: "If you use this scaffold, cite the repository and the underlying publi
 type: software
 authors:
   - name: EcoNiche-Opt contributors
-version: 0.3.0
-date-released: 2026-05-08
+version: 0.3.1
+date-released: 2026-05-27

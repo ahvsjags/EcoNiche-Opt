@@ -1,0 +1,9 @@
+name: modules
+required_columns:
+  - state
+  - gene
+  - direction
+recommended_columns:
+  - selection_frequency
+  - cell_state_prior
+  - coefficient

@@ -1,0 +1,7 @@
+figures:
+  fig1_overview: figures/fig1_overview.pdf
+  fig2_benchmark: figures/fig2_benchmark.pdf
+  fig3_module_network: figures/fig3_module_network.pdf
+  fig4_single_cell: figures/fig4_single_cell.pdf
+  fig5_survival: figures/fig5_survival.pdf
+  fig6_perturbation: figures/fig6_perturbation.pdf

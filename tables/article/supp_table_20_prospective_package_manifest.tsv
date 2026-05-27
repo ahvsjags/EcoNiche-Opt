@@ -1,0 +1,20 @@
+domain	reproducible_element	status	analysis_boundary	scientific_role
+cohort evidence	public ICB expression cohorts	reported	retrospective public cohorts	Defines the multicohort response-prediction setting used for discovery and external evaluation.
+cohort evidence	patient-sample-response linkage	reported	sample-level curation	Links each expression profile to patient, treatment timepoint and response evidence before model fitting.
+endpoint definition	primary RECIST endpoint	reported	predefined response mapping	Treats CR/PR as response and SD/PD as non-response for the main binary endpoint.
+endpoint definition	strict RECIST endpoint	reported	sensitivity analysis	Compares CR/PR against PD after excluding intermediate SD/MR samples.
+endpoint definition	clinical benefit endpoint	reported	sensitivity analysis	Evaluates CR/PR/SD or durable benefit against progression/non-benefit where supported by cohort metadata.
+feature construction	signed-rank ecological module scores	reported	training-defined directions	Transforms expression into response-high and resistance-high module activities without using held-out labels.
+feature construction	ecological interaction features	reported	training-only graph construction	Aggregates biologically signed state-state gene interactions as model features.
+model fitting	class-balanced logistic model	reported	discovery cohorts only	Estimates response probability from module and interaction features under class imbalance.
+optimizer	heuristic ecological module search	reported	inner training folds only	Searches module composition and interaction edges with biological compactness and leakage-safety constraints.
+thresholding	endpoint-specific locked thresholds	reported	discovery cohorts only	Selects fixed decision thresholds before external cohort scoring.
+calibration	calibration object	reported	discovery cohorts only	Keeps probability calibration separated from locked external outcome labels.
+external scoring	one-way independent cohort scoring	reported	no model refit	Scores external cohorts once and evaluates discrimination and calibration only after predictions are fixed.
+external scoring	gene coverage assessment	reported	assay-aware QC	Reports module coverage so platform transfer does not silently change the biological score.
+benchmarking	signature-family comparison	reported	paired evaluation	Compares EcoNiche-Opt against IFNG/CXCL9/TIG/APM/TIDE-like immune signatures under shared samples.
+claim boundary	FDR-aware superiority gate	reported	paired bootstrap or family test	Separates FDR-supported statements from point-estimate-only improvements.
+mechanism	single-cell ecological enrichment	reported	post hoc interpretation	Maps bulk ecological modules to immune, stromal and myeloid cell-state patterns.
+mechanism	hypothesis-only perturbation ranking	reported	not treatment recommendation	Uses external perturbation resources only to generate mechanistic hypotheses.
+reproducibility	open scoring code	available	same frozen algorithm	Allows independent users to apply the published scoring rule to normalized expression matrices.
+reproducibility	controlled-data boundary	reported	no substitute data	Marks access-restricted cohorts as non-shareable while preserving interfaces and analysis rules.

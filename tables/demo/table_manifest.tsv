@@ -1,0 +1,5 @@
+table	status
+lodo_metrics.tsv	copied_from_pipeline
+lodo_predictions.tsv	copied_from_pipeline
+econiche_module.tsv	copied_from_pipeline
+objective_history.tsv	copied_from_pipeline

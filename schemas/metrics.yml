@@ -1,0 +1,14 @@
+name: metrics
+required_columns:
+  - cohort
+  - model_name
+recommended_columns:
+  - AUROC
+  - AUPRC
+  - balanced_accuracy
+  - MCC
+  - F1
+  - sensitivity
+  - specificity
+  - ECE
+  - Brier
