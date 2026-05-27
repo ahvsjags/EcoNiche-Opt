@@ -1,2 +1,2 @@
-subject_id	sample_id	response_raw	best_overall_response_date	progression_date	last_follow_up_date	dcbr_6mo	recist_version	label_source_document	curation_notes
-SUBJECT001	SUBJECT001_BL_RNA	CR/PR/SD/PD	YYYY-MM-DD	YYYY-MM-DD_or_blank	YYYY-MM-DD	DCB/NDB_or_blank	RECIST 1.1	source_file_or_eCRF_id	
+subject_id	sample_id	icb_regimen	icb_start_date	baseline_scan_date	response_raw	best_overall_response_date	progression_date	last_follow_up_date	dcbr_6mo	recist_version	primary_recist_label	strict_recist_label	clinical_benefit_label	response_assessor	label_source_document	source_page_or_record_id	curation_notes
+SUBJECT001	SUBJECT001_BL_RNA	anti-PD-1_or_anti-PD-1-based	YYYY-MM-DD	YYYY-MM-DD	CR/PR/SD/PD	YYYY-MM-DD	YYYY-MM-DD_or_blank	YYYY-MM-DD	DCB/NDB_or_blank	RECIST 1.1	1_for_CR_PR__0_for_SD_PD	1_for_CR_PR__0_for_PD__blank_for_SD	1_for_CR_PR_SD_or_DCB__0_for_PD_or_NDB	radiologist_or_clinician_id	source_file_or_eCRF_id		

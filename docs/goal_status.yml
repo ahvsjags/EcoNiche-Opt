@@ -3,8 +3,8 @@ version: 0.3.1
 goal_status_schema: 1
 last_updated: 2026-05-27
 summary:
-  total_goals: 84
-  completed: 84
+  total_goals: 85
+  completed: 85
   interface_completed: 0
   blocked: 0
   pending: 0
@@ -755,3 +755,11 @@ goals:
     tests_run: [git staged safety check for oversized files and excluded raw/expression data, python -m py_compile src/econiche_opt/validation/goals.py scripts/documents/make_commsmed_submission_assets.py scripts/documents/make_word_from_manuscript.py scripts/documents/make_jtm_submission.py scripts/analysis/run_aligned_panel_ablation.py scripts/analysis/run_locked_external_panel_validation.py scripts/figures/make_article_suite.py, python -m pytest -q tests/test_public_package_api.py tests/test_claim_gate.py tests/test_endpoint_modules.py, python -m econiche_opt.cli validate-project --mode demo]
     blocking_issues: []
     notes: Public release package records the GitHub repository, version 0.3.1, and release tag v0.3.1-jtm-20260527. Raw or controlled expression data, intermediate processed expression matrices, processed input folders, oversized TIFF exports, and external restricted data are excluded from the public repository. Submission-ready figures, tables, source data, calibrated external validation outputs, aligned panel ablation outputs, package code, R wrapper, and manuscript assets are synchronized for public review and independent scoring.
+  GOAL-084:
+    title: Independent melanoma tumor-tissue validation intake package
+    priority: P0
+    status: completed
+    files_changed: [scripts/reporting/make_prospective_validation_package.py, scripts/validation/validate_prospective_package.py, tests/test_prospective_validation_package.py, deliverables/prospective_validation/README.md, deliverables/prospective_validation/locked_scoring_spec.json, deliverables/prospective_validation/locked_scoring_spec.sha256, deliverables/prospective_validation/assay_sample_manifest_template.tsv, deliverables/prospective_validation/clinical_annotation_template.tsv, deliverables/prospective_validation/prospective_validation_protocol.md, deliverables/prospective_validation/statistical_analysis_plan.md, deliverables/prospective_validation/clinical_partner_intake_checklist.md, deliverables/prospective_validation/tumor_tissue_assay_sop.md, deliverables/prospective_validation/validation_readiness_checklist.tsv]
+    tests_run: [python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv --out deliverables/prospective_validation, python scripts/validation/validate_prospective_package.py --package-dir deliverables/prospective_validation, python -m pytest -q tests/test_prospective_validation_package.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
+    blocking_issues: []
+    notes: Expanded the independent validation package from a minimal future-validation scaffold into a clinician-facing tumor-tissue intake and assay package. The package now locks the calibrated thresholds, release tag, release commit, 62-unique-gene panel, sample/clinical templates, RECIST endpoint labels, tumor-tissue SOP, clinical partner checklist, readiness checklist, SHA256 hash, predeclared comparators, and no-leakage validation boundary. It explicitly states that blood, PBMC, plasma, serum, on-treatment biopsies, and non-ICB cohorts require a separately trained model rather than validating the current tumor-tissue score.

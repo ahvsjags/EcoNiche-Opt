@@ -1,0 +1,8 @@
+section	item	required	evidence_field	status
+cohort	melanoma anti-PD-1/anti-PD-1-based cohort	True	cancer_type;therapy	to_complete
+specimen	pretreatment tumor tissue before first ICB dose	True	sample_source;baseline_status;days_before_icb_start	to_complete
+pathology	tumor content and RNA QC recorded	True	tumor_content_percent;rna_dv200_or_rin;qc_pass	to_complete
+labels	RECIST raw response and source evidence recorded	True	response_raw;recist_version;label_source_document	to_complete
+labels	primary/strict/clinical-benefit binary labels derived before scoring	True	primary_recist_label;strict_recist_label;clinical_benefit_label	to_complete
+assay	locked panel coverage reported	True	panel_gene_coverage_percent	to_complete
+leakage	no validation labels used for tuning or calibration	True	data_freeze_id	to_complete
