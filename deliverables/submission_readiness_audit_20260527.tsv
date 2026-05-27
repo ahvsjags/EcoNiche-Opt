@@ -1,21 +1,21 @@
 check	is_valid	detail
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	66322
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394529
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	767853
-exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3584961
-exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	663629
-exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12198
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38034
-exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	663629
-main_docx_not_older_than_markdown	True	docx=1779866379.335528;md=1779866377.6100717
-main_pdf_not_older_than_docx	True	pdf=1779866391.9357986;docx=1779866379.335528
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	69056
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	395445
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	775706
+exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3607723
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	654218
+exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12235
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38140
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	654218
+main_docx_not_older_than_markdown	True	docx=1779903784.1392398;md=1779903783.0980742
+main_pdf_not_older_than_docx	True	pdf=1779920769.4941678;docx=1779903784.1392398
 exists:Figure_1.png	True	932292
 exists:Figure_2.png	True	739513
 exists:Figure_3.png	True	777168
 exists:Figure_4.png	True	921237
-exists:Figure_5.png	True	659593
+exists:Figure_5.png	True	644210
 exists:Figure_6.png	True	931767
-exists:Figure_7.png	True	638506
+exists:Figure_7.png	True	638819
 supplementary_table_01_single_manifested_file	True	supp_table_01_data_registry_roles.tsv
 supplementary_table_02_single_manifested_file	True	supp_table_02_access_audit.tsv
 supplementary_table_03_single_manifested_file	True	supp_table_03_expression_qc.tsv
@@ -36,6 +36,10 @@ supplementary_table_17_single_manifested_file	True	supp_table_17_pd1_like_rescue
 supplementary_table_18_single_manifested_file	True	supp_table_18_single_cell_enrichment.tsv
 supplementary_table_19_single_manifested_file	True	supp_table_19_perturbation_hypotheses.tsv
 supplementary_table_20_single_manifested_file	True	supp_table_20_prospective_package_manifest.tsv
+supplementary_table_21_single_manifested_file	True	supp_table_21_gpu_bioprior_rescue.tsv
+supplementary_table_22_single_manifested_file	True	supp_table_22_gpu_bioprior_component_ablation.tsv
+supplementary_table_23_single_manifested_file	True	supp_table_23_cbioportal_gpu_bioprior_external.tsv
+supplementary_table_24_single_manifested_file	True	supp_table_24_gpu_lipid_pair_rescue.tsv
 no_stale_word_graph_ablation_article_table	True	
 figure_1_600dpi_and_large_canvas	True	size=(4571, 4297);dpi=(599.9988, 599.9988)
 figure_2_600dpi_and_large_canvas	True	size=(6593, 4233);dpi=(599.9988, 599.9988)
@@ -45,9 +49,9 @@ figure_5_600dpi_and_large_canvas	True	size=(6595, 4232);dpi=(599.9988, 599.9988)
 figure_6_600dpi_and_large_canvas	True	size=(7541, 4411);dpi=(599.9988, 599.9988)
 figure_7_600dpi_and_large_canvas	True	size=(3739, 5250);dpi=(599.9988, 599.9988)
 source_data_required_sheets	True	
-source_data_release_tag	True	v0.3.2-locked-validation-20260527
-manuscript_release_version	True	0.3.2
-manuscript_release_tag	True	v0.3.2-locked-validation-20260527
+source_data_release_tag	True	v0.3.4-gpu-lipid-pair-rescue-20260528
+manuscript_release_version	True	0.3.4
+manuscript_release_tag	True	v0.3.4-gpu-lipid-pair-rescue-20260528
 manuscript_no_old_release_tag	True	old v0.3.1 absent
 manuscript_mentions_locked_scorer	True	
 forbidden_phrase_absent:superior to all	True	superior to all
@@ -73,17 +77,17 @@ external_strict_recist_fdr_in_text	True	q=0.039
 external_clinical_benefit_target_auroc_in_text	True	0.604353
 external_clinical_benefit_family_mean_in_text	True	0.566113
 external_clinical_benefit_fdr_in_text	True	q=0.039
-strict_external_claim_gate_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\deliverables\strict_melanoma_external_claim_gate_20260527.tsv
+strict_external_claim_gate_exists	True	D:\EcoNiche-Opt\deliverables\strict_melanoma_external_claim_gate_20260527.tsv
 strict_external_primary_gate_status	True	modest_point_estimate_only
 strict_external_primary_gate_auroc_in_text	True	0.571131
 strict_external_primary_gate_family_mean_in_text	True	0.541629
 strict_external_primary_gate_fdr_in_text	True	q=0.309
-strict_external_no_high_strength_overclaim	True	strict melanoma PD1-like layer is explicitly claim-gated
-performance_ci_audit_dir_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\results\performance_ci_audit_20260527
-table10_pooled_auroc_ci_present	True	supp_table_10
-table11_target_and_delta_auroc_ci_present	True	supp_table_11
-table15_external_auroc_ci_present	True	supp_table_15
-external_family_auroc_ci_file_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\results\performance_ci_audit_20260527\locked_external_signature_family_omnibus_with_ci.tsv
+strict_external_no_high_strength_overclaim	True	strict external layer is either explicitly claim-gated or updated with GPU rescue plus cBioPortal cross-check without overclaim
+performance_ci_audit_dir_exists	True	D:\EcoNiche-Opt\results\performance_ci_audit_20260527
+table10_pooled_auroc_ci_present	True	supp_table_10 or performance_ci_audit
+table11_target_and_delta_auroc_ci_present	True	supp_table_11 plus performance_ci_audit
+table15_external_auroc_ci_present	True	supp_table_15 or performance_ci_audit
+external_family_auroc_ci_file_exists	True	D:\EcoNiche-Opt\results\performance_ci_audit_20260527\locked_external_signature_family_omnibus_with_ci.tsv
 primary_core_target_ci_low_in_text	True	0.607472
 primary_core_target_ci_high_in_text	True	0.795575
 external_strict_target_ci_low_in_text	True	0.537128

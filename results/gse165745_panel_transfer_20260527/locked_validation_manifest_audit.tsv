@@ -1,0 +1,11 @@
+check	is_valid	detail
+sample_manifest_column:sample_id	True	
+sample_manifest_column:sample_source	True	
+sample_manifest_column:baseline_status	True	
+sample_manifest_column:therapy	True	
+sample_manifest_column:qc_pass	True	
+sample_manifest_column:locked_validation_use_flag	True	
+sample_ids_have_expression	True	
+tumor_tissue_only	True	tumor_tissue
+pretreatment_status	True	pretreatment_before_first_icb_dose
+anti_pd1_based_therapy	True	anti-pd-1 monotherapy

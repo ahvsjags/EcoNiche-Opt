@@ -1,0 +1,7 @@
+cohort	source_dir	n_samples	n_target_genes_available	target_genes_available	status
+CBIO_IATLAS_LIU_2019_PRE	data\processed\cbioportal_melanoma	122	3	AXL,MAP4K1,TBX3	ready
+CBIO_LIU_DFCI_2019_PRE	data\processed\cbioportal_melanoma	121	3	AXL,MAP4K1,TBX3	ready
+GSE145996	data\processed\bulk	14	3	AXL,MAP4K1,TBX3	ready
+GSE78220	data\processed\bulk	27	3	AXL,MAP4K1,TBX3	ready
+GSE91061	data\processed\bulk	49	3	AXL,MAP4K1,TBX3	ready
+PRJEB23709_PD1_PRE	data\processed\bulk	41	3	AXL,MAP4K1,TBX3	ready

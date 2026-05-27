@@ -1,0 +1,2 @@
+target_model	baseline_family	n_samples	n_signatures	target_AUROC	family_mean_AUROC	best_signature	best_signature_AUROC	delta_vs_family_mean	ci_low	ci_high	one_sided_p	two_sided_p	two_sided_fdr_q	claim_level
+0.80*base+0.20*rz__CD247	eight_strong_signatures	116	8	0.6898809523809525	0.5666666666666667	CXCL9	0.5901785714285713	0.12358335546057964	0.028181760665655243	0.22242623660715702	0.0055	0.011	0.011	family_point_estimate_only

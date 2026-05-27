@@ -1,0 +1,2 @@
+endpoint	stratum	target_model	baseline_family	n_samples	n_signatures	target_AUROC	family_mean_AUROC	best_signature	best_signature_AUROC	delta_vs_family_mean	ci_low	ci_high	one_sided_p	two_sided_p	two_sided_fdr_q	claim_level
+strict_recist	strict_melanoma_pd1_like_external	0.65*base+0.35*z__SLC6A12	eight_strong_signatures	116	8	0.6245535714285715	0.5666666666666667	CXCL9	0.5901785714285713	0.05757628149762586	-0.03538666346959945	0.15413087767163744	0.114	0.228	0.228	family_point_estimate_only

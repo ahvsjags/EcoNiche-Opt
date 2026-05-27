@@ -1,0 +1,60 @@
+{
+  "rescue_head_id": "EcoNiche-Opt-Melanoma-MAP4K1-TBX3-AXL",
+  "model_status": "frozen_extension_for_future_locked_external_validation",
+  "release_tag": "v0.3.2-melanoma-rescue-head-20260527",
+  "created": "2026-05-27",
+  "intended_context": "pretreatment melanoma tumor tissue before anti-PD-1 or anti-PD-1-based therapy",
+  "endpoint": "CR/PR responders versus SD/PD nonresponders when RECIST categories are available",
+  "selection_rule": "choose the MAP4K1-TBX3/AXL transform using primary melanoma LODO only; do not use current or future external labels for feature, transform, threshold, or calibration selection",
+  "locked_transform": {
+    "method": "cohort_gene_percentile",
+    "axis": "MAP4K1_minus_TBX3_AXL",
+    "positive_genes": [
+      "MAP4K1"
+    ],
+    "negative_genes": [
+      "TBX3",
+      "AXL"
+    ],
+    "transform_definition": "For each external cohort, rank each locked gene across samples to percentiles, average positive-gene percentiles, subtract the average negative-gene percentiles, then min-max scale the resulting sample score within the scored cohort.",
+    "score_orientation": "higher values indicate a more response-like tumor-immune balance"
+  },
+  "primary_development_evidence": {
+    "selection_boundary": "selected_by_primary_lodo_only_not_by_external",
+    "primary_AUROC": 0.7847265870521685,
+    "primary_AUPRC": 0.6926442778363515,
+    "primary_balanced_accuracy": 0.7253299811439347,
+    "current_strict_external_AUROC_for_primary_selected_head": 0.6605654761904762,
+    "current_strict_external_AUPRC_for_primary_selected_head": 0.6102916193311602,
+    "current_strict_external_balanced_accuracy_for_primary_selected_head": 0.6339285714285714
+  },
+  "stress_screen_not_for_locked_selection": {
+    "selection_id": "current_external_stress_best",
+    "claim_boundary": "current_external_stress_screen_not_a_locked_selection_claim",
+    "method": "cohort_zscore",
+    "axis": "MAP4K1_minus_TBX3_AXL",
+    "primary_AUROC": 0.7787554996857322,
+    "strict_external_AUROC": 0.6794642857142857
+  },
+  "no_leakage_rules": [
+    "External labels must not enter feature selection.",
+    "External labels must not enter transform selection.",
+    "External labels must not enter thresholding or calibration.",
+    "Current external stress-screen rows are reported only for weakness diagnosis and cannot define the locked rescue head.",
+    "Controlled or unavailable external data remain ACCESS_RESTRICTED or RESULT_PENDING until imported through a registered pipeline."
+  ],
+  "required_reporting": [
+    "AUROC",
+    "AUPRC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity",
+    "PPV",
+    "NPV",
+    "Brier",
+    "ECE",
+    "calibration_bins",
+    "decision_curve",
+    "paired baseline comparison with FDR claim gate"
+  ]
+}

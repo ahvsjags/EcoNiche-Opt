@@ -1,0 +1,4 @@
+gene_symbol	direction	role	interpretation
+MAP4K1	response_high	tumor_immune_balance_positive_gene	immune-signaling axis gene retained by primary melanoma LODO selection
+TBX3	resistance_high	tumor_dedifferentiation_resistance_gene	tumor-intrinsic resistance axis gene retained by primary melanoma LODO selection
+AXL	resistance_high	IPRES_dedifferentiation_extension_gene	resistance-extension gene retained by primary melanoma LODO selection

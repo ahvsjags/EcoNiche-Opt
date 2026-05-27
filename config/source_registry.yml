@@ -14,10 +14,20 @@ sources:
     title: European Nucleotide Archive public metadata
     source: https://www.ebi.ac.uk/ena/browser/home
     access_status: public
+  - id: ega_restricted
+    type: controlled_or_licensed_database
+    title: European Genome-phenome Archive controlled clinical genomics studies
+    source: https://ega-archive.org/
+    access_status: ACCESS_RESTRICTED
   - id: tiger_immunotherapy
     type: public_database
     title: TIGER immunotherapy processed expression and clinical download tables
     source: http://tiger.canceromics.org/tiger/downloadtable.php?table=immunotherapy
+    access_status: public
+  - id: cbioportal_public_api
+    type: public_database
+    title: cBioPortal public Web API melanoma ICB expression and clinical attributes
+    source: https://www.cbioportal.org/api
     access_status: public
   - id: controlled_optional
     type: controlled_or_licensed_database

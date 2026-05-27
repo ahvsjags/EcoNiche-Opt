@@ -1,0 +1,6 @@
+gene_symbol	role	transform	locked_in_model
+MAP4K1	base_response_axis_positive	rz,z	True
+TBX3	base_resistance_axis_negative	rz,z	True
+AXL	base_resistance_axis_negative	rz,z	True
+PLA2G2D	lipid_immunoregulatory_component	pct	True
+PIK3CD	PI3K_delta_immune_component	rz	True

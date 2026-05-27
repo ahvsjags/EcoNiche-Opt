@@ -17,6 +17,11 @@ ALLOWED_STATUSES = {
     "unavailable_with_reason",
 }
 
+# Backwards-compatible baseline used by older tests and scaffolded goal files.
+# Real project files can extend beyond this range; expected_goal_ids() expands
+# to the observed highest GOAL-N id whenever more goals are present.
+EXPECTED_GOALS = tuple(f"GOAL-{idx:03d}" for idx in range(10))
+
 
 def expected_goal_ids(data: dict[str, Any]) -> list[str]:
     """Validate the contiguous GOAL-000..GOAL-N range recorded in goal_status.yml."""
@@ -30,8 +35,9 @@ def expected_goal_ids(data: dict[str, Any]) -> list[str]:
                 continue
     if not numeric_ids:
         total = int(data.get("summary", {}).get("total_goals", 0) or 0)
+        total = max(total, len(EXPECTED_GOALS))
         return [f"GOAL-{idx:03d}" for idx in range(total)]
-    return [f"GOAL-{idx:03d}" for idx in range(max(numeric_ids) + 1)]
+    return [f"GOAL-{idx:03d}" for idx in range(max(max(numeric_ids) + 1, len(EXPECTED_GOALS)))]
 
 
 def load_goal_status(path: str | Path) -> dict[str, Any]:

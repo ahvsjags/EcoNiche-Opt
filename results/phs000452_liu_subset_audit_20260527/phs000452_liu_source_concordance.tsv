@@ -1,0 +1,2 @@
+audit	tiger_n	cbio_n	matched_n	response_mismatch_n	missing_from_cbio	missing_from_tiger	tiger_response_counts	cbio_response_counts	interpretation
+liu_tiger_cbioportal_patient_response_concordance	121	121	120	0	Patient192	Patient20	CR:16;MR:2;PD:55;PR:32;SD:16	CR:16;MR:2;PD:56;PR:31;SD:16	TIGER and cBioPortal response labels are concordant for matched Liu/DFCI patients; performance differences are more likely processing/source-subset effects than response-label flips.

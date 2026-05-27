@@ -14,7 +14,7 @@ Pengyuan Xu1,3, Guang Yang2,3, Moyan Li3*
 
 ## Inventory
 
-- Supplementary Tables 1-20
+- Supplementary Tables 1-24
 - Supplementary References
 - Supplementary Figures 1-10
 - Supplementary Methods
@@ -81,6 +81,18 @@ Lists perturbation_name, target_gene, mechanism, reversal_score, depmap_score, D
 **Supplementary Table 20 | Algorithmic reproducibility and independent-scoring boundary.**  
 Summarizes the reproducible analysis boundary from public ICB cohort curation, endpoint harmonization, signed-rank ecological modules, interaction features, heuristic optimization, threshold locking, external scoring, coverage QC, signature-family benchmarking, and the FDR-aware claim gate to open scoring code. This table clarifies which information is learned in the discovery layer, which information is read only during external evaluation, and how EcoNiche-Opt becomes an independently scorable method without using external labels for model selection.
 
+**Supplementary Table 21 | GPU biological-prior rescue combo.**  
+Reports the frozen GPU lipid/PI3K rescue-combo candidate, biological prior, transform policy, GPU device, primary melanoma LODO metrics, strict melanoma external metrics, family-level delta, FDR q value, claim level, and no-leakage selection boundary. This table supports Figure 5e.
+
+**Supplementary Table 22 | GPU rescue component ablation.**  
+Compares the selected GPU lipid/PI3K rescue combo with the ablated MAP4K1/TBX3/AXL base rescue axis in primary melanoma LODO and strict melanoma external settings. It reports AUROC, AUPRC, balanced accuracy, paired bootstrap intervals, P values, FDR q values, and claim levels. This table supports Figure 5e and the component-ablation claim boundary.
+
+**Supplementary Table 23 | cBioPortal GPU rescue external validation.**  
+Reports cBioPortal Liu/DFCI and cBioPortal Liu plus GSE145996 strict RECIST metrics for the frozen GPU lipid/PI3K rescue combo, including AUROC, AUPRC, balanced accuracy, ECE, Brier score, sensitivity, specificity, PPV, NPV, calibration slope/intercept, and no-leakage scoring boundary. This table supports Figure 5f.
+
+**Supplementary Table 24 | GPU lipid/PI3K pair rescue.**  
+Reports the component-dominant PLA2G2D/PIK3CD lipid/PI3K pair rescue selected by primary melanoma LODO with a balanced-accuracy guardrail. It includes the locked candidate formula, GPU device, primary AUROC/AUPRC/balanced accuracy, strict melanoma external metrics, cBioPortal Liu/DFCI metrics, family-level delta, FDR q value, claim level, and no-leakage selection boundary. This table supports Figure 5e-f.
+
 ## Supplementary References
 
 1. Pardoll DM. The blockade of immune checkpoints in cancer immunotherapy. Nat Rev Cancer. 2012;12:252-264. doi:10.1038/nrc3239.
@@ -136,8 +148,8 @@ Extends Figures 2 and 4b by showing aligned locked-panel component ablation toge
 **Supplementary Figure 7 | Expanded locked external validation.**  
 Extends Figure 5b-c by showing performance of locked external and panel-transfer cohorts under primary RECIST, strict RECIST, and clinical-benefit endpoints. It corresponds to Supplementary Table 15.
 
-**Supplementary Figure 8 | PD1-like rescue.**  
-Extends Figure 5e-f by showing strict RECIST PD1-like stress analysis in GSE145996 and PHS000452_LIU_LIKE_PRE. It compares locked panel scoring with PD1LikeTransferHead and shows balanced accuracy under discovery Youden and fixed 0.5 threshold policies. It corresponds to Supplementary Table 17.
+**Supplementary Figure 8 | PD1-like and GPU biological-prior rescue.**  
+Extends Figure 5e-f by showing strict RECIST PD1-like stress analysis in GSE145996 and PHS000452_LIU_LIKE_PRE. It includes the original locked-panel stress analysis, the frozen GPU lipid/PI3K rescue combo, the balanced-accuracy-guarded PLA2G2D/PIK3CD pair rescue, component ablation against the MAP4K1/TBX3/AXL base axis, and cBioPortal Liu/DFCI source cross-check evidence. It corresponds to Supplementary Tables 17 and 21-24.
 
 **Supplementary Figure 9 | Single-cell and ecological mechanism.**  
 Extends Figure 6a-b by showing module-score distributions across single-cell cell types and the interaction structure among ecological states. It corresponds to Supplementary Table 18 and supports the biological interpretability of the model.
@@ -165,4 +177,4 @@ Superiority claims are used only when paired bootstrap or DeLong-compatible comp
 
 ### Reporting and reproducibility
 
-The study follows prediction-model reporting logic for data sources, sample inclusion, endpoint definitions, model formulas, training/validation splits, performance metrics, calibration, decision-curve analysis, external validation, code availability, and data availability. The open reproducibility layer documents how the same frozen algorithm preserves module scores, interaction features, thresholds, and probability outputs across Python/R environments, allowing readers to distinguish discovery training, external scoring, and performance evaluation. Figures 1-7, Supplementary Figures 1-10, and Supplementary Tables 1-20 form the reporting evidence map.
+The study follows prediction-model reporting logic for data sources, sample inclusion, endpoint definitions, model formulas, training/validation splits, performance metrics, calibration, decision-curve analysis, external validation, code availability, and data availability. The open reproducibility layer documents how the same frozen algorithm preserves module scores, interaction features, thresholds, and probability outputs across Python/R environments, allowing readers to distinguish discovery training, external scoring, and performance evaluation. Figures 1-7, Supplementary Figures 1-10, and Supplementary Tables 1-24 form the reporting evidence map.

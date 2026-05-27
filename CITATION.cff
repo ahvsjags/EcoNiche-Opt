@@ -1,8 +1,13 @@
 cff-version: 1.2.0
-title: EcoNiche-Opt
-message: "If you use this scaffold, cite the repository and the underlying public datasets."
+title: "EcoNiche-Opt: a locked immune-ecology transcriptomic score for multicohort prediction of immune checkpoint blockade response"
+message: "If you use EcoNiche-Opt, cite the repository, this frozen release, and the underlying public datasets."
 type: software
 authors:
-  - name: EcoNiche-Opt contributors
-version: 0.3.2
-date-released: 2026-05-27
+  - family-names: Xu
+    given-names: Pengyuan
+  - family-names: Yang
+    given-names: Guang
+  - family-names: Li
+    given-names: Moyan
+version: 0.3.4
+date-released: 2026-05-28

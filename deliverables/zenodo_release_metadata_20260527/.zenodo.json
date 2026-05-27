@@ -1,0 +1,39 @@
+{
+  "title": "EcoNiche-Opt: locked immune-ecology transcriptomic scoring framework",
+  "upload_type": "software",
+  "publication_date": "2026-05-28",
+  "creators": [
+    {
+      "name": "Xu, Pengyuan",
+      "affiliation": "Department of Materials Science and Engineering, Monash University"
+    },
+    {
+      "name": "Yang, Guang",
+      "affiliation": "School of Economics and Management, China University of Mining and Technology"
+    },
+    {
+      "name": "Li, Moyan",
+      "affiliation": "Hong Kong University of Science and Technology (Guangzhou)"
+    }
+  ],
+  "description": "EcoNiche-Opt provides reproducible code, locked scoring specifications, validation artifacts, and manuscript source data for multicohort immune-checkpoint blockade response benchmarking.",
+  "license": "MIT",
+  "version": "0.3.4",
+  "keywords": [
+    "immune checkpoint blockade",
+    "melanoma",
+    "transcriptomics",
+    "biomarker",
+    "immune ecology",
+    "machine learning",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/ahvsjags/EcoNiche-Opt",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Controlled-access or licensed datasets are not redistributed. Missing controlled outputs remain ACCESS_RESTRICTED or RESULT_PENDING until authorized files are imported through registered pipelines."
+}

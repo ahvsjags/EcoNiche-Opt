@@ -1,0 +1,17 @@
+candidate	candidate_family	ifn_t_cell_inflamed	cytotoxic_cd8	exhaustion_checkpoint	antigen_presentation	myeloid_suppression	stromal_exclusion	trm_tls	weight_l1	n_nonzero_modules
+bio_prior	prior	1.0	0.5	0.25	0.5	-0.5	-0.5	0.25	3.5	7
+bio_prior_strong_suppression	prior_perturbation	1.0	0.5	0.25	0.5	-1.0	-1.0	0.25	4.5	7
+bio_prior_no_exhaustion	prior_perturbation	1.0	0.5	0.0	0.5	-0.5	-0.5	0.25	3.25	6
+response_equal_resistance_negative	ecology_symmetric	1.0	1.0	1.0	1.0	-1.0	-1.0	1.0	7.0	7
+response_equal_no_resistance	response_only	1.0	1.0	1.0	1.0	0.0	0.0	1.0	5.0	5
+ifn_only	single_axis	1.0	0.0	0.0	0.0	0.0	0.0	0.0	1.0	1
+ifn_apm_cyto	response_axis	1.0	0.7	0.0	0.7	0.0	0.0	0.3	2.6999999999999997	4
+apm_cyto_resistance	response_resistance_axis	0.0	0.7	0.0	1.0	-0.7	-0.7	0.0	3.0999999999999996	4
+exhaustion_penalty	prior_perturbation	1.0	0.5	-0.5	0.5	-0.5	-0.5	0.25	3.75	7
+drop_ifn_t_cell_inflamed	single_module_drop	0.0	0.5	0.25	0.5	-0.5	-0.5	0.25	2.5	6
+drop_cytotoxic_cd8	single_module_drop	1.0	0.0	0.25	0.5	-0.5	-0.5	0.25	3.0	6
+drop_exhaustion_checkpoint	single_module_drop	1.0	0.5	0.0	0.5	-0.5	-0.5	0.25	3.25	6
+drop_antigen_presentation	single_module_drop	1.0	0.5	0.25	0.0	-0.5	-0.5	0.25	3.0	6
+drop_myeloid_suppression	single_module_drop	1.0	0.5	0.25	0.5	0.0	-0.5	0.25	3.0	6
+drop_stromal_exclusion	single_module_drop	1.0	0.5	0.25	0.5	-0.5	0.0	0.25	3.0	6
+drop_trm_tls	single_module_drop	1.0	0.5	0.25	0.5	-0.5	-0.5	0.0	3.25	6

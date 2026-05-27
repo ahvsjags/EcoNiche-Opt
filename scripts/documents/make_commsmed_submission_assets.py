@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import re
 from datetime import date
@@ -23,7 +23,7 @@ CHECKLISTS = SUBMISSION_DIR / "STROBE_TRIPOD_REMARK_checklists.xlsx"
 REPORTING_SUMMARY = SUBMISSION_DIR / "NaturePortfolio_Reporting_Summary_EcoNicheOpt.docx"
 READINESS = SUBMISSION_DIR / "communications_medicine_submission_readiness.md"
 
-RELEASE_TAG = "v0.3.2-locked-validation-20260527"
+RELEASE_TAG = "v0.3.4-gpu-lipid-pair-rescue-20260528"
 REPO = "https://github.com/ahvsjags/EcoNiche-Opt"
 ARCHIVE = f"{REPO}/archive/refs/tags/{RELEASE_TAG}.zip"
 
@@ -33,7 +33,7 @@ FIGURE_SOURCE_MAP = [
     ("Figure 2", "a-f", "Ecological modules, signed-rank score, optimizer, edges and aligned ablation space", "Supplementary Tables 7, 8, 9, 13"),
     ("Figure 3", "a-f", "Primary melanoma performance, signature family FDR, LODO and decision curve", "Supplementary Tables 10, 11, 12, 14"),
     ("Figure 4", "a-f", "Endpoint sensitivity, aligned locked-panel ablation, calibration and claim gate", "Supplementary Tables 6, 10, 11, 13, 14"),
-    ("Figure 5", "a-f", "Locked external validation, panel transfer and PD1-like stress analysis", "Supplementary Tables 15, 16, 17"),
+    ("Figure 5", "a-f", "Locked external validation, panel transfer, GPU biological-prior rescue, lipid/PI3K pair rescue and cBioPortal cross-check", "Supplementary Tables 15, 16, 17, 21, 22, 23, 24"),
     ("Figure 6", "a-f", "Single-cell localization, ecological edges and perturbation hypotheses", "Supplementary Tables 7, 8, 18, 19"),
     ("Figure 7", "a-e", "Locked panel, thresholds, external scoring path and reproducibility boundary", "Supplementary Tables 7, 15, 16, 20"),
     ("Supplementary Figure 1", "a-b", "Cohort curation and access inventory", "Supplementary Tables 1, 2, 3"),
@@ -43,7 +43,7 @@ FIGURE_SOURCE_MAP = [
     ("Supplementary Figure 5", "a", "Endpoint sensitivity", "Supplementary Table 6"),
     ("Supplementary Figure 6", "a-b", "Aligned locked-panel ablation and optimizer diagnostics", "Supplementary Tables 9, 13"),
     ("Supplementary Figure 7", "a", "Expanded external validation", "Supplementary Table 15"),
-    ("Supplementary Figure 8", "a", "PD1-like stress rescue", "Supplementary Table 17"),
+    ("Supplementary Figure 8", "a", "PD1-like stress rescue, GPU biological-prior rescue and lipid/PI3K pair rescue", "Supplementary Tables 17, 21, 22, 23, 24"),
     ("Supplementary Figure 9", "a", "Single-cell and ecological mechanism", "Supplementary Table 18"),
     ("Supplementary Figure 10", "a-b", "Reproducibility and locked scoring package", "Supplementary Table 20"),
 ]
@@ -53,7 +53,7 @@ FIGURE_TO_TABLES = {
     "Fig2_source": [7, 8, 9, 13],
     "Fig3_source": [10, 11, 12, 14],
     "Fig4_source": [6, 10, 11, 13, 14],
-    "Fig5_source": [15, 16, 17],
+    "Fig5_source": [15, 16, 17, 21, 22, 23, 24],
     "Fig6_source": [7, 8, 18, 19],
     "Fig7_source": [7, 15, 16, 20],
     "SuppFig1_source": [1, 2, 3],
@@ -63,7 +63,7 @@ FIGURE_TO_TABLES = {
     "SuppFig5_source": [6],
     "SuppFig6_source": [9, 13],
     "SuppFig7_source": [15],
-    "SuppFig8_source": [17],
+    "SuppFig8_source": [17, 21, 22, 23, 24],
     "SuppFig9_source": [18],
     "SuppFig10_source": [20],
 }
@@ -123,7 +123,7 @@ def make_source_data() -> None:
                 {"field": "repository", "value": REPO},
                 {"field": "release_tag", "value": RELEASE_TAG},
                 {"field": "release_archive", "value": ARCHIVE},
-                {"field": "contents", "value": "Source data for main Figures 1-7, major Supplementary Figures 1-10, and Supplementary Tables 1-20."},
+                {"field": "contents", "value": "Source data for main Figures 1-7, major Supplementary Figures 1-10, and Supplementary Tables 1-24."},
                 {"field": "provenance", "value": "All sheets are generated from registered TSV outputs under tables/article and figure_manifest.tsv."},
             ]
         )
@@ -148,7 +148,7 @@ def make_source_data() -> None:
             combined = pd.concat(frames, ignore_index=True, sort=False)
             combined.to_excel(writer, sheet_name=safe_sheet_name(sheet, used), index=False)
 
-        for n in range(1, 21):
+        for n in range(1, 25):
             path = table_path(n)
             short = path.stem.replace("supp_table_", "ST")
             pd.read_csv(path, sep="\t").to_excel(writer, sheet_name=safe_sheet_name(short, used), index=False)
@@ -227,7 +227,7 @@ def make_checklists() -> None:
         ("Statistics", "Statistical tests", "Paired bootstrap/DeLong-compatible comparisons and Benjamini-Hochberg FDR correction are described."),
         ("Data", "Data availability", "Public and restricted datasets are listed with access status; source data workbook is provided."),
         ("Code", "Code availability", f"Repository {REPO}; release tag {RELEASE_TAG}; release archive {ARCHIVE}."),
-        ("Software", "Core software", "Python package econiche_opt v0.3.2; R wrapper via reticulate; scripts listed in Code availability."),
+        ("Software", "Core software", "Python package econiche_opt v0.3.4; R wrapper via reticulate; GPU biological-prior rescue and lipid/PI3K pair rescue packages and scripts listed in Code availability."),
         ("Reporting", "Guidelines", "STROBE, TRIPOD and REMARK checklists are supplied for the observational biomarker prediction study."),
     ]
     with pd.ExcelWriter(CHECKLISTS, engine="openpyxl") as writer:
@@ -279,7 +279,7 @@ def make_reporting_summary_docx() -> None:
         ],
         "Data availability": [
             "Public data sources and access status are reported in Supplementary Tables 1-6.",
-            "Source Data.xlsx contains figure-level source mappings, figure/table manifests, and Supplementary Tables 1-20.",
+            "Source Data.xlsx contains figure-level source mappings, figure/table manifests, and Supplementary Tables 1-24.",
             "Controlled or access-restricted cohorts are described by access route and are not redistributed.",
         ],
         "Code availability": [
@@ -314,7 +314,7 @@ def make_readiness_note() -> None:
         "- Plain language summary: added immediately after the Abstract and kept near the 120-word guide.",
         "- Transparent peer review: cover letter states opt-in.",
         f"- Code availability: repository, release tag and release-specific archive are listed ({ARCHIVE}).",
-        "- Source data: Source_Data.xlsx covers Figures 1-7, Supplementary Figures 1-10 and Supplementary Tables 1-20.",
+        "- Source data: Source_Data.xlsx covers Figures 1-7, Supplementary Figures 1-10 and Supplementary Tables 1-24.",
         "- Reporting files: Nature Portfolio Reporting Summary document plus STROBE, TRIPOD and REMARK checklist workbook.",
         "",
         "Files:",

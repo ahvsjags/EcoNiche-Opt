@@ -4,7 +4,7 @@ Generated from registered local outputs. Panels with unavailable data are marked
 
 - Main figures: 7
 - Supplementary figures: 10
-- Supplementary tables: 20
+- Supplementary tables: 24
 
 ## Outputs
 
@@ -48,6 +48,10 @@ Generated from registered local outputs. Panels with unavailable data are marked
 - supp_table_18_single_cell_enrichment.tsv: copied_from_pipeline
 - supp_table_19_perturbation_hypotheses.tsv: copied_from_pipeline
 - supp_table_20_prospective_package_manifest.tsv: generated_reproducibility_record
+- supp_table_21_gpu_bioprior_rescue.tsv: copied_from_pipeline
+- supp_table_22_gpu_bioprior_component_ablation.tsv: copied_from_pipeline
+- supp_table_23_cbioportal_gpu_bioprior_external.tsv: copied_from_pipeline
+- supp_table_24_gpu_lipid_pair_rescue.tsv: copied_from_pipeline
 
 ## Claim Boundary
 

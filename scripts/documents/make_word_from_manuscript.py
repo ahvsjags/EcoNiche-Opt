@@ -5,6 +5,9 @@ import re
 import zipfile
 from pathlib import Path
 
+import matplotlib
+
+matplotlib.use("Agg", force=True)
 import matplotlib.pyplot as plt
 from docx import Document
 from docx.enum.section import WD_ORIENT, WD_SECTION

@@ -1,0 +1,26 @@
+{
+  "release_tag": "v0.3.4-gpu-lipid-pair-rescue-20260528",
+  "repository_url": "https://github.com/ahvsjags/EcoNiche-Opt",
+  "commit": "UNAVAILABLE_LOCAL_GIT",
+  "zenodo_doi": "RESULT_PENDING",
+  "doi_status": "metadata_prepared_no_doi_minted",
+  "required_before_citation": [
+    "Create GitHub release from the frozen tag.",
+    "Archive the release with Zenodo or an institutional repository.",
+    "Replace RESULT_PENDING with the minted DOI in CITATION.cff, README, manuscript, and Code availability."
+  ],
+  "included_public_artifact_classes": [
+    "package source code",
+    "registered analysis scripts",
+    "public metadata and manifests",
+    "generated benchmark and validation tables",
+    "manuscript figures and source data",
+    "locked scoring specifications"
+  ],
+  "excluded_artifact_classes": [
+    "controlled-access raw data",
+    "licensed data",
+    "oversized raw expression matrices not allowed for redistribution",
+    "local caches"
+  ]
+}

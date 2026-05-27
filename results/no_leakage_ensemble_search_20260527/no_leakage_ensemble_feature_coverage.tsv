@@ -1,0 +1,155 @@
+cohort	module	n_genes_defined	n_genes_available	genes_available	feature_family	n_features	n_samples
+GSE115821	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE115821	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE115821	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE115821	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE115821	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE115821	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE115821	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE136961	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE136961	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE136961	exhaustion_checkpoint	7.0	6.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,CXCL13	module_gene_coverage		
+GSE136961	antigen_presentation	10.0	7.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,TAP1,PSMB9	module_gene_coverage		
+GSE136961	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE136961	stromal_exclusion	9.0	0.0		module_gene_coverage		
+GSE136961	trm_tls	9.0	6.0	ITGAE,CD69,CXCR6,CXCL13,MS4A1,CD79A	module_gene_coverage		
+GSE140901	ifn_t_cell_inflamed	11.0	10.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE140901	cytotoxic_cd8	8.0	7.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,GNLY	module_gene_coverage		
+GSE140901	exhaustion_checkpoint	7.0	6.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,CXCL13	module_gene_coverage		
+GSE140901	antigen_presentation	10.0	8.0	HLA-A,HLA-B,HLA-C,HLA-DRA,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE140901	myeloid_suppression	9.0	8.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,IL10,TGFB1	module_gene_coverage		
+GSE140901	stromal_exclusion	9.0	2.0	COL3A1,FN1	module_gene_coverage		
+GSE140901	trm_tls	9.0	6.0	ITGAE,CXCR6,CXCL13,MS4A1,CD79A,LTB	module_gene_coverage		
+GSE145996	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE145996	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE145996	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE145996	antigen_presentation	10.0	6.0	HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP2,PSMB9	module_gene_coverage		
+GSE145996	myeloid_suppression	9.0	8.0	CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE145996	stromal_exclusion	9.0	7.0	COL1A1,COL1A2,FN1,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE145996	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE165252	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE165252	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE165252	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE165252	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE165252	myeloid_suppression	9.0	8.0	CD68,CD163,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE165252	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE165252	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE168204	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE168204	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE168204	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE168204	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE168204	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE168204	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE168204	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE176307	ifn_t_cell_inflamed	11.0	10.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE176307	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE176307	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE176307	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE176307	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE176307	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE176307	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE67501	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE67501	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE67501	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE67501	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE67501	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE67501	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE67501	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE78220	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE78220	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE78220	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE78220	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE78220	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE78220	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE78220	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE91061	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE91061	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+GSE91061	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+GSE91061	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE91061	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+GSE91061	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+GSE91061	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE93157	ifn_t_cell_inflamed	11.0	10.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+GSE93157	cytotoxic_cd8	8.0	7.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,GNLY	module_gene_coverage		
+GSE93157	exhaustion_checkpoint	7.0	6.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,CXCL13	module_gene_coverage		
+GSE93157	antigen_presentation	10.0	8.0	HLA-A,HLA-B,HLA-C,HLA-DRA,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+GSE93157	myeloid_suppression	9.0	8.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,IL10,TGFB1	module_gene_coverage		
+GSE93157	stromal_exclusion	9.0	2.0	COL3A1,FN1	module_gene_coverage		
+GSE93157	trm_tls	9.0	6.0	ITGAE,CXCR6,CXCL13,MS4A1,CD79A,LTB	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+PHS000452_LIU_LIKE_PRE	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+PRJEB23709_COMBO_PRE	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+PRJEB23709_COMBO_PRE	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+PRJEB23709_COMBO_PRE	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+PRJEB23709_COMBO_PRE	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+PRJEB23709_COMBO_PRE	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+PRJEB23709_COMBO_PRE	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+PRJEB23709_COMBO_PRE	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+PRJEB23709_PD1_PRE	ifn_t_cell_inflamed	11.0	11.0	IFNG,CXCL9,CXCL10,CXCL11,STAT1,IDO1,GBP1,CXCR3,CCL5,CD274,PDCD1LG2	module_gene_coverage		
+PRJEB23709_PD1_PRE	cytotoxic_cd8	8.0	8.0	CD8A,CD8B,GZMA,GZMB,GZMH,PRF1,NKG7,GNLY	module_gene_coverage		
+PRJEB23709_PD1_PRE	exhaustion_checkpoint	7.0	7.0	PDCD1,CTLA4,LAG3,HAVCR2,TIGIT,TOX,CXCL13	module_gene_coverage		
+PRJEB23709_PD1_PRE	antigen_presentation	10.0	10.0	HLA-A,HLA-B,HLA-C,HLA-DRA,HLA-DRB1,B2M,TAP1,TAP2,PSMB8,PSMB9	module_gene_coverage		
+PRJEB23709_PD1_PRE	myeloid_suppression	9.0	9.0	CD68,CD163,MRC1,CSF1R,ITGAM,S100A8,S100A9,IL10,TGFB1	module_gene_coverage		
+PRJEB23709_PD1_PRE	stromal_exclusion	9.0	9.0	COL1A1,COL1A2,COL3A1,FN1,ACTA2,VIM,TGFBI,POSTN,LOXL2	module_gene_coverage		
+PRJEB23709_PD1_PRE	trm_tls	9.0	9.0	ITGAE,CD69,CXCR6,CXCL13,ZNF683,MS4A1,CD79A,BANK1,LTB	module_gene_coverage		
+GSE115821					module	7.0	8.0
+GSE115821					signature	13.0	8.0
+GSE115821					bio_candidate	16.0	8.0
+GSE115821					edge	30.0	8.0
+GSE136961					module	7.0	21.0
+GSE136961					signature	13.0	21.0
+GSE136961					bio_candidate	16.0	21.0
+GSE136961					edge	30.0	21.0
+GSE140901					module	7.0	24.0
+GSE140901					signature	13.0	24.0
+GSE140901					bio_candidate	16.0	24.0
+GSE140901					edge	30.0	24.0
+GSE145996					module	7.0	14.0
+GSE145996					signature	13.0	14.0
+GSE145996					bio_candidate	16.0	14.0
+GSE145996					edge	30.0	14.0
+GSE165252					module	7.0	32.0
+GSE165252					signature	13.0	32.0
+GSE165252					bio_candidate	16.0	32.0
+GSE165252					edge	30.0	32.0
+GSE168204					module	7.0	21.0
+GSE168204					signature	13.0	21.0
+GSE168204					bio_candidate	16.0	21.0
+GSE168204					edge	30.0	21.0
+GSE176307					module	7.0	88.0
+GSE176307					signature	13.0	88.0
+GSE176307					bio_candidate	16.0	88.0
+GSE176307					edge	30.0	88.0
+GSE67501					module	7.0	11.0
+GSE67501					signature	13.0	11.0
+GSE67501					bio_candidate	16.0	11.0
+GSE67501					edge	30.0	11.0
+GSE78220					module	7.0	27.0
+GSE78220					signature	13.0	27.0
+GSE78220					bio_candidate	16.0	27.0
+GSE78220					edge	30.0	27.0
+GSE91061					module	7.0	49.0
+GSE91061					signature	13.0	49.0
+GSE91061					bio_candidate	16.0	49.0
+GSE91061					edge	30.0	49.0
+GSE93157					module	7.0	65.0
+GSE93157					signature	13.0	65.0
+GSE93157					bio_candidate	16.0	65.0
+GSE93157					edge	30.0	65.0
+PHS000452_LIU_LIKE_PRE					module	7.0	121.0
+PHS000452_LIU_LIKE_PRE					signature	13.0	121.0
+PHS000452_LIU_LIKE_PRE					bio_candidate	16.0	121.0
+PHS000452_LIU_LIKE_PRE					edge	30.0	121.0
+PRJEB23709_COMBO_PRE					module	7.0	32.0
+PRJEB23709_COMBO_PRE					signature	13.0	32.0
+PRJEB23709_COMBO_PRE					bio_candidate	16.0	32.0
+PRJEB23709_COMBO_PRE					edge	30.0	32.0
+PRJEB23709_PD1_PRE					module	7.0	41.0
+PRJEB23709_PD1_PRE					signature	13.0	41.0
+PRJEB23709_PD1_PRE					bio_candidate	16.0	41.0
+PRJEB23709_PD1_PRE					edge	30.0	41.0

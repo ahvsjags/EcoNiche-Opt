@@ -1,0 +1,8 @@
+module	n_genes_defined	n_genes_available	genes_available	coverage_fraction
+ifn_t_cell_inflamed	11	2	IFNG,IDO1	0.18181818181818182
+cytotoxic_cd8	8	3	CD8A,GZMB,PRF1	0.375
+exhaustion_checkpoint	7	0		0.0
+antigen_presentation	10	0		0.0
+myeloid_suppression	9	1	TGFB1	0.1111111111111111
+stromal_exclusion	9	2	COL1A2,FN1	0.2222222222222222
+trm_tls	9	0		0.0

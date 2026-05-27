@@ -1,0 +1,1 @@
+Expression import format: rows are sample_id, columns are HGNC gene symbols, values are normalized expression or raw counts with a documented normalization path. Do not include labels in the expression matrix.

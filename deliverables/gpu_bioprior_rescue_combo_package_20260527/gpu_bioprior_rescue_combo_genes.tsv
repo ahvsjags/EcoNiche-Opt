@@ -1,0 +1,5 @@
+gene_symbol	component	direction	role	interpretation
+MAP4K1	base_positive	response_high	immune_signaling_balance_positive_gene	Positive arm of the MAP4K1 minus TBX3/AXL tumor-immune balance axis.
+TBX3	base_negative	resistance_high	tumor_dedifferentiation_resistance_gene	Negative arm of the tumor-intrinsic resistance balance axis.
+AXL	base_negative	resistance_high	IPRES_dedifferentiation_extension_gene	Negative arm extending the dedifferentiation/resistance axis.
+PLA2G2D	lipid_pi3k_rescue_component	training_response_oriented	lipid_pi3k_biological_prior_gene	Primary-LODO-selected lipid/PI3K-prior rescue component.

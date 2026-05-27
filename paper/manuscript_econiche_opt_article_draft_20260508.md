@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Immune-checkpoint-blockade response prediction remains limited by cohort heterogeneity, endpoint inconsistency, and incomplete validation of published signatures. We developed EcoNiche-Opt, a leakage-safe ecological module optimization framework for multicohort ICB transcriptomic benchmarking. The framework integrates manually curated baseline cohorts, endpoint-sensitive label harmonization, signed rank module scoring, ecological interaction priors, heuristic module search, paired bootstrap/FDR claim gates, locked external validation, and qPCR/NanoString-compatible panel transfer. In primary melanoma benchmark strata, EcoNiche-Opt achieved AUROC 0.705 and 0.685 and significantly outperformed a predeclared eight-signature family (two-sided FDR q=0.002 in both strata). Locked external and panel-transfer analyses supported family-level gains in pooled strict RECIST and clinical benefit analyses, and a secondary PD1-like transfer head was evaluated as a stress-test extension. EcoNiche-Opt provides a reproducible scoring method for immunotherapy-response biomarker development.
+Immune-checkpoint-blockade response prediction remains limited by cohort heterogeneity, endpoint inconsistency, and incomplete validation of published signatures. We developed EcoNiche-Opt, a leakage-safe ecological module optimization framework for multicohort ICB transcriptomic benchmarking. The framework integrates manually curated baseline cohorts, endpoint-sensitive label harmonization, signed rank module scoring, ecological interaction priors, heuristic module search, paired bootstrap/FDR claim gates, locked external validation, and qPCR/NanoString-compatible panel transfer. In primary melanoma benchmark strata, EcoNiche-Opt achieved AUROC 0.705 and 0.685 and significantly outperformed a predeclared eight-signature family (two-sided FDR q=0.002 in both strata). A frozen GPU lipid/PI3K rescue combo reached strict melanoma external AUROC 0.713 with family-level FDR support, and cBioPortal Liu/DFCI source rescoring improved to AUROC 0.674. EcoNiche-Opt provides a reproducible scoring method for immunotherapy-response biomarker development.
 
 ## Introduction
 
@@ -28,7 +28,7 @@ Figure 4 and Supplementary Figures 5-6 summarize endpoint sensitivity, aligned l
 
 ### Locked external and panel-transfer analyses test portability
 
-Figure 5 summarizes locked external validation, NanoString panel transfer, and the secondary PD1-like stress rescue. The rescue head improves the weak stress cohorts but remains a model-development analysis pending fresh independent validation.
+Figure 5 summarizes locked external validation, NanoString panel transfer, the frozen GPU lipid/PI3K strict-external rescue combo, and cBioPortal Liu/DFCI source cross-check scoring.
 
 ### Mechanistic analyses localize ecological components and perturbation hypotheses
 

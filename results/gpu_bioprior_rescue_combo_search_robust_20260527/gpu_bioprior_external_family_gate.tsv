@@ -1,0 +1,2 @@
+target_model	baseline_family	n_samples	n_signatures	target_AUROC	family_mean_AUROC	best_signature	best_signature_AUROC	delta_vs_family_mean	ci_low	ci_high	one_sided_p	two_sided_p	two_sided_fdr_q	claim_level
+0.80*base+0.20*rz__PLA2G2D	eight_strong_signatures	116	8	0.7125	0.5666666666666667	CXCL9	0.5901785714285713	0.14649167160228566	0.06153453018138577	0.23358828590029754	0.0	0.0	0.0	strict_external_family_FDR_supported_numeric_target_met

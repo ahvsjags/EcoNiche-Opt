@@ -1,0 +1,46 @@
+{
+  "model_id": "EcoNiche-Opt-GPU-LipidPI3K-PairRescue",
+  "release_tag": "v0.3.4-gpu-lipid-pair-rescue-20260528",
+  "candidate": "0.35*base+0.65*(0.35*pct__PLA2G2D+0.65*rz__PIK3CD)",
+  "selection_boundary": "pair_candidate_and_weights_selected_by_primary_lodo_only_lipid_pi3k_prior_no_external_labels",
+  "training_endpoint": "primary_recist",
+  "training_cohorts": [
+    "GSE91061",
+    "GSE78220",
+    "PRJEB23709_PD1_PRE"
+  ],
+  "locked_score": {
+    "base_genes": {
+      "positive": "MAP4K1",
+      "negative_mean": [
+        "TBX3",
+        "AXL"
+      ]
+    },
+    "base_formula": "minmax(0.95*robust_z(MAP4K1-mean(TBX3,AXL))+0.05*z(MAP4K1-mean(TBX3,AXL)))",
+    "weight_base": 0.35,
+    "weight_pair_component": 0.65,
+    "pair_components": [
+      {
+        "gene": "PLA2G2D",
+        "method": "pct",
+        "mix_weight": 0.35,
+        "training_direction_sign": 1.0
+      },
+      {
+        "gene": "PIK3CD",
+        "method": "rz",
+        "mix_weight": 0.65,
+        "training_direction_sign": 1.0
+      }
+    ],
+    "locked_threshold": 0.5970883846282959,
+    "normalization": "cohort-wise z, robust-z, or within-cohort percentile as specified; min-max normalization is applied inside each scoring cohort without labels"
+  },
+  "claim_boundary": {
+    "external_or_holdout_labels_used_for_training": false,
+    "external_or_holdout_labels_used_for_feature_selection": false,
+    "external_or_holdout_labels_used_for_threshold_or_calibration": false,
+    "claim_language": "family-level FDR-supported improvement only where the paired family gate passes"
+  }
+}

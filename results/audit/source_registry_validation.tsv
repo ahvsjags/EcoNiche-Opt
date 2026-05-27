@@ -2,6 +2,9 @@ id	is_valid	missing_fields
 data_registry	True	
 geo_public	True	
 ena_public	True	
+ega_restricted	True	
+tiger_immunotherapy	True	
+cbioportal_public_api	True	
 controlled_optional	True	
 ucsc_xena_tcga	True	
 gdc_api	True	

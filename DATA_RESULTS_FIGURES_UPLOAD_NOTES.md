@@ -17,9 +17,15 @@ Included:
 Authoritative current result directories for the submitted manuscript include
 `results/endpoint_modules_heuristic_core_locked_gpu/`,
 `results/aligned_panel_ablation_20260527/`, and
-`results/locked_external_panel_validation_calibrated_20260519/`. Older
-un-calibrated validation folders are retained only as historical pipeline
-outputs and are not the source for the current manuscript claims.
+`results/locked_external_panel_validation_calibrated_20260519/`,
+`results/gpu_bioprior_rescue_combo_search_robust_20260527/`,
+`results/cbioportal_gpu_bioprior_external_validation_20260527/`, and
+`results/gpu_lipid_pair_rescue_component_dominant_ba_guardrail_20260528/`.
+The frozen package-level evidence for the current promoted external-rescue
+model is in `deliverables/gpu_lipid_pair_rescue_package_20260528/`.
+Older un-calibrated validation folders and no-leakage negative optimization
+audits are retained as historical pipeline outputs and are not the source for
+the current manuscript performance claims.
 
 Excluded:
 
@@ -32,3 +38,8 @@ Excluded:
 These exclusions keep the GitHub repository usable and avoid redistributing
 controlled, licensed, or oversized data. Regeneration and download paths remain
 documented in the package and pipeline documentation.
+
+Release status: the current local manuscript/package version is
+`v0.3.4-gpu-lipid-pair-rescue-20260528`. Zenodo metadata are prepared with
+`zenodo_doi=RESULT_PENDING`; no DOI should be cited until Zenodo or an
+institutional archive mints a real identifier.

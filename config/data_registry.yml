@@ -119,6 +119,126 @@ cohorts:
     preprocessing_script: scripts/preprocess/preprocess_phs000452_tiger.py
     uses: [external, survival, melanoma_primary]
     notes: "TIGER Melanoma-phs000452 processed expression/clinical. Only Patient-like anti-PD1 rows are modeled as PHS000452_LIU_LIKE_PRE; IPI-like rows are excluded from the primary set until source/timepoint evidence is hardened."
+  - accession: CBIO_LIU_DFCI_2019_PRE
+    name: Liu_DFCI_2019_cBioPortal_melanoma_antiPD1
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq_cBioPortal_TPM
+    timepoints: [pretreatment]
+    endpoint: [RECIST_response, PFS, OS]
+    role: strict_external_crosscheck
+    access: public
+    priority: high
+    download_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    preprocessing_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    uses: [external, melanoma_primary, source_crosscheck]
+    notes: "Public cBioPortal Liu/DFCI Nat Med 2019 expression profile mel_dfci_2019_mrna_seq_tpm with 121 pretreatment anti-PD1 melanoma samples after cBioPortal API fetch. Use as an independent-source cross-check/replacement for TIGER phs000452; do not pool duplicate Liu-derived versions as separate validation evidence."
+  - accession: CBIO_IATLAS_LIU_2019_PRE
+    name: Liu_iAtlas_2019_cBioPortal_melanoma_antiPD1
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq_cBioPortal_iAtlas
+    timepoints: [pretreatment]
+    endpoint: [mRECIST_response, PFS, OS]
+    role: duplicate_source_crosscheck
+    access: public
+    priority: high
+    download_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    preprocessing_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    uses: [source_crosscheck]
+    notes: "iAtlas harmonized Liu cBioPortal profile shares source patients with Liu/DFCI and is not independent validation."
+  - accession: CBIO_IATLAS_GIDE_2019_PRE
+    name: Gide_iAtlas_2019_cBioPortal_melanoma_ICB
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1_or_combo
+    platform: RNA-seq_cBioPortal_iAtlas
+    timepoints: [pretreatment]
+    endpoint: [mRECIST_response, PFS, OS]
+    role: discovery_overlap_crosscheck
+    access: public
+    priority: high
+    download_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    preprocessing_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    uses: [source_crosscheck]
+    notes: "cBioPortal/iAtlas Gide expression overlaps PRJEB23709 discovery data; use for source and response-label cross-check unless excluded from discovery and frozen before external evaluation."
+  - accession: CBIO_IATLAS_RIAZ_2017_PRE
+    name: Riaz_iAtlas_2017_cBioPortal_melanoma_nivolumab
+    layer: A
+    cancer_type: melanoma
+    therapy: nivolumab
+    platform: RNA-seq_cBioPortal_iAtlas
+    timepoints: [pretreatment]
+    endpoint: [mRECIST_response]
+    role: discovery_overlap_crosscheck
+    access: public
+    priority: high
+    download_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    preprocessing_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    uses: [source_crosscheck]
+    notes: "cBioPortal/iAtlas Riaz expression overlaps GSE91061 discovery data; not independent external validation."
+  - accession: CBIO_IATLAS_HUGO_2016_PRE
+    name: Hugo_iAtlas_2016_cBioPortal_melanoma_antiPD1
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq_cBioPortal_iAtlas
+    timepoints: [pretreatment]
+    endpoint: [mRECIST_response]
+    role: discovery_overlap_crosscheck
+    access: public
+    priority: high
+    download_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    preprocessing_script: scripts/preprocess/fetch_cbioportal_melanoma_icb.py
+    uses: [source_crosscheck]
+    notes: "cBioPortal/iAtlas Hugo expression overlaps GSE78220 discovery data; not independent external validation."
+  - accession: EGAS00001001552
+    name: Lee_Rizos_PD1_melanoma_EGA
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [pretreatment, on_treatment, progression]
+    endpoint: [irRC_response, CR_PR_vs_SD_PD]
+    role: high_value_restricted_external_candidate
+    access: EGA_ACCESS_RESTRICTED
+    priority: high
+    download_script: https://ega-archive.org/studies/EGAS00001001552
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external_candidate, melanoma_primary, mechanism]
+    notes: "Lee/Rizos Nat Commun 2020 reports 53 pretreatment melanoma PD-1 tumor biopsies and 44 PRE RNA-seq tumors with CR/PR versus SD/PD response ROC analyses. RNA-seq data are in EGA study EGAS00001001552, dataset EGAD00001005738; do not substitute or fabricate expression data without approved access."
+  - accession: phs001919
+    name: Abril_Rodriguez_PD1_melanoma_dbGaP
+    layer: A
+    cancer_type: melanoma
+    therapy: anti-PD1
+    platform: RNA-seq
+    timepoints: [controlled_clinical_files_required]
+    endpoint: [response_requires_dbGaP_phenotype_access]
+    role: high_value_restricted_external_candidate
+    access: DBGAP_ACCESS_RESTRICTED
+    priority: high
+    download_script: https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001919.v1.p1
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external_candidate, melanoma_primary, mechanism]
+    notes: "dbGaP phs001919.v1.p1 describes melanoma patients treated with human anti-PD-1 and RNA sequencing of tumor biopsies in an immune-exclusion/PD-1 resistance context. Authorized access is required before expression, sample timing, and response labels can be used."
+  - accession: phs002683
+    name: MGH_Hacohen_checkpoint_melanoma_dbGaP
+    layer: A
+    cancer_type: melanoma
+    therapy: checkpoint_blockade
+    platform: RNA-seq
+    timepoints: [controlled_clinical_files_required]
+    endpoint: [response_survival_requires_dbGaP_phenotype_access]
+    role: high_value_restricted_external_candidate
+    access: DBGAP_ACCESS_RESTRICTED
+    priority: high
+    download_script: https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002683.v1.p1
+    preprocessing_script: scripts/preprocess/preprocess_bulk.py
+    uses: [external_candidate, melanoma_primary, mechanism]
+    notes: "dbGaP phs002683.v1.p1 reports tumor DNA/RNA profiling from checkpoint-blockade melanoma patients and aggregated bulk RNA-seq data associated with response and survival. It is a high-value controlled external candidate after pretreatment anti-PD-1-like samples are isolated."
   - accession: GSE244982
     name: acquired_resistance_melanoma_progression
     layer: A_C
@@ -318,17 +438,17 @@ cohorts:
     name: melanoma_ICB_public_candidate
     layer: A
     cancer_type: melanoma
-    therapy: ICB
-    platform: RNA-seq
+    therapy: anti-PD1_or_anti-CTLA4_plus_PD1
+    platform: Illumina_HumanHT12_V4_expression_beadchip
     timepoints: [pretreatment]
     endpoint: [response]
-    role: candidate_external_requires_metadata_curation
+    role: low_n_array_external_sensitivity
     access: public
     priority: medium
     download_script: scripts/download/download_geo.py
-    preprocessing_script: scripts/preprocess/preprocess_bulk.py
-    uses: [external]
-    notes: "Registry entry required by implementation contract; use only after accession metadata are verified."
+    preprocessing_script: scripts/preprocess/preprocess_gse122220_array.py
+    uses: [external, platform_sensitivity]
+    notes: "GEO series matrix includes 10 pretreatment melanoma tumor biopsy samples with CR/PR/SD/PD response categories in sample characteristics. Use as low-n microarray platform sensitivity only; do not count as strict bulk RNA-seq melanoma external validation."
   - accession: TCGA_SKCM_Xena
     name: TCGA_SKCM_UCSC_Xena
     layer: D

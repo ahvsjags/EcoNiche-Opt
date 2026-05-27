@@ -1,0 +1,2 @@
+cohort	n_samples	n_responders	n_nonresponders	n_genes	locked_panel_genes	locked_panel_overlap	locked_panel_overlap_fraction	overlap_genes	primary_use
+GSE165745	24	12	12	204	62	8	0.12903225806451613	CD8A,COL1A2,FN1,GZMB,IDO1,IFNG,PRF1,TGFB1	panel_transfer_sensitivity_not_strict_bulk_external

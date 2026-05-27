@@ -1,0 +1,3 @@
+group_id	target_model	baseline_family	n_samples	n_signatures	target_AUROC	family_mean_AUROC	best_signature	best_signature_AUROC	delta_vs_family_mean	ci_low	ci_high	two_sided_p	two_sided_fdr_q	claim_level
+cbio_liu_dfci_only	EcoNiche-Opt-GPU-LipidPI3K-RescueCombo	eight_strong_signatures	103	8	0.6736322188449847	0.5645896656534954	APM	0.5889057750759878	0.1095517783962357	0.003693108385445166	0.210809574540043	0.044	0.044	family_point_estimate_only
+strict_cbio_liu_plus_gse145996	EcoNiche-Opt-GPU-LipidPI3K-RescueCombo	eight_strong_signatures	116	8	0.6858420268256333	0.5525335320417288	TIDE_dysfunction	0.5855439642324889	0.13279874458883076	0.03340316384022154	0.23457041180853844	0.009	0.018	family_point_estimate_only

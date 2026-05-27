@@ -47,7 +47,7 @@ def validate_registry(registry: dict[str, Any]) -> pd.DataFrame:
 
 def normalize_access_status(access: str | None) -> str:
     text = (access or "").lower()
-    if text == "public":
+    if text == "public" or text.startswith("public_"):
         return "public"
     if any(token in text for token in ["controlled", "dbgap", "ega", "restricted"]):
         return "controlled"

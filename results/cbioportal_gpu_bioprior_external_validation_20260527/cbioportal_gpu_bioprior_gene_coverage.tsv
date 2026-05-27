@@ -1,0 +1,3 @@
+cohort	n_target_genes	n_target_genes_available	available_genes	missing_genes	status
+CBIO_LIU_DFCI_2019_PRE	4	4	MAP4K1,TBX3,AXL,PLA2G2D		ready
+GSE145996	4	4	MAP4K1,TBX3,AXL,PLA2G2D		ready

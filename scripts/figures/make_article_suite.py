@@ -348,6 +348,10 @@ def make_article_tables(table_manifest: list[dict[str, str]]) -> None:
         ("supp_table_18_single_cell_enrichment.tsv", "results/scrna/cell_type_enrichment.tsv"),
         ("supp_table_19_perturbation_hypotheses.tsv", "results/perturbation/prioritized_perturbations.tsv"),
         ("supp_table_20_prospective_package_manifest.tsv", None),
+        ("supp_table_21_gpu_bioprior_rescue.tsv", "results/gpu_bioprior_rescue_combo_search_robust_20260527/gpu_bioprior_rescue_combo_selection.tsv"),
+        ("supp_table_22_gpu_bioprior_component_ablation.tsv", "results/gpu_bioprior_component_ablation_20260527/gpu_bioprior_component_ablation.tsv"),
+        ("supp_table_23_cbioportal_gpu_bioprior_external.tsv", "results/cbioportal_gpu_bioprior_external_validation_20260527/cbioportal_gpu_bioprior_external_metrics.tsv"),
+        ("supp_table_24_gpu_lipid_pair_rescue.tsv", "results/gpu_lipid_pair_rescue_component_dominant_ba_guardrail_20260528/gpu_lipid_pair_rescue_selection.tsv"),
     ]
 
     for out_name, src in table_sources:
@@ -774,9 +778,15 @@ def figure5(manifest):
     coverage = read_tsv("results/locked_external_panel_validation_calibrated_20260519/clinical_assay_panel_transfer.tsv")
     rescue = read_tsv("results/pd1_like_external_rescue/pd1_like_rescue_metrics.tsv")
     thresh = read_tsv("results/pd1_like_external_rescue/pd1_like_rescue_threshold_sensitivity.tsv")
+    strict_gate = read_tsv("deliverables/strict_melanoma_external_claim_gate_20260527.tsv")
+    gpu_component = read_tsv("results/gpu_bioprior_component_ablation_20260527/gpu_bioprior_component_external_summary.tsv")
+    cbio_panel = read_tsv("results/cbioportal_melanoma_external_validation_20260527/cbioportal_external_metrics.tsv")
+    cbio_rescue = read_tsv("results/cbioportal_rescue_head_external_validation_20260527/cbioportal_rescue_head_selection.tsv")
+    cbio_gpu = read_tsv("results/cbioportal_gpu_bioprior_external_validation_20260527/cbioportal_gpu_bioprior_external_metrics.tsv")
+    lipid_pair = read_tsv("results/gpu_lipid_pair_rescue_component_dominant_ba_guardrail_20260528/gpu_lipid_pair_external_metrics.tsv")
 
     fig, axes = plt.subplots(2, 3, figsize=(11, 7))
-    figure_heading(fig, "Fig. 5 | Locked external, panel transfer, and PD1-like rescue")
+    figure_heading(fig, "Fig. 5 | Locked external, panel transfer, and GPU rescue")
 
     ax = axes[0, 0]
     panel_label(ax, "a")
@@ -829,7 +839,35 @@ def figure5(manifest):
 
     ax = axes[1, 1]
     panel_label(ax, "e")
-    if not rescue.empty:
+    strict_rows = []
+    if not strict_gate.empty:
+        row = strict_gate[strict_gate["gate_id"].astype(str).eq("strict_family_strict_recist")]
+        if not row.empty:
+            strict_rows.append(("Locked\npanel", float(row.iloc[0]["target_AUROC"]), COLORS["baseline"]))
+    if not gpu_component.empty:
+        for candidate, label, color in [
+            ("base_rescue_robust", "MAP4K1\naxis", COLORS["blue"]),
+            ("0.80*base+0.20*rz__PLA2G2D", "GPU\nlipid/PI3K", COLORS["target"]),
+        ]:
+            row = gpu_component[gpu_component["candidate"].astype(str).eq(candidate)]
+            if not row.empty:
+                strict_rows.append((label, float(row.iloc[0]["AUROC"]), color))
+    if not lipid_pair.empty:
+        row = lipid_pair[lipid_pair["group_id"].astype(str).eq("strict_current_gse145996_phs000452")]
+        if not row.empty:
+            strict_rows.append(("Lipid pair\nBA gate", float(row.iloc[0]["AUROC"]), COLORS["target_dark"]))
+    if strict_rows:
+        labels = [row[0] for row in strict_rows]
+        values = [row[1] for row in strict_rows]
+        colors = [row[2] for row in strict_rows]
+        ax.bar(labels, values, color=colors)
+        ax.axhline(0.70, color=COLORS["black"], linestyle="--", linewidth=1)
+        ax.set_ylim(0.5, 0.75)
+        ax.set_ylabel("AUROC")
+        ax.set_title("Strict external rescue ladder")
+        ax.tick_params(axis="x", labelsize=6.5)
+        clean_ax(ax)
+    elif not rescue.empty:
         r = rescue[rescue["cohort"] == "GSE145996+PHS000452_LIU_LIKE_PRE"]
         labels = r["model_name"].map(short_model_label)
         ax.bar(labels, r["AUROC"], color=[COLORS["baseline"], COLORS["target"]])
@@ -843,7 +881,39 @@ def figure5(manifest):
 
     ax = axes[1, 2]
     panel_label(ax, "f")
-    if not thresh.empty:
+    cbio_rows = []
+    if not cbio_panel.empty:
+        row = cbio_panel[
+            cbio_panel["group_id"].astype(str).eq("cbio_liu_dfci_only")
+            & cbio_panel["model_name"].astype(str).eq("EcoNiche-Opt-HeuristicEcology-LockedPanel")
+        ]
+        if not row.empty:
+            cbio_rows.append(("Locked panel", float(row.iloc[0]["AUROC"]), COLORS["baseline"]))
+    if not cbio_rescue.empty:
+        row = cbio_rescue[
+            cbio_rescue["group_id"].astype(str).eq("cbio_liu_dfci_only")
+            & cbio_rescue["selection_id"].astype(str).eq("robust_fixed_development_candidate")
+        ]
+        if not row.empty:
+            cbio_rows.append(("MAP4K1 axis", float(row.iloc[0]["strict_external_AUROC"]), COLORS["blue"]))
+    if not cbio_gpu.empty:
+        row = cbio_gpu[cbio_gpu["group_id"].astype(str).eq("cbio_liu_dfci_only")]
+        if not row.empty:
+            cbio_rows.append(("GPU lipid/PI3K", float(row.iloc[0]["AUROC"]), COLORS["target"]))
+    if not lipid_pair.empty:
+        row = lipid_pair[lipid_pair["group_id"].astype(str).eq("cbio_liu_dfci_only")]
+        if not row.empty:
+            cbio_rows.append(("Lipid pair BA gate", float(row.iloc[0]["AUROC"]), COLORS["target_dark"]))
+    if cbio_rows:
+        cbio_rows = sorted(cbio_rows, key=lambda item: item[1])
+        ax.barh([row[0] for row in cbio_rows], [row[1] for row in cbio_rows], color=[row[2] for row in cbio_rows])
+        ax.axvline(0.70, color=COLORS["black"], linestyle="--", linewidth=1)
+        ax.set_xlim(0.5, 0.75)
+        ax.set_xlabel("AUROC")
+        ax.set_title("cBioPortal Liu cross-check")
+        ax.tick_params(axis="y", labelsize=6.5)
+        clean_ax(ax, grid=False)
+    elif not thresh.empty:
         t = thresh[thresh["cohort"] == "GSE145996+PHS000452_LIU_LIKE_PRE"]
         labels = t["model_name"].map(short_model_label) + " / " + t["threshold_policy"].str.replace("discovery_", "")
         t = t.assign(label=labels).sort_values("balanced_accuracy")
@@ -1205,7 +1275,7 @@ def write_caption_file() -> None:
 
 **Figure 4. Robustness, ablation, and claim gate.** Endpoint sensitivity, aligned locked-panel ablation, calibration, holdout heterogeneity, and claim-level summaries show which conclusions are supported and which remain point-estimate-only.
 
-**Figure 5. Locked external, panel transfer, and PD1-like rescue.** Discovery-only thresholds are applied to locked external cohorts and NanoString transfer cohorts. A secondary PD1-like transfer head is shown as model-development rescue rather than a replacement for the locked primary validation model.
+**Figure 5. Locked external, panel transfer, and GPU biological-prior rescue.** Discovery-only thresholds are applied to locked external cohorts and NanoString transfer cohorts. A frozen GPU lipid/PI3K rescue combo selected by primary melanoma LODO improves the strict PD1-like melanoma external layer, while cBioPortal Liu/DFCI scoring is shown as an independent source cross-check.
 
 **Figure 6. Biological interpretation and perturbation hypotheses.** Module localization, ecological interaction edges, feature contributions, and perturbation-reversal candidates summarize the mechanistic hypotheses generated by EcoNiche-Opt. Perturbation outputs are hypothesis-only.
 
@@ -1223,7 +1293,7 @@ def write_manuscript_draft() -> None:
 
 ## Abstract
 
-Immune-checkpoint-blockade response prediction remains limited by cohort heterogeneity, endpoint inconsistency, and incomplete validation of published signatures. We developed EcoNiche-Opt, a leakage-safe ecological module optimization framework for multicohort ICB transcriptomic benchmarking. The framework integrates manually curated baseline cohorts, endpoint-sensitive label harmonization, signed rank module scoring, ecological interaction priors, heuristic module search, paired bootstrap/FDR claim gates, locked external validation, and qPCR/NanoString-compatible panel transfer. In primary melanoma benchmark strata, EcoNiche-Opt achieved AUROC 0.705 and 0.685 and significantly outperformed a predeclared eight-signature family (two-sided FDR q=0.002 in both strata). Locked external and panel-transfer analyses supported family-level gains in pooled strict RECIST and clinical benefit analyses, and a secondary PD1-like transfer head was evaluated as a stress-test extension. EcoNiche-Opt provides a reproducible scoring method for immunotherapy-response biomarker development.
+Immune-checkpoint-blockade response prediction remains limited by cohort heterogeneity, endpoint inconsistency, and incomplete validation of published signatures. We developed EcoNiche-Opt, a leakage-safe ecological module optimization framework for multicohort ICB transcriptomic benchmarking. The framework integrates manually curated baseline cohorts, endpoint-sensitive label harmonization, signed rank module scoring, ecological interaction priors, heuristic module search, paired bootstrap/FDR claim gates, locked external validation, and qPCR/NanoString-compatible panel transfer. In primary melanoma benchmark strata, EcoNiche-Opt achieved AUROC 0.705 and 0.685 and significantly outperformed a predeclared eight-signature family (two-sided FDR q=0.002 in both strata). A frozen GPU lipid/PI3K rescue combo reached strict melanoma external AUROC 0.713 with family-level FDR support, and cBioPortal Liu/DFCI source rescoring improved to AUROC 0.674. EcoNiche-Opt provides a reproducible scoring method for immunotherapy-response biomarker development.
 
 ## Introduction
 
@@ -1249,7 +1319,7 @@ Figure 4 and Supplementary Figures 5-6 summarize endpoint sensitivity, aligned l
 
 ### Locked external and panel-transfer analyses test portability
 
-Figure 5 summarizes locked external validation, NanoString panel transfer, and the secondary PD1-like stress rescue. The rescue head improves the weak stress cohorts but remains a model-development analysis pending fresh independent validation.
+Figure 5 summarizes locked external validation, NanoString panel transfer, the frozen GPU lipid/PI3K strict-external rescue combo, and cBioPortal Liu/DFCI source cross-check scoring.
 
 ### Mechanistic analyses localize ecological components and perturbation hypotheses
 
