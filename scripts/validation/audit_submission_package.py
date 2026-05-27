@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RELEASE_TAG = "v0.3.2-locked-validation-20260527"
 RELEASE_VERSION = "0.3.2"
 STRICT_EXTERNAL_GATE = ROOT / "deliverables" / "strict_melanoma_external_claim_gate_20260527.tsv"
+PERFORMANCE_CI_DIR = ROOT / "results" / "performance_ci_audit_20260527"
 
 FORBIDDEN_PHRASES = [
     "superior to all",
@@ -164,6 +165,7 @@ def _audit_primary_claims(manuscript: Path, table_dir: Path) -> list[dict[str, o
         rows.append(_row(f"external_{endpoint}_family_mean_in_text", _contains(text, float(row["mean_signature_AUROC"])), f"{row['mean_signature_AUROC']:.6f}"))
         rows.append(_row(f"external_{endpoint}_fdr_in_text", f"q={float(row['two_sided_fdr_q']):.3f}" in text, f"q={float(row['two_sided_fdr_q']):.3f}"))
     rows.extend(_audit_strict_external_gate(text))
+    rows.extend(_audit_auroc_ci_coverage(text, table_dir))
     return rows
 
 
@@ -214,6 +216,68 @@ def _audit_strict_external_gate(text: str) -> list[dict[str, object]]:
             "strict melanoma PD1-like layer is explicitly claim-gated",
         )
     )
+    return rows
+
+
+def _audit_auroc_ci_coverage(text: str, table_dir: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    table10 = pd.read_csv(table_dir / "supp_table_10_melanoma_benchmark_summary.tsv", sep="\t")
+    table11 = pd.read_csv(table_dir / "supp_table_11_signature_family_fdr.tsv", sep="\t")
+    table15 = pd.read_csv(table_dir / "supp_table_15_locked_external_metrics.tsv", sep="\t")
+    ext_family = PERFORMANCE_CI_DIR / "locked_external_signature_family_omnibus_with_ci.tsv"
+    rows.append(_row("performance_ci_audit_dir_exists", PERFORMANCE_CI_DIR.exists(), str(PERFORMANCE_CI_DIR)))
+    rows.append(
+        _row(
+            "table10_pooled_auroc_ci_present",
+            {"pooled_AUROC_ci_low", "pooled_AUROC_ci_high"}.issubset(table10.columns)
+            and table10["pooled_AUROC_ci_low"].notna().any(),
+            "supp_table_10",
+        )
+    )
+    rows.append(
+        _row(
+            "table11_target_and_delta_auroc_ci_present",
+            {
+                "target_AUROC_ci_low",
+                "target_AUROC_ci_high",
+                "delta_AUROC_ci_low",
+                "delta_AUROC_ci_high",
+            }.issubset(table11.columns)
+            and table11["target_AUROC_ci_low"].notna().all(),
+            "supp_table_11",
+        )
+    )
+    rows.append(
+        _row(
+            "table15_external_auroc_ci_present",
+            {"AUROC_ci_low", "AUROC_ci_high"}.issubset(table15.columns) and table15["AUROC_ci_low"].notna().any(),
+            "supp_table_15",
+        )
+    )
+    rows.append(_row("external_family_auroc_ci_file_exists", ext_family.exists(), str(ext_family)))
+    if ext_family.exists():
+        family = pd.read_csv(ext_family, sep="\t")
+        key_rows = [
+            ("primary_core_target_ci_low_in_text", table11.iloc[0]["target_AUROC_ci_low"]),
+            ("primary_core_target_ci_high_in_text", table11.iloc[0]["target_AUROC_ci_high"]),
+            (
+                "external_strict_target_ci_low_in_text",
+                family[
+                    (family["endpoint"] == "strict_recist")
+                    & (family["validation_family"] == "all_locked_external_and_panel")
+                ].iloc[0]["target_AUROC_ci_low"],
+            ),
+            (
+                "external_strict_target_ci_high_in_text",
+                family[
+                    (family["endpoint"] == "strict_recist")
+                    & (family["validation_family"] == "all_locked_external_and_panel")
+                ].iloc[0]["target_AUROC_ci_high"],
+            ),
+        ]
+        for check, value in key_rows:
+            rows.append(_row(check, _contains(text, float(value)), f"{float(value):.6f}"))
+    rows.append(_row("manuscript_mentions_auroc_ci", "95% CI" in text, "95% CI"))
     return rows
 
 

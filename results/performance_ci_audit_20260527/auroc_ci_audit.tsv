@@ -1,0 +1,5 @@
+check	is_valid	detail
+table10_primary_benchmark_auroc_ci_columns	True	rows=38
+table11_signature_family_target_auroc_ci_columns	True	rows=2
+table15_locked_external_auroc_ci_columns	True	rows=135
+external_family_target_auroc_ci_columns	True	rows=12

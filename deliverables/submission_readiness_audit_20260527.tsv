@@ -1,14 +1,14 @@
 check	is_valid	detail
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	65723
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394254
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	766587
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	66322
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394529
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	767853
 exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3584961
-exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	663629
 exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12198
 exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38034
-exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
-main_docx_not_older_than_markdown	True	docx=1779865717.7619674;md=1779865715.5758657
-main_pdf_not_older_than_docx	True	pdf=1779865771.7611556;docx=1779865717.7619674
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	663629
+main_docx_not_older_than_markdown	True	docx=1779866379.335528;md=1779866377.6100717
+main_pdf_not_older_than_docx	True	pdf=1779866391.9357986;docx=1779866379.335528
 exists:Figure_1.png	True	932292
 exists:Figure_2.png	True	739513
 exists:Figure_3.png	True	777168
@@ -79,3 +79,13 @@ strict_external_primary_gate_auroc_in_text	True	0.571131
 strict_external_primary_gate_family_mean_in_text	True	0.541629
 strict_external_primary_gate_fdr_in_text	True	q=0.309
 strict_external_no_high_strength_overclaim	True	strict melanoma PD1-like layer is explicitly claim-gated
+performance_ci_audit_dir_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\results\performance_ci_audit_20260527
+table10_pooled_auroc_ci_present	True	supp_table_10
+table11_target_and_delta_auroc_ci_present	True	supp_table_11
+table15_external_auroc_ci_present	True	supp_table_15
+external_family_auroc_ci_file_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\results\performance_ci_audit_20260527\locked_external_signature_family_omnibus_with_ci.tsv
+primary_core_target_ci_low_in_text	True	0.607472
+primary_core_target_ci_high_in_text	True	0.795575
+external_strict_target_ci_low_in_text	True	0.537128
+external_strict_target_ci_high_in_text	True	0.684688
+manuscript_mentions_auroc_ci	True	95% CI
