@@ -1,12 +1,14 @@
 check	is_valid	detail
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	65314
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394147
-exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	765872
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	65723
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394254
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	766587
 exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3584961
 exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
 exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12198
 exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38034
 exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
+main_docx_not_older_than_markdown	True	docx=1779865717.7619674;md=1779865715.5758657
+main_pdf_not_older_than_docx	True	pdf=1779865771.7611556;docx=1779865717.7619674
 exists:Figure_1.png	True	932292
 exists:Figure_2.png	True	739513
 exists:Figure_3.png	True	777168
@@ -71,3 +73,9 @@ external_strict_recist_fdr_in_text	True	q=0.039
 external_clinical_benefit_target_auroc_in_text	True	0.604353
 external_clinical_benefit_family_mean_in_text	True	0.566113
 external_clinical_benefit_fdr_in_text	True	q=0.039
+strict_external_claim_gate_exists	True	D:\EcoNiche-Opt\tmp\github_sync_20260527\EcoNiche-Opt\deliverables\strict_melanoma_external_claim_gate_20260527.tsv
+strict_external_primary_gate_status	True	modest_point_estimate_only
+strict_external_primary_gate_auroc_in_text	True	0.571131
+strict_external_primary_gate_family_mean_in_text	True	0.541629
+strict_external_primary_gate_fdr_in_text	True	q=0.309
+strict_external_no_high_strength_overclaim	True	strict melanoma PD1-like layer is explicitly claim-gated

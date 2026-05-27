@@ -3,8 +3,8 @@ version: 0.3.2
 goal_status_schema: 1
 last_updated: 2026-05-27
 summary:
-  total_goals: 88
-  completed: 88
+  total_goals: 89
+  completed: 89
   interface_completed: 0
   blocked: 0
   pending: 0
@@ -787,3 +787,11 @@ goals:
     tests_run: [python scripts/validation/audit_submission_package.py --manuscript paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.md --jtm-dir paper/Journal of Translational Medicine投稿 --table-dir tables/article --source-data paper/Journal of Translational Medicine投稿/Additional_file_2_Source_Data.xlsx --out deliverables/submission_readiness_audit_20260527.tsv, python -m pytest -q tests/test_submission_package_audit.py tests/test_prospective_validation_package.py, python -m py_compile scripts/validation/audit_submission_package.py, python -m econiche_opt.cli validate-project --mode demo]
     blocking_issues: []
     notes: Added a submission readiness auditor that checks required JTM files, Figures 1-7 at 600 DPI, exactly one Supplementary Table 1-20 file per table number, absence of stale WordFullGraph ablation article tables, Source Data sheet coverage and release tag, manuscript release/version consistency, forbidden overclaim phrases, and key AUROC/FDR values against Supplementary Tables 11, 13, and 15. Removed the stale supp_table_13_word_graph_ablation.tsv from article tables so the current aligned-panel ablation remains the sole Table 13 evidence.
+  GOAL-088:
+    title: Strict melanoma PD1-like external claim gate
+    priority: P0
+    status: completed
+    files_changed: [scripts/validation/audit_strict_external_claim_gate.py, tests/test_strict_external_claim_gate.py, deliverables/strict_melanoma_external_claim_gate_20260527.tsv, deliverables/strict_melanoma_external_claim_gate_20260527.md, paper/econiche_opt_manuscript_en_v1_20260509.md, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.md, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.docx, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.pdf, scripts/validation/audit_submission_package.py, deliverables/submission_readiness_audit_20260527.tsv, docs/goal_status.yml]
+    tests_run: [python scripts/validation/audit_strict_external_claim_gate.py, python scripts/documents/make_jtm_submission.py, powershell Word COM ExportAsFixedFormat for EcoNiche-Opt_JTM_Main_Manuscript.pdf, python scripts/validation/audit_submission_package.py --manuscript paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.md --jtm-dir paper/Journal of Translational Medicine投稿 --table-dir tables/article --source-data paper/Journal of Translational Medicine投稿/Additional_file_2_Source_Data.xlsx --out deliverables/submission_readiness_audit_20260527.tsv, python -m pytest -q tests/test_strict_external_claim_gate.py tests/test_submission_package_audit.py tests/test_prospective_validation_package.py, python -m py_compile scripts/validation/audit_strict_external_claim_gate.py scripts/validation/audit_submission_package.py scripts/documents/make_jtm_submission.py, python -m econiche_opt.cli validate-project --mode demo]
+    blocking_issues: []
+    notes: Added a strict melanoma PD1-like external evidence gate for GSE145996 plus PHS000452_LIU_LIKE_PRE. The gate records strict RECIST n=116, locked AUROC=0.571131, signature-family mean AUROC=0.541629, mean delta=0.029501, and two-sided FDR q=0.309, classifying this layer as modest point-estimate external support rather than a high-strength external claim. The JTM manuscript now states this boundary explicitly, and the submission audit verifies the gate row, values, q value, explicit claim-gated wording, and that the PDF is not older than the DOCX.

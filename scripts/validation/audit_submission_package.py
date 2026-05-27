@@ -11,6 +11,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 RELEASE_TAG = "v0.3.2-locked-validation-20260527"
 RELEASE_VERSION = "0.3.2"
+STRICT_EXTERNAL_GATE = ROOT / "deliverables" / "strict_melanoma_external_claim_gate_20260527.tsv"
 
 FORBIDDEN_PHRASES = [
     "superior to all",
@@ -64,6 +65,25 @@ def _audit_required_files(jtm_dir: Path, table_dir: Path, source_data: Path) -> 
     for path in required:
         label = path.resolve().relative_to(ROOT) if path.resolve().is_relative_to(ROOT) else path
         rows.append(_row(f"exists:{label}", path.exists(), str(path.stat().st_size) if path.exists() else "missing"))
+    main_md = jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.md"
+    main_docx = jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.docx"
+    main_pdf = jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.pdf"
+    if main_md.exists() and main_docx.exists():
+        rows.append(
+            _row(
+                "main_docx_not_older_than_markdown",
+                main_docx.stat().st_mtime >= main_md.stat().st_mtime,
+                f"docx={main_docx.stat().st_mtime};md={main_md.stat().st_mtime}",
+            )
+        )
+    if main_docx.exists() and main_pdf.exists():
+        rows.append(
+            _row(
+                "main_pdf_not_older_than_docx",
+                main_pdf.stat().st_mtime >= main_docx.stat().st_mtime,
+                f"pdf={main_pdf.stat().st_mtime};docx={main_docx.stat().st_mtime}",
+            )
+        )
     for idx in range(1, 8):
         path = jtm_dir / f"Figure_{idx}.png"
         rows.append(_row(f"exists:Figure_{idx}.png", path.exists(), str(path.stat().st_size) if path.exists() else "missing"))
@@ -143,6 +163,57 @@ def _audit_primary_claims(manuscript: Path, table_dir: Path) -> list[dict[str, o
         rows.append(_row(f"external_{endpoint}_target_auroc_in_text", _contains(text, float(row["target_AUROC"])), f"{row['target_AUROC']:.6f}"))
         rows.append(_row(f"external_{endpoint}_family_mean_in_text", _contains(text, float(row["mean_signature_AUROC"])), f"{row['mean_signature_AUROC']:.6f}"))
         rows.append(_row(f"external_{endpoint}_fdr_in_text", f"q={float(row['two_sided_fdr_q']):.3f}" in text, f"q={float(row['two_sided_fdr_q']):.3f}"))
+    rows.extend(_audit_strict_external_gate(text))
+    return rows
+
+
+def _audit_strict_external_gate(text: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = [
+        _row("strict_external_claim_gate_exists", STRICT_EXTERNAL_GATE.exists(), str(STRICT_EXTERNAL_GATE))
+    ]
+    if not STRICT_EXTERNAL_GATE.exists():
+        return rows
+    gate = pd.read_csv(STRICT_EXTERNAL_GATE, sep="\t")
+    primary = gate[gate["gate_id"] == "strict_family_strict_recist"]
+    if primary.empty:
+        rows.append(_row("strict_external_primary_gate_row", False, "strict_family_strict_recist missing"))
+        return rows
+    row = primary.iloc[0]
+    rows.append(
+        _row(
+            "strict_external_primary_gate_status",
+            str(row["claim_status"]) == "modest_point_estimate_only",
+            str(row["claim_status"]),
+        )
+    )
+    rows.append(
+        _row(
+            "strict_external_primary_gate_auroc_in_text",
+            _contains(text, float(row["target_AUROC"])),
+            f"{float(row['target_AUROC']):.6f}",
+        )
+    )
+    rows.append(
+        _row(
+            "strict_external_primary_gate_family_mean_in_text",
+            _contains(text, float(row["family_mean_AUROC"])),
+            f"{float(row['family_mean_AUROC']):.6f}",
+        )
+    )
+    rows.append(
+        _row(
+            "strict_external_primary_gate_fdr_in_text",
+            f"q={float(row['two_sided_fdr_q']):.3f}" in text,
+            f"q={float(row['two_sided_fdr_q']):.3f}",
+        )
+    )
+    rows.append(
+        _row(
+            "strict_external_no_high_strength_overclaim",
+            "high-strength external claim" in text and "modest point-estimate external support" in text,
+            "strict melanoma PD1-like layer is explicitly claim-gated",
+        )
+    )
     return rows
 
 
