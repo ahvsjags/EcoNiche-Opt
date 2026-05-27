@@ -81,8 +81,13 @@ EXCLUDE_PATTERNS = [
     "*.zip",
     "*.expr.tsv",
     "*expression*.tsv",
+    "goal_status.yml",
     "github_release_status_*.json",
+    "top_tier_target_audit_*.md",
+    "top_tier_target_audit_*.tsv",
     "deliverables/github_release_status_*.json",
+    "deliverables/top_tier_target_audit_*.md",
+    "deliverables/top_tier_target_audit_*.tsv",
     "zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
     "zenodo_release_metadata_*/zenodo_release_manifest.json",
     "deliverables/zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
@@ -93,8 +98,11 @@ EXCLUDE_PATTERNS = [
 
 TARGET_CLEANUP_PATTERNS = [
     "deliverables/github_release_status_*.json",
+    "deliverables/top_tier_target_audit_*.md",
+    "deliverables/top_tier_target_audit_*.tsv",
     "deliverables/zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
     "deliverables/zenodo_release_metadata_*/zenodo_release_manifest.json",
+    "docs/goal_status.yml",
 ]
 
 
