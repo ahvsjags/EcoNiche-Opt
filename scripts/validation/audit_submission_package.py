@@ -1,0 +1,187 @@
+from __future__ import annotations
+
+import argparse
+import re
+from pathlib import Path
+
+import pandas as pd
+from openpyxl import load_workbook
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[2]
+RELEASE_TAG = "v0.3.2-locked-validation-20260527"
+RELEASE_VERSION = "0.3.2"
+
+FORBIDDEN_PHRASES = [
+    "superior to all",
+    "significantly superior",
+    "prospective validation completed",
+    "clinical utility",
+    "clinical actionability",
+    "actionable biomarker",
+    "treatment recommendation",
+    "diagnostic test",
+    "pan-cancer predictor",
+]
+
+
+def _row(check: str, ok: bool, detail: str = "") -> dict[str, object]:
+    return {"check": check, "is_valid": bool(ok), "detail": detail}
+
+
+def _contains(text: str, value: float, digits: int = 6) -> bool:
+    return f"{value:.{digits}f}" in text or f"{value:.3f}" in text
+
+
+def _sheet_text(workbook_path: Path, max_cells: int = 2000) -> str:
+    wb = load_workbook(workbook_path, read_only=True, data_only=True)
+    values: list[str] = []
+    seen = 0
+    for ws in wb.worksheets:
+        values.append(ws.title)
+        for row in ws.iter_rows(values_only=True):
+            for cell in row:
+                if cell is not None:
+                    values.append(str(cell))
+                    seen += 1
+                if seen >= max_cells:
+                    return "\n".join(values)
+    return "\n".join(values)
+
+
+def _audit_required_files(jtm_dir: Path, table_dir: Path, source_data: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    required = [
+        jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.md",
+        jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.docx",
+        jtm_dir / "EcoNiche-Opt_JTM_Main_Manuscript.pdf",
+        jtm_dir / "Additional_file_1_Supplementary_Information.pdf",
+        jtm_dir / "Additional_file_2_Source_Data.xlsx",
+        jtm_dir / "Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx",
+        jtm_dir / "EcoNiche-Opt_JTM_Cover_Letter.docx",
+        source_data,
+    ]
+    for path in required:
+        label = path.resolve().relative_to(ROOT) if path.resolve().is_relative_to(ROOT) else path
+        rows.append(_row(f"exists:{label}", path.exists(), str(path.stat().st_size) if path.exists() else "missing"))
+    for idx in range(1, 8):
+        path = jtm_dir / f"Figure_{idx}.png"
+        rows.append(_row(f"exists:Figure_{idx}.png", path.exists(), str(path.stat().st_size) if path.exists() else "missing"))
+    for idx in range(1, 21):
+        matches = sorted(table_dir.glob(f"supp_table_{idx:02d}_*.tsv"))
+        rows.append(_row(f"supplementary_table_{idx:02d}_single_manifested_file", len(matches) == 1, ",".join(path.name for path in matches)))
+    stale = sorted(table_dir.glob("*word_graph_ablation*"))
+    rows.append(_row("no_stale_word_graph_ablation_article_table", len(stale) == 0, ",".join(path.name for path in stale)))
+    return rows
+
+
+def _audit_figures(jtm_dir: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for idx in range(1, 8):
+        path = jtm_dir / f"Figure_{idx}.png"
+        if not path.exists():
+            rows.append(_row(f"figure_{idx}_600dpi", False, "missing"))
+            continue
+        image = Image.open(path)
+        dpi = image.info.get("dpi", (0, 0))
+        ok = min(dpi) >= 590 and image.size[0] >= 3000 and image.size[1] >= 3000
+        rows.append(_row(f"figure_{idx}_600dpi_and_large_canvas", ok, f"size={image.size};dpi={dpi}"))
+    return rows
+
+
+def _audit_source_data(source_data: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    if not source_data.exists():
+        return [_row("source_data_exists", False, "missing")]
+    wb = load_workbook(source_data, read_only=True, data_only=True)
+    sheets = set(wb.sheetnames)
+    required = {
+        "README",
+        "Figure_Source_Map",
+        "Figure_File_Manifest",
+        "Table_File_Manifest",
+        *{f"Fig{idx}_source" for idx in range(1, 8)},
+        *{f"SuppFig{idx}_source" for idx in range(1, 11)},
+    }
+    missing = sorted(required - sheets)
+    rows.append(_row("source_data_required_sheets", not missing, ",".join(missing)))
+    text = _sheet_text(source_data)
+    rows.append(_row("source_data_release_tag", RELEASE_TAG in text, RELEASE_TAG))
+    return rows
+
+
+def _audit_manuscript_text(manuscript: Path) -> list[dict[str, object]]:
+    text = manuscript.read_text(encoding="utf-8")
+    lower = text.lower()
+    rows = [
+        _row("manuscript_release_version", f"v{RELEASE_VERSION}" in lower, RELEASE_VERSION),
+        _row("manuscript_release_tag", RELEASE_TAG in text, RELEASE_TAG),
+        _row("manuscript_no_old_release_tag", "v0.3.1" not in text and "0.3.1" not in text, "old v0.3.1 absent"),
+        _row("manuscript_mentions_locked_scorer", "locked independent-cohort scoring" in lower or "score-locked-validation" in lower, ""),
+    ]
+    for phrase in FORBIDDEN_PHRASES:
+        rows.append(_row(f"forbidden_phrase_absent:{phrase}", phrase not in lower, phrase))
+    return rows
+
+
+def _audit_primary_claims(manuscript: Path, table_dir: Path) -> list[dict[str, object]]:
+    text = manuscript.read_text(encoding="utf-8")
+    rows: list[dict[str, object]] = []
+    family = pd.read_csv(table_dir / "supp_table_11_signature_family_fdr.tsv", sep="\t")
+    for _, row in family.iterrows():
+        stratum = str(row["stratum"])
+        rows.append(_row(f"primary_family_target_auroc_in_text:{stratum}", _contains(text, float(row["target_AUROC"])), f"{row['target_AUROC']:.6f}"))
+        rows.append(_row(f"primary_family_mean_auroc_in_text:{stratum}", _contains(text, float(row["mean_signature_AUROC"])), f"{row['mean_signature_AUROC']:.6f}"))
+        rows.append(_row(f"primary_family_fdr_in_text:{stratum}", f"q={float(row['two_sided_fdr_q']):.3f}" in text, f"q={float(row['two_sided_fdr_q']):.3f}"))
+    ablation = pd.read_csv(table_dir / "supp_table_13_aligned_panel_ablation.tsv", sep="\t")
+    core = ablation[ablation["stratum"] == "melanoma_core_high_evidence"]
+    rows.append(_row("aligned_ablation_full_auroc_in_text", _contains(text, float(core["target_AUROC"].iloc[0])), f"{float(core['target_AUROC'].iloc[0]):.6f}"))
+    rows.append(_row("aligned_ablation_component_q_boundary_in_text", "q<=0.028" in text or "q≤0.028" in text, "q<=0.028"))
+    external = pd.read_csv(ROOT / "results" / "locked_external_panel_validation_calibrated_20260519" / "locked_external_signature_family_omnibus.tsv", sep="\t")
+    for endpoint in ["strict_recist", "clinical_benefit"]:
+        row = external[(external["endpoint"] == endpoint) & (external["validation_family"] == "all_locked_external_and_panel")].iloc[0]
+        rows.append(_row(f"external_{endpoint}_target_auroc_in_text", _contains(text, float(row["target_AUROC"])), f"{row['target_AUROC']:.6f}"))
+        rows.append(_row(f"external_{endpoint}_family_mean_in_text", _contains(text, float(row["mean_signature_AUROC"])), f"{row['mean_signature_AUROC']:.6f}"))
+        rows.append(_row(f"external_{endpoint}_fdr_in_text", f"q={float(row['two_sided_fdr_q']):.3f}" in text, f"q={float(row['two_sided_fdr_q']):.3f}"))
+    return rows
+
+
+def audit_submission_package(
+    manuscript: str | Path,
+    jtm_dir: str | Path,
+    table_dir: str | Path,
+    source_data: str | Path,
+) -> pd.DataFrame:
+    manuscript = Path(manuscript)
+    jtm_dir = Path(jtm_dir)
+    table_dir = Path(table_dir)
+    source_data = Path(source_data)
+    rows: list[dict[str, object]] = []
+    rows.extend(_audit_required_files(jtm_dir, table_dir, source_data))
+    rows.extend(_audit_figures(jtm_dir))
+    rows.extend(_audit_source_data(source_data))
+    rows.extend(_audit_manuscript_text(manuscript))
+    rows.extend(_audit_primary_claims(manuscript, table_dir))
+    return pd.DataFrame(rows)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Audit the EcoNiche-Opt submission package for version, file, figure, source-data, and claim consistency.")
+    parser.add_argument("--manuscript", default="paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.md")
+    parser.add_argument("--jtm-dir", default="paper/Journal of Translational Medicine投稿")
+    parser.add_argument("--table-dir", default="tables/article")
+    parser.add_argument("--source-data", default="paper/Journal of Translational Medicine投稿/Additional_file_2_Source_Data.xlsx")
+    parser.add_argument("--out", default="deliverables/submission_readiness_audit_20260527.tsv")
+    args = parser.parse_args()
+    report = audit_submission_package(args.manuscript, args.jtm_dir, args.table_dir, args.source_data)
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    report.to_csv(out, sep="\t", index=False)
+    print(report.to_string(index=False))
+    print(f"Wrote {out}")
+    if not bool(report["is_valid"].all()):
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

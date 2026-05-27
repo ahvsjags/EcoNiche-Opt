@@ -1,0 +1,73 @@
+check	is_valid	detail
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.md	True	65314
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.docx	True	394147
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Main_Manuscript.pdf	True	765872
+exists:paper\Journal of Translational Medicine投稿\Additional_file_1_Supplementary_Information.pdf	True	3584961
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
+exists:paper\Journal of Translational Medicine投稿\Additional_file_3_STROBE_TRIPOD_REMARK_checklists.xlsx	True	12198
+exists:paper\Journal of Translational Medicine投稿\EcoNiche-Opt_JTM_Cover_Letter.docx	True	38034
+exists:paper\Journal of Translational Medicine投稿\Additional_file_2_Source_Data.xlsx	True	642322
+exists:Figure_1.png	True	932292
+exists:Figure_2.png	True	739513
+exists:Figure_3.png	True	777168
+exists:Figure_4.png	True	921237
+exists:Figure_5.png	True	659593
+exists:Figure_6.png	True	931767
+exists:Figure_7.png	True	638506
+supplementary_table_01_single_manifested_file	True	supp_table_01_data_registry_roles.tsv
+supplementary_table_02_single_manifested_file	True	supp_table_02_access_audit.tsv
+supplementary_table_03_single_manifested_file	True	supp_table_03_expression_qc.tsv
+supplementary_table_04_single_manifested_file	True	supp_table_04_manual_curation_evidence.tsv
+supplementary_table_05_single_manifested_file	True	supp_table_05_external_cohort_gap_audit.tsv
+supplementary_table_06_single_manifested_file	True	supp_table_06_endpoint_label_sensitivity.tsv
+supplementary_table_07_single_manifested_file	True	supp_table_07_module_gene_sets.tsv
+supplementary_table_08_single_manifested_file	True	supp_table_08_ecological_edges.tsv
+supplementary_table_09_single_manifested_file	True	supp_table_09_optimizer_history.tsv
+supplementary_table_10_single_manifested_file	True	supp_table_10_melanoma_benchmark_summary.tsv
+supplementary_table_11_single_manifested_file	True	supp_table_11_signature_family_fdr.tsv
+supplementary_table_12_single_manifested_file	True	supp_table_12_lodo_metrics.tsv
+supplementary_table_13_single_manifested_file	True	supp_table_13_aligned_panel_ablation.tsv
+supplementary_table_14_single_manifested_file	True	supp_table_14_decision_curve.tsv
+supplementary_table_15_single_manifested_file	True	supp_table_15_locked_external_metrics.tsv
+supplementary_table_16_single_manifested_file	True	supp_table_16_nanostring_panel_transfer.tsv
+supplementary_table_17_single_manifested_file	True	supp_table_17_pd1_like_rescue.tsv
+supplementary_table_18_single_manifested_file	True	supp_table_18_single_cell_enrichment.tsv
+supplementary_table_19_single_manifested_file	True	supp_table_19_perturbation_hypotheses.tsv
+supplementary_table_20_single_manifested_file	True	supp_table_20_prospective_package_manifest.tsv
+no_stale_word_graph_ablation_article_table	True	
+figure_1_600dpi_and_large_canvas	True	size=(4571, 4297);dpi=(599.9988, 599.9988)
+figure_2_600dpi_and_large_canvas	True	size=(6593, 4233);dpi=(599.9988, 599.9988)
+figure_3_600dpi_and_large_canvas	True	size=(6658, 4223);dpi=(599.9988, 599.9988)
+figure_4_600dpi_and_large_canvas	True	size=(6584, 4233);dpi=(599.9988, 599.9988)
+figure_5_600dpi_and_large_canvas	True	size=(6595, 4232);dpi=(599.9988, 599.9988)
+figure_6_600dpi_and_large_canvas	True	size=(7541, 4411);dpi=(599.9988, 599.9988)
+figure_7_600dpi_and_large_canvas	True	size=(3739, 5250);dpi=(599.9988, 599.9988)
+source_data_required_sheets	True	
+source_data_release_tag	True	v0.3.2-locked-validation-20260527
+manuscript_release_version	True	0.3.2
+manuscript_release_tag	True	v0.3.2-locked-validation-20260527
+manuscript_no_old_release_tag	True	old v0.3.1 absent
+manuscript_mentions_locked_scorer	True	
+forbidden_phrase_absent:superior to all	True	superior to all
+forbidden_phrase_absent:significantly superior	True	significantly superior
+forbidden_phrase_absent:prospective validation completed	True	prospective validation completed
+forbidden_phrase_absent:clinical utility	True	clinical utility
+forbidden_phrase_absent:clinical actionability	True	clinical actionability
+forbidden_phrase_absent:actionable biomarker	True	actionable biomarker
+forbidden_phrase_absent:treatment recommendation	True	treatment recommendation
+forbidden_phrase_absent:diagnostic test	True	diagnostic test
+forbidden_phrase_absent:pan-cancer predictor	True	pan-cancer predictor
+primary_family_target_auroc_in_text:melanoma_core_high_evidence	True	0.704903
+primary_family_mean_auroc_in_text:melanoma_core_high_evidence	True	0.631796
+primary_family_fdr_in_text:melanoma_core_high_evidence	True	q=0.002
+primary_family_target_auroc_in_text:melanoma_recist_supported_primary	True	0.684559
+primary_family_mean_auroc_in_text:melanoma_recist_supported_primary	True	0.619700
+primary_family_fdr_in_text:melanoma_recist_supported_primary	True	q=0.002
+aligned_ablation_full_auroc_in_text	True	0.704903
+aligned_ablation_component_q_boundary_in_text	True	q<=0.028
+external_strict_recist_target_auroc_in_text	True	0.609671
+external_strict_recist_family_mean_in_text	True	0.569882
+external_strict_recist_fdr_in_text	True	q=0.039
+external_clinical_benefit_target_auroc_in_text	True	0.604353
+external_clinical_benefit_family_mean_in_text	True	0.566113
+external_clinical_benefit_fdr_in_text	True	q=0.039
