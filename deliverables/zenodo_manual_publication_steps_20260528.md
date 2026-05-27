@@ -27,6 +27,24 @@ python scripts\validation\audit_submission_package.py
 python -m econiche_opt.cli validate-goals --goal-file docs\goal_status.yml
 ```
 
+## API publication route
+
+If you prefer a scripted route, create a Zenodo access token with `deposit:write` and `deposit:actions` scopes and set it only as an environment variable:
+
+```powershell
+$env:ZENODO_TOKEN='PASTE_ZENODO_TOKEN_HERE'
+python scripts\reporting\publish_zenodo_release.py --execute --publish --apply-doi
+```
+
+The script builds the archive from the frozen GitHub release tag, creates a Zenodo deposition, uploads the zip archive, publishes the record, extracts the minted DOI, and then calls `scripts\reporting\apply_zenodo_doi.py` to update citation/manuscript files. Without `--execute`, the same script runs a dry-run and writes `deliverables/zenodo_api_publication_status_20260528.json`; without `--publish`, it only creates an unpublished draft and must not be cited as a DOI-bearing record.
+
+To test the flow without publishing to production Zenodo:
+
+```powershell
+$env:ZENODO_TOKEN='PASTE_SANDBOX_ZENODO_TOKEN_HERE'
+python scripts\reporting\publish_zenodo_release.py --sandbox --execute
+```
+
 ## Manual upload fallback
 
 If GitHub integration is unavailable, create a new Zenodo software upload and upload the source archive from:
