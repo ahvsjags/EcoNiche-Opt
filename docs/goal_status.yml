@@ -1,10 +1,10 @@
 project: EcoNiche-Opt
-version: 0.3.1
+version: 0.3.2
 goal_status_schema: 1
 last_updated: 2026-05-27
 summary:
-  total_goals: 86
-  completed: 86
+  total_goals: 87
+  completed: 87
   interface_completed: 0
   blocked: 0
   pending: 0
@@ -771,3 +771,11 @@ goals:
     tests_run: [python scripts/analysis/run_locked_external_panel_validation.py --processed-dir data/processed/bulk --out results/locked_external_panel_validation_calibrated_20260519, python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv --out deliverables/prospective_validation, python scripts/validation/validate_prospective_package.py --package-dir deliverables/prospective_validation, python -m pytest -q tests/test_prospective_validation_package.py, python -m py_compile scripts/validation/score_locked_validation_cohort.py scripts/validation/validate_prospective_package.py scripts/analysis/run_locked_external_panel_validation.py scripts/reporting/make_prospective_validation_package.py src/econiche_opt/cli.py, python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml]
     blocking_issues: []
     notes: Added a no-refit locked validation scorer for independent cohorts. The CLI command score-locked-validation verifies the frozen scoring-spec hash, audits the sample manifest, computes module scores from the locked 62-gene panel, applies discovery-only Platt calibration coefficients and endpoint thresholds, writes sample-level probabilities and calls, reports panel/module coverage, and computes optional AUROC/calibration/decision-curve metrics when clinical labels are supplied. Calibration coefficients are now exported from the locked external validation pipeline into locked_thresholds.tsv and the prospective scoring spec.
+  GOAL-086:
+    title: Versioned release alignment for locked validation scorer
+    priority: P0
+    status: completed
+    files_changed: [pyproject.toml, CITATION.cff, r-package/EcoNicheOpt/DESCRIPTION, src/econiche_opt/__init__.py, scripts/documents/make_commsmed_submission_assets.py, scripts/reporting/make_prospective_validation_package.py, deliverables/prospective_validation/locked_scoring_spec.json, deliverables/prospective_validation/locked_scoring_spec.sha256, paper/econiche_opt_manuscript_en_v1_20260509.md, paper/econiche_opt_manuscript_en_v1_20260509.docx, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.md, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.docx, paper/Journal of Translational Medicine投稿/EcoNiche-Opt_JTM_Main_Manuscript.pdf, paper/communications_medicine_submission/Source_Data.xlsx, paper/communications_medicine_submission/communications_medicine_submission_readiness.md]
+    tests_run: [python scripts/reporting/make_prospective_validation_package.py --thresholds results/locked_external_panel_validation_calibrated_20260519/locked_thresholds.tsv --out deliverables/prospective_validation, python scripts/documents/make_commsmed_submission_assets.py, python scripts/documents/make_word_from_manuscript.py, python scripts/documents/make_jtm_submission.py, python scripts/validation/validate_prospective_package.py --package-dir deliverables/prospective_validation, python -m pytest -q tests/test_prospective_validation_package.py, python -m econiche_opt.cli validate-project --mode demo]
+    blocking_issues: []
+    notes: Bumped the public package/manuscript version to 0.3.2 and changed the code-availability release tag to v0.3.2-locked-validation-20260527 so the cited archive includes the independent locked-validation scorer. Regenerated Source Data, reporting checklist/readiness assets, manuscript DOCX, JTM manuscript DOCX/PDF, and prospective validation package so manuscript, package metadata, and locked scoring spec point to the same release line.

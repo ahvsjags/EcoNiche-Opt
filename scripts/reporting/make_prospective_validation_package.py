@@ -15,8 +15,8 @@ if str(SRC) not in sys.path:
 
 from econiche_opt.model.endpoint_modules import MODULE_GENE_SETS, MODULE_PRIOR_WEIGHTS
 
-RELEASE_TAG = "v0.3.1-jtm-20260527"
-RELEASE_COMMIT = "4371e3ac3d70133f4635bf83a5165dcc2fe4357c"
+RELEASE_TAG = "v0.3.2-locked-validation-20260527"
+RELEASE_COMMIT = "recorded_on_github_release_page"
 MODEL_NAME = "EcoNiche-Opt-HeuristicEcology-LockedPanel"
 PRIMARY_CONTEXT = "independent pretreatment melanoma tumor-tissue anti-PD-1/anti-PD-1-based cohort"
 COMPARATORS = ["IFNG", "CXCL9", "TIG", "TIDE_dysfunction", "APM", "CYT", "IPRES", "TIDE_exclusion"]

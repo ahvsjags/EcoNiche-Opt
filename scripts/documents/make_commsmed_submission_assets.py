@@ -23,7 +23,7 @@ CHECKLISTS = SUBMISSION_DIR / "STROBE_TRIPOD_REMARK_checklists.xlsx"
 REPORTING_SUMMARY = SUBMISSION_DIR / "NaturePortfolio_Reporting_Summary_EcoNicheOpt.docx"
 READINESS = SUBMISSION_DIR / "communications_medicine_submission_readiness.md"
 
-RELEASE_TAG = "v0.3.1-jtm-20260527"
+RELEASE_TAG = "v0.3.2-locked-validation-20260527"
 REPO = "https://github.com/ahvsjags/EcoNiche-Opt"
 ARCHIVE = f"{REPO}/archive/refs/tags/{RELEASE_TAG}.zip"
 
@@ -227,7 +227,7 @@ def make_checklists() -> None:
         ("Statistics", "Statistical tests", "Paired bootstrap/DeLong-compatible comparisons and Benjamini-Hochberg FDR correction are described."),
         ("Data", "Data availability", "Public and restricted datasets are listed with access status; source data workbook is provided."),
         ("Code", "Code availability", f"Repository {REPO}; release tag {RELEASE_TAG}; release archive {ARCHIVE}."),
-        ("Software", "Core software", "Python package econiche_opt v0.3.1; R wrapper via reticulate; scripts listed in Code availability."),
+        ("Software", "Core software", "Python package econiche_opt v0.3.2; R wrapper via reticulate; scripts listed in Code availability."),
         ("Reporting", "Guidelines", "STROBE, TRIPOD and REMARK checklists are supplied for the observational biomarker prediction study."),
     ]
     with pd.ExcelWriter(CHECKLISTS, engine="openpyxl") as writer:

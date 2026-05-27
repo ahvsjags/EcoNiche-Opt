@@ -1,8 +1,8 @@
 {
   "model_name": "EcoNiche-Opt-HeuristicEcology-LockedPanel",
   "model_status": "frozen_for_external_validation",
-  "release_tag": "v0.3.1-jtm-20260527",
-  "release_commit": "4371e3ac3d70133f4635bf83a5165dcc2fe4357c",
+  "release_tag": "v0.3.2-locked-validation-20260527",
+  "release_commit": "recorded_on_github_release_page",
   "intended_validation_context": "independent pretreatment melanoma tumor-tissue anti-PD-1/anti-PD-1-based cohort",
   "unsupported_context_without_new_training": "blood, plasma, PBMC, serum, on-treatment biopsy, and non-ICB treatment-only cohorts",
   "training_threshold_source": "GSE91061,GSE78220,PRJEB23709_PD1_PRE only",

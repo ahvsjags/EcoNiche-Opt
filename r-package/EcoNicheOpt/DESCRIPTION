@@ -1,6 +1,6 @@
 Package: EcoNicheOpt
 Title: R Interface to the EcoNiche-Opt Immune Response Model
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(person("EcoNiche-Opt", "contributors", role = c("aut", "cre"), email = "noreply@example.com"))
 Description: Provides a lightweight R interface to the Python EcoNiche-Opt package for immune checkpoint blockade response modeling. The wrapper exposes model fitting, scoring, feature coverage, module tables, and serialization through reticulate.
 License: MIT

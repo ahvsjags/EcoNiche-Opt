@@ -5,7 +5,7 @@
 - Abstract: structured as Background, Methods, Results and Conclusions; 250-word limit checked in the manuscript source.
 - Plain language summary: added immediately after the Abstract and kept near the 120-word guide.
 - Transparent peer review: cover letter states opt-in.
-- Code availability: repository, release tag and release-specific archive are listed (https://github.com/ahvsjags/EcoNiche-Opt/archive/refs/tags/v0.3.1-jtm-20260527.zip).
+- Code availability: repository, release tag and release-specific archive are listed (https://github.com/ahvsjags/EcoNiche-Opt/archive/refs/tags/v0.3.2-locked-validation-20260527.zip).
 - Source data: Source_Data.xlsx covers Figures 1-7, Supplementary Figures 1-10 and Supplementary Tables 1-20.
 - Reporting files: Nature Portfolio Reporting Summary document plus STROBE, TRIPOD and REMARK checklist workbook.
 
