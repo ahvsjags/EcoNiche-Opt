@@ -1154,8 +1154,10 @@ goals:
       - git push --force origin refs/tags/v0.3.4-gpu-lipid-pair-rescue-20260528
       - gh release create/edit v0.3.4-gpu-lipid-pair-rescue-20260528
       - gh release view v0.3.4-gpu-lipid-pair-rescue-20260528 --repo ahvsjags/EcoNiche-Opt
+      - gh api repos/ahvsjags/EcoNiche-Opt/git/ref/tags/v0.3.4-gpu-lipid-pair-rescue-20260528
       - python scripts/validation/audit_top_tier_targets.py
       - python scripts/validation/audit_submission_package.py
       - python -m pytest -q tests/test_top_tier_target_audit.py tests/test_zenodo_release_metadata.py
+      - python -m econiche_opt.cli validate-goals --goal-file docs/goal_status.yml
     blocking_issues: []
-    notes: "Published the public v0.3.4 release assets to https://github.com/ahvsjags/EcoNiche-Opt. The release repository main branch was updated to commit 400206422b11904c38ca01d1278d60204c66554e and the frozen tag v0.3.4-gpu-lipid-pair-rescue-20260528 was aligned to that commit. Created the GitHub release at https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/v0.3.4-gpu-lipid-pair-rescue-20260528 and verified by GitHub API that it is published, non-draft, non-prerelease, and that the tag object SHA matches the expected commit. Updated repository URLs from 3272464246/EcoNiche-Opt to ahvsjags/EcoNiche-Opt in the manuscript/release metadata. The top-tier audit now reports 45 PASS, 0 PARTIAL, and 1 GAP; the remaining GAP is a real Zenodo DOI."
+    notes: "Published the public v0.3.4 release assets to https://github.com/ahvsjags/EcoNiche-Opt. The release repository main branch was updated to commit edc782c245a2e3a6dada0df30d6544c386503275 and the frozen tag v0.3.4-gpu-lipid-pair-rescue-20260528 was aligned to that commit. Created the GitHub release at https://github.com/ahvsjags/EcoNiche-Opt/releases/tag/v0.3.4-gpu-lipid-pair-rescue-20260528 and verified by GitHub API that it is published, non-draft, non-prerelease, and that the tag object SHA matches the expected commit. Updated repository URLs from 3272464246/EcoNiche-Opt to ahvsjags/EcoNiche-Opt in the manuscript/release metadata. The top-tier audit now reports 45 PASS, 0 PARTIAL, and 1 GAP; the remaining GAP is a real Zenodo DOI."

@@ -81,8 +81,20 @@ EXCLUDE_PATTERNS = [
     "*.zip",
     "*.expr.tsv",
     "*expression*.tsv",
+    "github_release_status_*.json",
+    "deliverables/github_release_status_*.json",
+    "zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
+    "zenodo_release_metadata_*/zenodo_release_manifest.json",
+    "deliverables/zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
+    "deliverables/zenodo_release_metadata_*/zenodo_release_manifest.json",
     "*/processed_inputs/*",
     "*/tmp/*",
+]
+
+TARGET_CLEANUP_PATTERNS = [
+    "deliverables/github_release_status_*.json",
+    "deliverables/zenodo_release_metadata_*/ZENODO_RELEASE_CHECKLIST.md",
+    "deliverables/zenodo_release_metadata_*/zenodo_release_manifest.json",
 ]
 
 
@@ -96,6 +108,16 @@ def should_skip(path: Path, source_root: Path) -> bool:
 def copy_file(src: Path, dst: Path) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dst)
+
+
+def cleanup_target_only_files(target: Path) -> list[Path]:
+    removed: list[Path] = []
+    for pattern in TARGET_CLEANUP_PATTERNS:
+        for path in target.glob(pattern):
+            if path.is_file():
+                path.unlink()
+                removed.append(path)
+    return removed
 
 
 def copy_tree_filtered(source_root: Path, target_root: Path) -> list[Path]:
@@ -129,6 +151,8 @@ def main() -> None:
         raise SystemExit(f"Target is not a Git release repository: {target}")
     if not str(target).startswith(str(ROOT.resolve())):
         raise SystemExit(f"Refusing to sync outside project root: {target}")
+
+    removed = cleanup_target_only_files(target)
 
     copied: list[Path] = []
     for rel in ROOT_FILES:
@@ -176,6 +200,8 @@ def main() -> None:
     manifest_path = target / args.manifest
     manifest_path.write_text("\n".join(rows) + "\n", encoding="utf-8")
     print(f"Copied {len(set(copied))} public files into {target}")
+    if removed:
+        print(f"Removed {len(set(removed))} post-release verification files from {target}")
     print(f"Wrote {manifest_path}")
 
 
