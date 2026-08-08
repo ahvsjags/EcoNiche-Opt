@@ -1,0 +1,29 @@
+check	is_valid	detail
+required_revision_files	True	15
+manuscript_control_bytes	True	unexpected=0
+supplementary_table_first_citations	True	[(1, 42), (2, 42), (3, 42), (4, 42), (5, 42), (6, 50), (7, 162), (8, 166), (9, 166), (10, 172), (11, 172), (12, 172), (13, 186), (14, 188), (15, 196), (16, 196), (17, 212), (18, 222), (19, 228), (20, 240), (21, 240), (22, 240), (23, 240), (24, 240)]
+supplementary_figure_first_citations	True	[(1, 154), (2, 158), (3, 172), (4, 172), (5, 184), (6, 186), (7, 196), (8, 212), (9, 222), (10, 240)]
+table15_prediction_consistency	True	max_absolute_difference=0
+lodo_rows_with_ci	True	rows=133
+external_strict_recist_rows	True	rows=5
+lodo_required_ci_columns	True	AUROC/sensitivity/specificity
+all_reviewer_comments_resolved	True	rows=28
+figure_input_manifest_complete	True	rows=46
+figure_input_files_exist	True	missing=[]
+docx_embedded_main_figures	True	media_files=7
+docx_structured_equations	True	native_omml_objects=16
+expanded_table12_embedded_in_supplement	True	CI headers present
+source_data_workbook_valid	True	OOXML workbook present
+limitations_section	True	present
+figure_ai_disclosure	True	present
+author_contribution_statement	True	present
+locked_external_operating_points	True	present
+results_aim_analysis_result_takeaway	True	all seven Results subsections
+equations_structured_and_methods_only	True	Formulas 1-12 precede Results; native_omml_objects=16
+main_narrative_q_precision	True	q=0.000_matches=0
+obsolete_model_labels_absent	True	descriptive labels only
+figure_legends_sample_sizes	True	legends=7
+supplement_narrative_precision	True	no >3-decimal narrative metrics
+response_comment_count	True	comments=28
+supplement_model_label_mapping	True	Supplementary Table 12 caption mapping
+figure_legend_ci_definition	True	CI expanded in Figures 2-5

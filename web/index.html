@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102b43" />
+    <meta name="description" content="EcoNiche-Opt reproducible immune-ecology scoring and audit portal" />
+    <title>EcoNiche-Opt | Reproducible scoring portal</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"><span>EO</span></div>
+          <div>
+            <div class="brand-name">EcoNiche-Opt</div>
+            <div class="brand-subtitle">immune-ecology scoring portal</div>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="release-pill"><span class="status-dot"></span><span id="release-tag">loading release</span></span>
+          <a class="icon-button" href="https://doi.org/10.5281/zenodo.20419694" target="_blank" rel="noreferrer" title="Open archived release" aria-label="Open archived release">
+            <i data-lucide="archive"></i>
+          </a>
+          <button class="icon-button" id="theme-toggle" type="button" title="Toggle color theme" aria-label="Toggle color theme">
+            <i data-lucide="sun-moon"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="app-body">
+        <aside class="sidebar" aria-label="Portal navigation">
+          <div class="sidebar-kicker">RESEARCH WORKSPACE</div>
+          <nav class="side-nav">
+            <button class="nav-item is-active" type="button" data-view="overview">
+              <i data-lucide="layout-dashboard"></i><span>Overview</span><span class="nav-key">01</span>
+            </button>
+            <button class="nav-item" type="button" data-view="score">
+              <i data-lucide="scan-line"></i><span>Score &amp; audit</span><span class="nav-key">02</span>
+            </button>
+            <button class="nav-item" type="button" data-view="evidence">
+              <i data-lucide="clipboard-check"></i><span>Evidence map</span><span class="nav-key">03</span>
+            </button>
+            <button class="nav-item" type="button" data-view="panel">
+              <i data-lucide="dna"></i><span>62-gene panel</span><span class="nav-key">04</span>
+            </button>
+            <button class="nav-item" type="button" data-view="reproducibility">
+              <i data-lucide="file-code-2"></i><span>Reproducibility</span><span class="nav-key">05</span>
+            </button>
+          </nav>
+          <div class="sidebar-note">
+            <div class="note-label"><i data-lucide="shield-check"></i> boundary locked</div>
+            <p>Browser preview is label-free and does not retrain, recalibrate, or select features.</p>
+          </div>
+          <div class="sidebar-footer">BUILD <span id="build-stamp">registered</span></div>
+        </aside>
+
+        <main id="main-content" class="main-content">
+          <section class="view is-visible" id="view-overview" data-view-panel="overview">
+            <div class="page-heading">
+              <div>
+                <div class="eyebrow">EVIDENCE-FIRST RESEARCH TOOL</div>
+                <h1>From frozen specification<br /><em>to inspectable score.</em></h1>
+                <p class="heading-copy">A browser workspace for checking panel coverage, running a transparent locked-score preview, and tracing every displayed claim back to registered repository artifacts.</p>
+              </div>
+              <div class="heading-actions">
+                <button class="button button-primary" type="button" data-go-view="score"><i data-lucide="scan-line"></i>Open scoring workbench</button>
+                <button class="button button-secondary" type="button" data-go-view="evidence"><i data-lucide="clipboard-check"></i>Inspect evidence</button>
+              </div>
+            </div>
+
+            <div class="metric-grid" id="overview-metrics" aria-live="polite">
+              <div class="metric-card"><span class="metric-label">Panel genes</span><strong class="metric-value">--</strong><span class="metric-foot">unique HGNC symbols</span></div>
+              <div class="metric-card"><span class="metric-label">Ecological modules</span><strong class="metric-value">--</strong><span class="metric-foot">signed prior weights</span></div>
+              <div class="metric-card"><span class="metric-label">Locked endpoints</span><strong class="metric-value">--</strong><span class="metric-foot">discovery thresholds frozen</span></div>
+              <div class="metric-card metric-card-accent"><span class="metric-label">Revision audit</span><strong class="metric-value">--</strong><span class="metric-foot">reviewer items resolved</span></div>
+            </div>
+
+            <div class="overview-grid">
+              <section class="panel-card path-card">
+                <div class="section-head"><div><span class="section-index">A</span><h2>Locked validation path</h2></div><span class="section-meta">four checks before a claim</span></div>
+                <div class="path-list">
+                  <div class="path-step"><span class="path-number">01</span><div><strong>Freeze</strong><p>Panel, coefficients, endpoint thresholds and comparators are versioned before independent scoring.</p></div><span class="path-state">registered</span></div>
+                  <div class="path-step"><span class="path-number">02</span><div><strong>Qualify</strong><p>Check sample source, pretreatment status, therapy boundary and per-module gene coverage.</p></div><span class="path-state">auditable</span></div>
+                  <div class="path-step"><span class="path-number">03</span><div><strong>Score</strong><p>Run the frozen model once. No validation labels enter feature selection, thresholding or calibration.</p></div><span class="path-state">locked</span></div>
+                  <div class="path-step"><span class="path-number">04</span><div><strong>Report</strong><p>Export sample probabilities, endpoint calls, coverage tables and the exact input manifest.</p></div><span class="path-state">traceable</span></div>
+                </div>
+              </section>
+
+              <section class="panel-card release-card">
+                <div class="section-head"><div><span class="section-index">B</span><h2>Release digest</h2></div><span class="release-status">frozen for external validation</span></div>
+                <dl class="digest-list" id="release-digest">
+                  <div><dt>Model</dt><dd>loading…</dd></div>
+                  <div><dt>Intended context</dt><dd>loading…</dd></div>
+                  <div><dt>Discovery source</dt><dd>loading…</dd></div>
+                  <div><dt>Input contract</dt><dd>loading…</dd></div>
+                </dl>
+                <div class="boundary-box"><div class="boundary-icon"><i data-lucide="triangle-alert"></i></div><div><strong>Boundary carried into every export</strong><p id="unsupported-context">Loading context boundary…</p></div></div>
+              </section>
+            </div>
+
+            <section class="panel-card figure-card">
+              <div class="section-head"><div><span class="section-index">C</span><h2>Study architecture</h2></div><button class="text-button" type="button" data-go-view="reproducibility">view source files <i data-lucide="arrow-up-right"></i></button></div>
+              <div class="figure-layout">
+                <div class="figure-frame"><img src="assets/fig1_study_design_benchmark.png" alt="EcoNiche-Opt study design and evidence chain" /></div>
+                <div class="figure-notes"><div class="figure-note"><span class="note-rule teal"></span><div><strong>Registered data flow</strong><p>Access status, cohort roles, endpoint harmonization and module coverage remain visible instead of being compressed into a single score.</p></div></div><div class="figure-note"><span class="note-rule coral"></span><div><strong>Independent use</strong><p>Upload an expression matrix to inspect coverage and produce a label-free preview in the scoring workbench.</p></div></div><div class="figure-note"><span class="note-rule gold"></span><div><strong>Reproducible handoff</strong><p>Every download includes the release tag, endpoint thresholds and an audit snapshot.</p></div></div></div>
+              </div>
+            </section>
+          </section>
+
+          <section class="view" id="view-score" data-view-panel="score">
+            <div class="page-heading compact-heading"><div><div class="eyebrow">WORKBENCH / 02</div><h1>Score &amp; audit</h1><p class="heading-copy">Load a samples-by-genes matrix, verify the locked panel boundary, then export a transparent browser-side preview.</p></div><div class="heading-context"><span class="context-label">MODEL CONTEXT</span><strong id="score-context">loading…</strong><span>no labels required</span></div></div>
+            <div class="workbench-grid">
+              <section class="panel-card input-card">
+                <div class="section-head"><div><span class="section-index">01</span><h2>Input contract</h2></div><span class="section-meta">CSV or TSV</span></div>
+                <div class="field-group"><label for="endpoint-select">Endpoint threshold</label><select id="endpoint-select"><option value="primary_recist">Primary RECIST</option><option value="strict_recist">Strict RECIST</option><option value="clinical_benefit">Clinical benefit</option></select><span class="field-help">All three endpoints are scored together; this selector controls the headline call.</span></div>
+                <div class="field-group"><span class="field-label">Matrix orientation</span><div class="segmented" role="group" aria-label="Matrix orientation"><button class="segment is-active" type="button" data-orientation="samples">samples × genes</button><button class="segment" type="button" data-orientation="genes">genes × samples</button></div><span class="field-help">First column must contain sample IDs or gene symbols.</span></div>
+                <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="Choose an expression matrix file"><input id="expression-file" type="file" accept=".csv,.tsv,.txt" hidden /><div class="drop-icon"><i data-lucide="file-up"></i></div><strong>Drop expression matrix here</strong><span>or choose a local CSV / TSV file</span><button class="button button-secondary button-small" id="choose-file" type="button"><i data-lucide="folder-open"></i>Choose file</button><div class="selected-file" id="selected-file">No file loaded</div></div>
+                <div class="field-row"><button class="button button-secondary" id="load-demo" type="button"><i data-lucide="flask-conical"></i>Load deterministic demo</button><button class="button button-quiet" id="clear-input" type="button"><i data-lucide="rotate-ccw"></i>Clear</button></div>
+                <div class="attestation"><label class="check-row"><input id="attest-tumor" type="checkbox" /><span class="checkmark"></span><span>Pretreatment tumor-tissue context confirmed</span></label><label class="check-row"><input id="attest-therapy" type="checkbox" /><span class="checkmark"></span><span>Anti-PD-1 / PD-1-based therapy confirmed</span></label><p>These attestations are not a substitute for the formal sample manifest.</p></div>
+                <button class="button button-primary button-wide" id="run-score" type="button"><i data-lucide="play"></i>Run audit &amp; score</button>
+              </section>
+
+              <section class="panel-card output-card" aria-live="polite">
+                <div class="section-head"><div><span class="section-index">02</span><h2>Inspectable output</h2></div><span class="output-status" id="output-status">waiting for input</span></div>
+                <div class="empty-output" id="empty-output"><div class="empty-mark"><i data-lucide="scan-search"></i></div><strong>Nothing scored yet</strong><p>Load a matrix or the deterministic demo to see sample-level probabilities, module coverage and endpoint calls.</p></div>
+                <div class="score-results is-hidden" id="score-results">
+                  <div class="score-summary" id="score-summary"></div>
+                  <div class="coverage-strip" id="coverage-strip"></div>
+                  <div class="module-chart-wrap"><div class="mini-head"><span>Module activity across loaded samples</span><span>z-scored module mean</span></div><div class="module-chart" id="module-chart"></div></div>
+                  <div class="table-wrap"><table class="data-table" id="score-table"><thead></thead><tbody></tbody></table></div>
+                  <div class="result-actions"><button class="button button-primary" id="download-csv" type="button"><i data-lucide="download"></i>Download scores</button><button class="button button-secondary" id="download-audit" type="button"><i data-lucide="file-down"></i>Download audit JSON</button></div>
+                </div>
+              </section>
+            </div>
+            <section class="panel-card method-note"><div class="method-icon"><i data-lucide="info"></i></div><div><strong>Interpretation boundary</strong><p>This browser preview follows the registered locked scorer's module-prior calculation and frozen endpoint calibration. It is a computational demonstration and coverage audit; it does not establish independent clinical performance without a prespecified cohort, manifest, labels and the repository command-line workflow.</p></div></section>
+          </section>
+
+          <section class="view" id="view-evidence" data-view-panel="evidence">
+            <div class="page-heading compact-heading"><div><div class="eyebrow">AUDIT TRAIL / 03</div><h1>Evidence map</h1><p class="heading-copy">A compact view of what was resolved, where it is documented, and which checks are generated from source artifacts.</p></div><div class="audit-score" id="audit-score">-- / --<span>audit checks passed</span></div></div>
+            <div class="evidence-grid"><section class="panel-card audit-card"><div class="section-head"><div><span class="section-index">A</span><h2>Revision audit</h2></div><span class="section-meta" id="audit-subtitle">loading…</span></div><div class="audit-meter"><div id="audit-meter-fill"></div></div><div class="audit-list" id="audit-list"></div></section><section class="panel-card reviewer-card"><div class="section-head"><div><span class="section-index">B</span><h2>Reviewer resolution</h2></div><span class="section-meta" id="reviewer-subtitle">loading…</span></div><div class="filter-row"><div class="search-box"><i data-lucide="search"></i><input id="review-search" type="search" placeholder="Filter comments" aria-label="Filter reviewer comments" /></div><span class="resolved-badge" id="reviewer-badge">--</span></div><div class="table-wrap evidence-table-wrap"><table class="data-table evidence-table" id="review-table"><thead><tr><th>ID</th><th>Issue</th><th>Evidence</th><th>Status</th></tr></thead><tbody></tbody></table></div></section></div>
+            <section class="panel-card benchmark-card"><div class="section-head"><div><span class="section-index">C</span><h2>Registered benchmark outputs</h2></div><span class="section-meta">repository-generated, not browser-generated</span></div><div class="benchmark-grid" id="benchmark-grid"></div></section>
+          </section>
+
+          <section class="view" id="view-panel" data-view-panel="panel">
+            <div class="page-heading compact-heading"><div><div class="eyebrow">PANEL TRANSLATION / 04</div><h1>62-gene panel</h1><p class="heading-copy">Explore the frozen gene-to-module mapping, signed biological direction and prior weight carried into the locked validation package.</p></div><div class="panel-count"><strong id="panel-count">--</strong><span>unique genes</span></div></div>
+            <div class="panel-toolbar"><div class="search-box panel-search"><i data-lucide="search"></i><input id="gene-search" type="search" placeholder="Search gene or module" aria-label="Search gene or module" /></div><div class="module-filters" id="module-filters"></div><a class="button button-secondary" href="data/locked_panel_genes.tsv" download><i data-lucide="download"></i>Download panel TSV</a></div>
+            <section class="panel-card panel-table-card"><div class="table-wrap"><table class="data-table gene-table" id="gene-table"><thead><tr><th>Gene</th><th>Module</th><th>Prior weight</th><th>Direction</th><th>Role</th></tr></thead><tbody></tbody></table></div></section>
+          </section>
+
+          <section class="view" id="view-reproducibility" data-view-panel="reproducibility">
+            <div class="page-heading compact-heading"><div><div class="eyebrow">REPRODUCIBILITY / 05</div><h1>Reproducibility kit</h1><p class="heading-copy">The portal is a public-facing window into the repository. The formal analysis remains scriptable, versioned and inspectable from the command line.</p></div><a class="button button-primary" href="https://doi.org/10.5281/zenodo.20419694" target="_blank" rel="noreferrer"><i data-lucide="external-link"></i>Open archived release</a></div>
+            <div class="repro-grid"><section class="panel-card command-card"><div class="section-head"><div><span class="section-index">A</span><h2>Formal scoring command</h2></div><span class="section-meta">server / local execution</span></div><pre><code>econiche-opt score-locked-validation \
+  --package-dir deliverables/prospective_validation \
+  --expression independent_expression.tsv \
+  --sample-manifest assay_sample_manifest.tsv \
+  --clinical-annotation clinical_annotation.tsv \
+  --out-dir results/independent_locked_validation</code></pre><div class="command-foot"><i data-lucide="lock-keyhole"></i><span>Never retrains or calibrates on the independent cohort.</span></div></section><section class="panel-card artifact-card"><div class="section-head"><div><span class="section-index">B</span><h2>Public artifacts</h2></div><span class="section-meta">generated from source</span></div><div class="artifact-list"><a href="data/portal_manifest.json" download><span class="artifact-icon"><i data-lucide="file-json-2"></i></span><span><strong>Portal manifest</strong><small>specification, audit and registered outputs</small></span><i data-lucide="download"></i></a><a href="data/locked_scoring_spec.json" download><span class="artifact-icon"><i data-lucide="braces"></i></span><span><strong>Locked scoring specification</strong><small>release-tagged model contract</small></span><i data-lucide="download"></i></a><a href="data/locked_panel_genes.tsv" download><span class="artifact-icon"><i data-lucide="table-2"></i></span><span><strong>62-gene panel map</strong><small>gene, module, direction and weight</small></span><i data-lucide="download"></i></a></div></section></div>
+            <section class="panel-card boundaries-card"><div class="section-head"><div><span class="section-index">C</span><h2>Boundary ledger</h2></div><span class="section-meta">carried into manuscript and portal</span></div><div class="boundary-grid"><div><span class="ledger-label">INTENDED</span><p id="intended-context">loading…</p></div><div><span class="ledger-label">UNSUPPORTED WITHOUT NEW TRAINING</span><p id="unsupported-context-repro">loading…</p></div><div><span class="ledger-label">ALLOWED CLAIM</span><p id="allowed-claim">loading…</p></div><div><span class="ledger-label">FORBIDDEN BEFORE SAP FREEZE</span><p id="forbidden-claim">loading…</p></div></div></section>
+          </section>
+
+          <footer class="site-footer"><span>EcoNiche-Opt / reproducible research portal</span><span>Built from registered repository artifacts · <span id="footer-release">--</span></span></footer>
+        </main>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

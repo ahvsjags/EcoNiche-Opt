@@ -1,0 +1,894 @@
+{
+  "generated_by": "scripts/web/build_portal_data.py",
+  "source_files": [
+    "deliverables/prospective_validation/locked_scoring_spec.json",
+    "deliverables/prospective_validation/locked_panel_genes.tsv",
+    "paper/BMC_Bioinformatics_revision_20260808/reviewer_comment_resolution_matrix.tsv",
+    "paper/BMC_Bioinformatics_revision_20260808/bmc_revision_pre_submission_audit.tsv",
+    "figures/article/figure_manifest.tsv",
+    "results/endpoint_modules_heuristic_core_locked_gpu/endpoint_module_summary.tsv",
+    "results/locked_external_panel_validation_calibrated_20260519/locked_external_metrics.tsv"
+  ],
+  "model": {
+    "name": "EcoNiche-Opt-HeuristicEcology-LockedPanel",
+    "status": "frozen_for_external_validation",
+    "release_tag": "v0.3.2-locked-validation-20260527",
+    "context": "independent pretreatment melanoma tumor-tissue anti-PD-1/anti-PD-1-based cohort",
+    "unsupported_context": "blood, plasma, PBMC, serum, on-treatment biopsy, and non-ICB treatment-only cohorts",
+    "input_format": "samples-by-genes matrix with sample_id as row identifier and HGNC gene symbols as columns",
+    "transform": "assay values must be normalized within the registered platform workflow; EcoNiche-Opt then computes signed rank-gene and module scores using the locked gene list and response/resistance directions",
+    "formula": "locked logistic response probability from signed immune-ecology module activities plus ecological interaction features; endpoint thresholds are discovery-only calibrated and frozen before validation scoring",
+    "panel_unique_genes": 62,
+    "panel_gene_module_rows": 63,
+    "threshold_source": "GSE91061,GSE78220,PRJEB23709_PD1_PRE only",
+    "allowed_claim": "locked independent validation performance only after newly assembled samples are scored with this frozen specification",
+    "forbidden_claim": "do not use validation labels for feature selection, thresholding, calibration, refitting, endpoint relabeling, or claim wording before the statistical analysis plan is frozen"
+  },
+  "modules": [
+    {
+      "id": "ifn_t_cell_inflamed",
+      "label": "Ifn T Cell Inflamed",
+      "weight": 1.0,
+      "direction": "response_high",
+      "genes": [
+        "IFNG",
+        "CXCL9",
+        "CXCL10",
+        "CXCL11",
+        "STAT1",
+        "IDO1",
+        "GBP1",
+        "CXCR3",
+        "CCL5",
+        "CD274",
+        "PDCD1LG2"
+      ]
+    },
+    {
+      "id": "cytotoxic_cd8",
+      "label": "Cytotoxic Cd8",
+      "weight": 0.5,
+      "direction": "response_high",
+      "genes": [
+        "CD8A",
+        "CD8B",
+        "GZMA",
+        "GZMB",
+        "GZMH",
+        "PRF1",
+        "NKG7",
+        "GNLY"
+      ]
+    },
+    {
+      "id": "exhaustion_checkpoint",
+      "label": "Exhaustion Checkpoint",
+      "weight": 0.25,
+      "direction": "response_high",
+      "genes": [
+        "PDCD1",
+        "CTLA4",
+        "LAG3",
+        "HAVCR2",
+        "TIGIT",
+        "TOX",
+        "CXCL13"
+      ]
+    },
+    {
+      "id": "antigen_presentation",
+      "label": "Antigen Presentation",
+      "weight": 0.5,
+      "direction": "response_high",
+      "genes": [
+        "HLA-A",
+        "HLA-B",
+        "HLA-C",
+        "HLA-DRA",
+        "HLA-DRB1",
+        "B2M",
+        "TAP1",
+        "TAP2",
+        "PSMB8",
+        "PSMB9"
+      ]
+    },
+    {
+      "id": "myeloid_suppression",
+      "label": "Myeloid Suppression",
+      "weight": -0.5,
+      "direction": "nonresponse_high",
+      "genes": [
+        "CD68",
+        "CD163",
+        "MRC1",
+        "CSF1R",
+        "ITGAM",
+        "S100A8",
+        "S100A9",
+        "IL10",
+        "TGFB1"
+      ]
+    },
+    {
+      "id": "stromal_exclusion",
+      "label": "Stromal Exclusion",
+      "weight": -0.5,
+      "direction": "nonresponse_high",
+      "genes": [
+        "COL1A1",
+        "COL1A2",
+        "COL3A1",
+        "FN1",
+        "ACTA2",
+        "VIM",
+        "TGFBI",
+        "POSTN",
+        "LOXL2"
+      ]
+    },
+    {
+      "id": "trm_tls",
+      "label": "Trm Tls",
+      "weight": 0.25,
+      "direction": "response_high",
+      "genes": [
+        "ITGAE",
+        "CD69",
+        "CXCR6",
+        "CXCL13",
+        "ZNF683",
+        "MS4A1",
+        "CD79A",
+        "BANK1",
+        "LTB"
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "endpoint": "primary_recist",
+      "threshold": 0.4377922748557101,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.348184436736193,
+      "calibration_intercept": -0.0628256143537588,
+      "training_n": 117,
+      "training_responders": 43,
+      "training_nonresponders": 74,
+      "training_AUROC": 0.7049025769956003,
+      "training_balanced_accuracy": 0.6742614707730987,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    },
+    {
+      "endpoint": "strict_recist",
+      "threshold": 0.4464485197217447,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.3485659294595968,
+      "calibration_intercept": -0.0602007040381982,
+      "training_n": 95,
+      "training_responders": 43,
+      "training_nonresponders": 52,
+      "training_AUROC": 0.7101967799642218,
+      "training_balanced_accuracy": 0.7010286225402504,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "threshold": 0.4866388147907647,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.2272870579954178,
+      "calibration_intercept": 0.0166390461953931,
+      "training_n": 117,
+      "training_responders": 65,
+      "training_nonresponders": 52,
+      "training_AUROC": 0.6428994082840236,
+      "training_balanced_accuracy": 0.6423076923076922,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    }
+  ],
+  "comparators": [
+    "IFNG",
+    "CXCL9",
+    "TIG",
+    "TIDE_dysfunction",
+    "APM",
+    "CYT",
+    "IPRES",
+    "TIDE_exclusion"
+  ],
+  "required_metrics": [
+    "AUROC",
+    "AUPRC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity",
+    "PPV",
+    "NPV",
+    "Brier",
+    "ECE",
+    "calibration_intercept",
+    "calibration_slope",
+    "decision_curve_net_benefit"
+  ],
+  "review": {
+    "total": 28,
+    "resolved": 28,
+    "rows": [
+      {
+        "comment_id": "R1.0",
+        "issue": "Contribution and claim proportionality",
+        "status": "resolved",
+        "evidence": "Abstract; Background; Discussion; Limitations"
+      },
+      {
+        "comment_id": "R1.1",
+        "issue": "Introduction density and novelty",
+        "status": "resolved",
+        "evidence": "Background final three paragraphs"
+      },
+      {
+        "comment_id": "R1.2",
+        "issue": "Outcome-dependent gene directions",
+        "status": "resolved",
+        "evidence": "Methods: EcoNiche-Opt module scores; Limitations"
+      },
+      {
+        "comment_id": "R1.3",
+        "issue": "Threshold and calibration provenance",
+        "status": "resolved",
+        "evidence": "Methods: LODO benchmark and statistical testing"
+      },
+      {
+        "comment_id": "R1.4",
+        "issue": "Fixed rescue coefficients",
+        "status": "resolved",
+        "evidence": "Methods: Training-locked biological-prior and lipid/PI3K pair rescue"
+      },
+      {
+        "comment_id": "R1.5",
+        "issue": "62-gene versus whole-transcriptome comparability",
+        "status": "resolved",
+        "evidence": "Methods: module scores; Results: locked panel; Discussion"
+      },
+      {
+        "comment_id": "R1.6",
+        "issue": "Per-cohort locked operating metrics",
+        "status": "resolved",
+        "evidence": "Results cohort table; locked_external_cohort_performance_with_ci.tsv"
+      },
+      {
+        "comment_id": "R1.7",
+        "issue": "AI disclosure, figure inputs, visual standardization",
+        "status": "resolved",
+        "evidence": "AI disclosure; BMC Source Data; figure_input_file_manifest.tsv; figure audit"
+      },
+      {
+        "comment_id": "R1.8",
+        "issue": "Structured equations in Methods",
+        "status": "resolved",
+        "evidence": "Methods Equations 1-12; revised DOCX equation objects"
+      },
+      {
+        "comment_id": "R1.9",
+        "issue": "Opaque model names",
+        "status": "resolved",
+        "evidence": "Methods optimizer ablation definitions; Results descriptive labels; Supplementary Table 12 label mapping"
+      },
+      {
+        "comment_id": "R1.10",
+        "issue": "Eight baseline signatures",
+        "status": "resolved",
+        "evidence": "Methods: Baseline signatures"
+      },
+      {
+        "comment_id": "R1.11",
+        "issue": "Dataset role/content and accession density",
+        "status": "resolved",
+        "evidence": "Methods registration; Results role labels; Supplementary Tables 1-5"
+      },
+      {
+        "comment_id": "R1.12",
+        "issue": "Numerical precision",
+        "status": "resolved",
+        "evidence": "Main text and revised Supplementary Information use three decimals"
+      },
+      {
+        "comment_id": "R1.13",
+        "issue": "Results and Discussion structure",
+        "status": "resolved",
+        "evidence": "All Results subsections use aim-analysis-result-takeaway openings; Discussion interpretation"
+      },
+      {
+        "comment_id": "R1.14",
+        "issue": "Self-contained figure legends",
+        "status": "resolved",
+        "evidence": "Figure legends 1-7 with n or explicit not-applicable statements"
+      },
+      {
+        "comment_id": "R1.15",
+        "issue": "Dedicated limitations",
+        "status": "resolved",
+        "evidence": "Discussion: Limitations"
+      },
+      {
+        "comment_id": "R2.1",
+        "issue": "Figure-panel/caption/text consistency",
+        "status": "resolved",
+        "evidence": "Figure legends; figure_caption_crosswalk.tsv"
+      },
+      {
+        "comment_id": "R2.2",
+        "issue": "Sequential supplementary citations",
+        "status": "resolved",
+        "evidence": "Automated first-citation audit"
+      },
+      {
+        "comment_id": "R2.3",
+        "issue": "AUROC mismatch",
+        "status": "resolved",
+        "evidence": "Corrected cohort mapping; supp_table_15_consistency_audit.tsv"
+      },
+      {
+        "comment_id": "R2.4",
+        "issue": "LODO confidence intervals",
+        "status": "resolved",
+        "evidence": "Expanded Supplementary Table 12 embedded in revised supplement"
+      },
+      {
+        "comment_id": "R3.1",
+        "issue": "Define locked external scoring",
+        "status": "resolved",
+        "evidence": "Abstract; Methods locked scoring"
+      },
+      {
+        "comment_id": "R3.2",
+        "issue": "Define ICB",
+        "status": "resolved",
+        "evidence": "First Abstract sentence"
+      },
+      {
+        "comment_id": "R3.3",
+        "issue": "Define edge class c",
+        "status": "resolved",
+        "evidence": "Methods Equation 4 text"
+      },
+      {
+        "comment_id": "R3.4",
+        "issue": "Clarify H_iq versus a_iq",
+        "status": "resolved",
+        "evidence": "Methods Equations 3-4"
+      },
+      {
+        "comment_id": "R3.5",
+        "issue": "Define F_i, alpha and beta",
+        "status": "resolved",
+        "evidence": "Methods Equation 5 text"
+      },
+      {
+        "comment_id": "R3.6a",
+        "issue": "Define theta",
+        "status": "resolved",
+        "evidence": "Methods optimizer"
+      },
+      {
+        "comment_id": "R3.6b",
+        "issue": "Explain objective weights",
+        "status": "resolved",
+        "evidence": "Methods optimizer; config/model_config.yml"
+      },
+      {
+        "comment_id": "R3.7",
+        "issue": "Move score equation to Methods",
+        "status": "resolved",
+        "evidence": "All equations in Methods; Results equation scan"
+      }
+    ]
+  },
+  "audit": {
+    "total": 28,
+    "passed": 28,
+    "failed": 0,
+    "rows": [
+      {
+        "check": "required_revision_files",
+        "is_valid": "True",
+        "detail": "15"
+      },
+      {
+        "check": "manuscript_control_bytes",
+        "is_valid": "True",
+        "detail": "unexpected=0"
+      },
+      {
+        "check": "supplementary_table_first_citations",
+        "is_valid": "True",
+        "detail": "[(1, 42), (2, 42), (3, 42), (4, 42), (5, 42), (6, 50), (7, 162), (8, 166), (9, 166), (10, 172), (11, 172), (12, 172), (13, 186), (14, 188), (15, 196), (16, 196), (17, 212), (18, 222), (19, 228), (20, 240), (21, 240), (22, 240), (23, 240), (24, 240)]"
+      },
+      {
+        "check": "supplementary_figure_first_citations",
+        "is_valid": "True",
+        "detail": "[(1, 154), (2, 158), (3, 172), (4, 172), (5, 184), (6, 186), (7, 196), (8, 212), (9, 222), (10, 240)]"
+      },
+      {
+        "check": "table15_prediction_consistency",
+        "is_valid": "True",
+        "detail": "max_absolute_difference=0"
+      },
+      {
+        "check": "lodo_rows_with_ci",
+        "is_valid": "True",
+        "detail": "rows=133"
+      },
+      {
+        "check": "external_strict_recist_rows",
+        "is_valid": "True",
+        "detail": "rows=5"
+      },
+      {
+        "check": "lodo_required_ci_columns",
+        "is_valid": "True",
+        "detail": "AUROC/sensitivity/specificity"
+      },
+      {
+        "check": "all_reviewer_comments_resolved",
+        "is_valid": "True",
+        "detail": "rows=28"
+      },
+      {
+        "check": "figure_input_manifest_complete",
+        "is_valid": "True",
+        "detail": "rows=46"
+      },
+      {
+        "check": "figure_input_files_exist",
+        "is_valid": "True",
+        "detail": "missing=[]"
+      },
+      {
+        "check": "docx_embedded_main_figures",
+        "is_valid": "True",
+        "detail": "media_files=7"
+      },
+      {
+        "check": "docx_structured_equations",
+        "is_valid": "True",
+        "detail": "native_omml_objects=16"
+      },
+      {
+        "check": "expanded_table12_embedded_in_supplement",
+        "is_valid": "True",
+        "detail": "CI headers present"
+      },
+      {
+        "check": "source_data_workbook_valid",
+        "is_valid": "True",
+        "detail": "OOXML workbook present"
+      },
+      {
+        "check": "limitations_section",
+        "is_valid": "True",
+        "detail": "present"
+      },
+      {
+        "check": "figure_ai_disclosure",
+        "is_valid": "True",
+        "detail": "present"
+      },
+      {
+        "check": "author_contribution_statement",
+        "is_valid": "True",
+        "detail": "present"
+      },
+      {
+        "check": "locked_external_operating_points",
+        "is_valid": "True",
+        "detail": "present"
+      },
+      {
+        "check": "results_aim_analysis_result_takeaway",
+        "is_valid": "True",
+        "detail": "all seven Results subsections"
+      },
+      {
+        "check": "equations_structured_and_methods_only",
+        "is_valid": "True",
+        "detail": "Formulas 1-12 precede Results; native_omml_objects=16"
+      },
+      {
+        "check": "main_narrative_q_precision",
+        "is_valid": "True",
+        "detail": "q=0.000_matches=0"
+      },
+      {
+        "check": "obsolete_model_labels_absent",
+        "is_valid": "True",
+        "detail": "descriptive labels only"
+      },
+      {
+        "check": "figure_legends_sample_sizes",
+        "is_valid": "True",
+        "detail": "legends=7"
+      },
+      {
+        "check": "supplement_narrative_precision",
+        "is_valid": "True",
+        "detail": "no >3-decimal narrative metrics"
+      },
+      {
+        "check": "response_comment_count",
+        "is_valid": "True",
+        "detail": "comments=28"
+      },
+      {
+        "check": "supplement_model_label_mapping",
+        "is_valid": "True",
+        "detail": "Supplementary Table 12 caption mapping"
+      },
+      {
+        "check": "figure_legend_ci_definition",
+        "is_valid": "True",
+        "detail": "CI expanded in Figures 2-5"
+      }
+    ]
+  },
+  "figures": {
+    "count": 17,
+    "rows": [
+      {
+        "figure": "fig1_study_design_benchmark",
+        "png": "figures\\article\\fig1_study_design_benchmark.png",
+        "tiff": "figures\\article\\fig1_study_design_benchmark.tiff",
+        "pdf": "figures\\article\\fig1_study_design_benchmark.pdf",
+        "svg": "figures\\article\\fig1_study_design_benchmark.svg"
+      },
+      {
+        "figure": "fig2_model_optimizer",
+        "png": "figures\\article\\fig2_model_optimizer.png",
+        "tiff": "figures\\article\\fig2_model_optimizer.tiff",
+        "pdf": "figures\\article\\fig2_model_optimizer.pdf",
+        "svg": "figures\\article\\fig2_model_optimizer.svg"
+      },
+      {
+        "figure": "fig3_primary_melanoma_performance",
+        "png": "figures\\article\\fig3_primary_melanoma_performance.png",
+        "tiff": "figures\\article\\fig3_primary_melanoma_performance.tiff",
+        "pdf": "figures\\article\\fig3_primary_melanoma_performance.pdf",
+        "svg": "figures\\article\\fig3_primary_melanoma_performance.svg"
+      },
+      {
+        "figure": "fig4_robustness_ablation_claims",
+        "png": "figures\\article\\fig4_robustness_ablation_claims.png",
+        "tiff": "figures\\article\\fig4_robustness_ablation_claims.tiff",
+        "pdf": "figures\\article\\fig4_robustness_ablation_claims.pdf",
+        "svg": "figures\\article\\fig4_robustness_ablation_claims.svg"
+      },
+      {
+        "figure": "fig5_external_panel_rescue",
+        "png": "figures\\article\\fig5_external_panel_rescue.png",
+        "tiff": "figures\\article\\fig5_external_panel_rescue.tiff",
+        "pdf": "figures\\article\\fig5_external_panel_rescue.pdf",
+        "svg": "figures\\article\\fig5_external_panel_rescue.svg"
+      },
+      {
+        "figure": "fig6_mechanism_perturbation",
+        "png": "figures\\article\\fig6_mechanism_perturbation.png",
+        "tiff": "figures\\article\\fig6_mechanism_perturbation.tiff",
+        "pdf": "figures\\article\\fig6_mechanism_perturbation.pdf",
+        "svg": "figures\\article\\fig6_mechanism_perturbation.svg"
+      },
+      {
+        "figure": "fig7_translation_package",
+        "png": "figures\\article\\fig7_translation_package.png",
+        "tiff": "figures\\article\\fig7_translation_package.tiff",
+        "pdf": "figures\\article\\fig7_translation_package.pdf",
+        "svg": "figures\\article\\fig7_translation_package.svg"
+      },
+      {
+        "figure": "suppfig1_cohort_curation",
+        "png": "figures\\article\\suppfig1_cohort_curation.png",
+        "tiff": "figures\\article\\suppfig1_cohort_curation.tiff",
+        "pdf": "figures\\article\\suppfig1_cohort_curation.pdf",
+        "svg": "figures\\article\\suppfig1_cohort_curation.svg"
+      },
+      {
+        "figure": "suppfig2_platform_gene_coverage",
+        "png": "figures\\article\\suppfig2_platform_gene_coverage.png",
+        "tiff": "figures\\article\\suppfig2_platform_gene_coverage.tiff",
+        "pdf": "figures\\article\\suppfig2_platform_gene_coverage.pdf",
+        "svg": "figures\\article\\suppfig2_platform_gene_coverage.svg"
+      },
+      {
+        "figure": "suppfig3_benchmark_detail",
+        "png": "figures\\article\\suppfig3_benchmark_detail.png",
+        "tiff": "figures\\article\\suppfig3_benchmark_detail.tiff",
+        "pdf": "figures\\article\\suppfig3_benchmark_detail.pdf",
+        "svg": "figures\\article\\suppfig3_benchmark_detail.svg"
+      },
+      {
+        "figure": "suppfig4_full_baseline_comparison",
+        "png": "figures\\article\\suppfig4_full_baseline_comparison.png",
+        "tiff": "figures\\article\\suppfig4_full_baseline_comparison.tiff",
+        "pdf": "figures\\article\\suppfig4_full_baseline_comparison.pdf",
+        "svg": "figures\\article\\suppfig4_full_baseline_comparison.svg"
+      },
+      {
+        "figure": "suppfig5_endpoint_sensitivity",
+        "png": "figures\\article\\suppfig5_endpoint_sensitivity.png",
+        "tiff": "figures\\article\\suppfig5_endpoint_sensitivity.tiff",
+        "pdf": "figures\\article\\suppfig5_endpoint_sensitivity.pdf",
+        "svg": "figures\\article\\suppfig5_endpoint_sensitivity.svg"
+      },
+      {
+        "figure": "suppfig6_ablation_optimizer",
+        "png": "figures\\article\\suppfig6_ablation_optimizer.png",
+        "tiff": "figures\\article\\suppfig6_ablation_optimizer.tiff",
+        "pdf": "figures\\article\\suppfig6_ablation_optimizer.pdf",
+        "svg": "figures\\article\\suppfig6_ablation_optimizer.svg"
+      },
+      {
+        "figure": "suppfig7_external_validation_expanded",
+        "png": "figures\\article\\suppfig7_external_validation_expanded.png",
+        "tiff": "figures\\article\\suppfig7_external_validation_expanded.tiff",
+        "pdf": "figures\\article\\suppfig7_external_validation_expanded.pdf",
+        "svg": "figures\\article\\suppfig7_external_validation_expanded.svg"
+      },
+      {
+        "figure": "suppfig8_pd1_rescue",
+        "png": "figures\\article\\suppfig8_pd1_rescue.png",
+        "tiff": "figures\\article\\suppfig8_pd1_rescue.tiff",
+        "pdf": "figures\\article\\suppfig8_pd1_rescue.pdf",
+        "svg": "figures\\article\\suppfig8_pd1_rescue.svg"
+      },
+      {
+        "figure": "suppfig9_single_cell_mechanism",
+        "png": "figures\\article\\suppfig9_single_cell_mechanism.png",
+        "tiff": "figures\\article\\suppfig9_single_cell_mechanism.tiff",
+        "pdf": "figures\\article\\suppfig9_single_cell_mechanism.pdf",
+        "svg": "figures\\article\\suppfig9_single_cell_mechanism.svg"
+      },
+      {
+        "figure": "suppfig10_reproducibility_package",
+        "png": "figures\\article\\suppfig10_reproducibility_package.png",
+        "tiff": "figures\\article\\suppfig10_reproducibility_package.tiff",
+        "pdf": "figures\\article\\suppfig10_reproducibility_package.pdf",
+        "svg": "figures\\article\\suppfig10_reproducibility_package.svg"
+      }
+    ]
+  },
+  "benchmark": [
+    {
+      "endpoint": "primary_recist",
+      "stratum": "melanoma_core_high_evidence",
+      "n_samples": 117,
+      "n_cohorts": 3,
+      "pooled_AUROC": 0.7049025769956003,
+      "pooled_AUPRC": 0.5584727461504684,
+      "pooled_balanced_accuracy": 0.6315210559396606,
+      "pooled_ECE": 0.2348619118541941,
+      "evaluation_modes": "LODO"
+    },
+    {
+      "endpoint": "primary_recist",
+      "stratum": "melanoma_recist_supported_primary",
+      "n_samples": 131,
+      "n_cohorts": 4,
+      "pooled_AUROC": 0.6845588235294118,
+      "pooled_AUPRC": 0.5804730202048082,
+      "pooled_balanced_accuracy": 0.6128676470588235,
+      "pooled_ECE": 0.23858416431842683,
+      "evaluation_modes": "LODO"
+    }
+  ],
+  "external": [
+    {
+      "endpoint": "primary_recist",
+      "cohort": "GSE145996",
+      "analysis_type": "locked_external_melanoma_pd1_recist",
+      "n_samples": 14,
+      "n_responders": 8,
+      "n_nonresponders": 6,
+      "AUROC": 0.5208333333333334,
+      "AUPRC": 0.7016684704184704,
+      "balanced_accuracy": 0.35416666666666663,
+      "Brier": 0.25805042011319107,
+      "ECE": 0.3873430257322005,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "primary_recist",
+      "cohort": "PHS000452_LIU_LIKE_PRE",
+      "analysis_type": "locked_external_melanoma_pd1_like",
+      "n_samples": 121,
+      "n_responders": 50,
+      "n_nonresponders": 71,
+      "AUROC": 0.5349295774647889,
+      "AUPRC": 0.4943932156513664,
+      "balanced_accuracy": 0.5335211267605634,
+      "Brier": 0.26196247530438765,
+      "ECE": 0.14475165592915976,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "primary_recist",
+      "cohort": "PRJEB23709_COMBO_PRE",
+      "analysis_type": "locked_external_melanoma_combination_transfer",
+      "n_samples": 32,
+      "n_responders": 21,
+      "n_nonresponders": 11,
+      "AUROC": 0.7402597402597402,
+      "AUPRC": 0.8677481485429872,
+      "balanced_accuracy": 0.6515151515151515,
+      "Brier": 0.22075717279513635,
+      "ECE": 0.16956239975280474,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "primary_recist",
+      "cohort": "GSE93157",
+      "analysis_type": "nanostring_melanoma_clinical_assay_transfer",
+      "n_samples": 65,
+      "n_responders": 20,
+      "n_nonresponders": 45,
+      "AUROC": 0.5722222222222222,
+      "AUPRC": 0.5179635609458979,
+      "balanced_accuracy": 0.5,
+      "Brier": 0.25282830856708655,
+      "ECE": 0.20314915486470905,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "primary_recist",
+      "cohort": "GSE140901",
+      "analysis_type": "nanostring_hcc_clinical_assay_transfer",
+      "n_samples": 24,
+      "n_responders": 6,
+      "n_nonresponders": 18,
+      "AUROC": 0.7592592592592593,
+      "AUPRC": 0.5318473193473194,
+      "balanced_accuracy": 0.7222222222222222,
+      "Brier": 0.22358300294770103,
+      "ECE": 0.27131800208183693,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "strict_recist",
+      "cohort": "GSE145996",
+      "analysis_type": "locked_external_melanoma_pd1_recist",
+      "n_samples": 13,
+      "n_responders": 8,
+      "n_nonresponders": 5,
+      "AUROC": 0.575,
+      "AUPRC": 0.7723099816849817,
+      "balanced_accuracy": 0.3875,
+      "Brier": 0.24872726082410315,
+      "ECE": 0.3696386537515642,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "strict_recist",
+      "cohort": "PHS000452_LIU_LIKE_PRE",
+      "analysis_type": "locked_external_melanoma_pd1_like",
+      "n_samples": 103,
+      "n_responders": 48,
+      "n_nonresponders": 55,
+      "AUROC": 0.5731060606060606,
+      "AUPRC": 0.5787465694242914,
+      "balanced_accuracy": 0.5617424242424243,
+      "Brier": 0.25317928221134817,
+      "ECE": 0.12208957495112494,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "strict_recist",
+      "cohort": "PRJEB23709_COMBO_PRE",
+      "analysis_type": "locked_external_melanoma_combination_transfer",
+      "n_samples": 27,
+      "n_responders": 21,
+      "n_nonresponders": 6,
+      "AUROC": 0.7619047619047619,
+      "AUPRC": 0.9301116483889595,
+      "balanced_accuracy": 0.6666666666666666,
+      "Brier": 0.2248711260257452,
+      "ECE": 0.2768511998932794,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "strict_recist",
+      "cohort": "GSE93157",
+      "analysis_type": "nanostring_melanoma_clinical_assay_transfer",
+      "n_samples": 49,
+      "n_responders": 20,
+      "n_nonresponders": 29,
+      "AUROC": 0.5862068965517241,
+      "AUPRC": 0.6096389324156446,
+      "balanced_accuracy": 0.5241379310344827,
+      "Brier": 0.24976501924811123,
+      "ECE": 0.1460807990553508,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "strict_recist",
+      "cohort": "GSE140901",
+      "analysis_type": "nanostring_hcc_clinical_assay_transfer",
+      "n_samples": 14,
+      "n_responders": 6,
+      "n_nonresponders": 8,
+      "AUROC": 0.8333333333333334,
+      "AUPRC": 0.7996031746031745,
+      "balanced_accuracy": 0.75,
+      "Brier": 0.19128632816684904,
+      "ECE": 0.16557433779660394,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "cohort": "GSE145996",
+      "analysis_type": "locked_external_melanoma_pd1_recist",
+      "n_samples": 14,
+      "n_responders": 9,
+      "n_nonresponders": 5,
+      "AUROC": 0.6222222222222222,
+      "AUPRC": 0.817977392977393,
+      "balanced_accuracy": 0.5222222222222221,
+      "Brier": 0.23253477528029615,
+      "ECE": 0.16855886701708286,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "cohort": "PHS000452_LIU_LIKE_PRE",
+      "analysis_type": "locked_external_melanoma_pd1_like",
+      "n_samples": 121,
+      "n_responders": 66,
+      "n_nonresponders": 55,
+      "AUROC": 0.5829201101928375,
+      "AUPRC": 0.6495006794445877,
+      "balanced_accuracy": 0.5727272727272728,
+      "Brier": 0.24464013486420055,
+      "ECE": 0.07486361044383906,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "cohort": "PRJEB23709_COMBO_PRE",
+      "analysis_type": "locked_external_melanoma_combination_transfer",
+      "n_samples": 32,
+      "n_responders": 26,
+      "n_nonresponders": 6,
+      "AUROC": 0.7243589743589743,
+      "AUPRC": 0.9306875382508506,
+      "balanced_accuracy": 0.6217948717948718,
+      "Brier": 0.23357657914684565,
+      "ECE": 0.30847663711050777,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "cohort": "GSE93157",
+      "analysis_type": "nanostring_melanoma_clinical_assay_transfer",
+      "n_samples": 65,
+      "n_responders": 36,
+      "n_nonresponders": 29,
+      "AUROC": 0.5766283524904214,
+      "AUPRC": 0.6805184247029877,
+      "balanced_accuracy": 0.5296934865900383,
+      "Brier": 0.2468155190802023,
+      "ECE": 0.062290473124393626,
+      "threshold_source": "discovery_only"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "cohort": "GSE140901",
+      "analysis_type": "nanostring_hcc_clinical_assay_transfer",
+      "n_samples": 24,
+      "n_responders": 16,
+      "n_nonresponders": 8,
+      "AUROC": 0.7109375,
+      "AUPRC": 0.8509012535666948,
+      "balanced_accuracy": 0.59375,
+      "Brier": 0.22594532861680794,
+      "ECE": 0.19889572484171936,
+      "threshold_source": "discovery_only"
+    }
+  ]
+}

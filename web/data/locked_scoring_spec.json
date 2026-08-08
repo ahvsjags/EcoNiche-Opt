@@ -1,0 +1,94 @@
+{
+  "model_name": "EcoNiche-Opt-HeuristicEcology-LockedPanel",
+  "model_status": "frozen_for_external_validation",
+  "release_tag": "v0.3.2-locked-validation-20260527",
+  "release_commit": "recorded_on_github_release_page",
+  "intended_validation_context": "independent pretreatment melanoma tumor-tissue anti-PD-1/anti-PD-1-based cohort",
+  "unsupported_context_without_new_training": "blood, plasma, PBMC, serum, on-treatment biopsy, and non-ICB treatment-only cohorts",
+  "training_threshold_source": "GSE91061,GSE78220,PRJEB23709_PD1_PRE only",
+  "input_matrix_format": "samples-by-genes matrix with sample_id as row identifier and HGNC gene symbols as columns",
+  "input_transform": "assay values must be normalized within the registered platform workflow; EcoNiche-Opt then computes signed rank-gene and module scores using the locked gene list and response/resistance directions",
+  "score_formula": "locked logistic response probability from signed immune-ecology module activities plus ecological interaction features; endpoint thresholds are discovery-only calibrated and frozen before validation scoring",
+  "panel_unique_genes": 62,
+  "panel_gene_module_rows": 63,
+  "module_weights": {
+    "ifn_t_cell_inflamed": 1.0,
+    "cytotoxic_cd8": 0.5,
+    "exhaustion_checkpoint": 0.25,
+    "antigen_presentation": 0.5,
+    "myeloid_suppression": -0.5,
+    "stromal_exclusion": -0.5,
+    "trm_tls": 0.25
+  },
+  "endpoint_thresholds": [
+    {
+      "endpoint": "primary_recist",
+      "threshold": 0.4377922748557101,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.348184436736193,
+      "calibration_intercept": -0.0628256143537588,
+      "training_n": 117,
+      "training_responders": 43,
+      "training_nonresponders": 74,
+      "training_AUROC": 0.7049025769956003,
+      "training_balanced_accuracy": 0.6742614707730987,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    },
+    {
+      "endpoint": "strict_recist",
+      "threshold": 0.4464485197217447,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.3485659294595968,
+      "calibration_intercept": -0.0602007040381982,
+      "training_n": 95,
+      "training_responders": 43,
+      "training_nonresponders": 52,
+      "training_AUROC": 0.7101967799642218,
+      "training_balanced_accuracy": 0.7010286225402504,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    },
+    {
+      "endpoint": "clinical_benefit",
+      "threshold": 0.4866388147907647,
+      "calibration": "discovery_only_platt",
+      "calibration_coef": 0.2272870579954178,
+      "calibration_intercept": 0.0166390461953931,
+      "training_n": 117,
+      "training_responders": 65,
+      "training_nonresponders": 52,
+      "training_AUROC": 0.6428994082840236,
+      "training_balanced_accuracy": 0.6423076923076922,
+      "training_cohorts": "GSE91061,GSE78220,PRJEB23709_PD1_PRE"
+    }
+  ],
+  "predeclared_comparators": [
+    "IFNG",
+    "CXCL9",
+    "TIG",
+    "TIDE_dysfunction",
+    "APM",
+    "CYT",
+    "IPRES",
+    "TIDE_exclusion"
+  ],
+  "required_primary_report_metrics": [
+    "AUROC",
+    "AUPRC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity",
+    "PPV",
+    "NPV",
+    "Brier",
+    "ECE",
+    "calibration_intercept",
+    "calibration_slope",
+    "decision_curve_net_benefit"
+  ],
+  "label_encoding": {
+    "responder": 1,
+    "nonresponder": 0
+  },
+  "allowed_primary_claim": "locked independent validation performance only after newly assembled samples are scored with this frozen specification",
+  "forbidden_claim": "do not use validation labels for feature selection, thresholding, calibration, refitting, endpoint relabeling, or claim wording before the statistical analysis plan is frozen"
+}
