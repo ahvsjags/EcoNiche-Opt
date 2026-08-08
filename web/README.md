@@ -6,7 +6,7 @@ This is a static, GitHub Pages-compatible research interface for the EcoNiche-Op
 - browser-side expression-matrix format and panel-coverage auditing;
 - a label-free locked-score preview using the registered module-prior and frozen endpoint calibration;
 - sample-level score and audit exports;
-- reviewer-resolution, revision-audit and registered benchmark views;
+- module, endpoint and reproducibility views for model users;
 - direct downloads of the locked specification and panel mapping.
 
 The browser preview is not a replacement for the formal independent-validation command. For production analysis use:

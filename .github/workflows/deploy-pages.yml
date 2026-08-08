@@ -7,8 +7,6 @@ on:
       - "web/**"
       - "deliverables/prospective_validation/locked_scoring_spec.json"
       - "deliverables/prospective_validation/locked_panel_genes.tsv"
-      - "paper/BMC_Bioinformatics_revision_20260808/reviewer_comment_resolution_matrix.tsv"
-      - "paper/BMC_Bioinformatics_revision_20260808/bmc_revision_pre_submission_audit.tsv"
       - "results/endpoint_modules_heuristic_core_locked_gpu/endpoint_module_summary.tsv"
       - "results/locked_external_panel_validation_calibrated_20260519/locked_external_metrics.tsv"
       - "figures/article/figure_manifest.tsv"

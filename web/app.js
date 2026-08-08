@@ -32,15 +32,14 @@ function setView(view) {
   $$(".nav-item").forEach((item) => item.classList.toggle("is-active", item.dataset.view === view));
   history.replaceState(null, "", `#${view}`);
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (view === "evidence") renderEvidence();
   if (view === "panel") renderPanel();
   refreshIcons();
 }
 
 function renderOverview() {
-  const { model, modules, endpoints, review } = state.manifest;
+  const { model, modules, endpoints } = state.manifest;
   const metrics = $("#overview-metrics").children;
-  const values = [model.panel_unique_genes, modules.length, endpoints.length, `${review.resolved}/${review.total}`];
+  const values = [model.panel_unique_genes, modules.length, endpoints.length, "ON"];
   [...metrics].forEach((card, index) => { $(".metric-value", card).textContent = values[index]; });
   $("#release-tag").textContent = model.release_tag;
   $("#build-stamp").textContent = model.release_tag.split("-")[0];
@@ -58,7 +57,6 @@ function renderOverview() {
   $("#allowed-claim").textContent = model.allowed_claim;
   $("#forbidden-claim").textContent = model.forbidden_claim;
   $("#panel-count").textContent = model.panel_unique_genes;
-  $("#audit-score").childNodes[0].textContent = `${state.manifest.audit.passed} / ${state.manifest.audit.total}`;
   refreshIcons();
 }
 
@@ -218,27 +216,6 @@ function loadMatrix(text, filename = "inline matrix") {
 
 function readFile(file) { const reader = new FileReader(); reader.onload = () => loadMatrix(String(reader.result), file.name); reader.onerror = () => showToast("The file could not be read."); reader.readAsText(file); }
 
-function renderEvidence() {
-  if (!state.manifest) return;
-  const { audit, review, benchmark } = state.manifest;
-  $("#audit-score").childNodes[0].textContent = `${audit.passed} / ${audit.total}`;
-  $("#audit-subtitle").textContent = `${audit.failed} failed · source audit`;
-  $("#reviewer-subtitle").textContent = `${review.total} comments · resolution matrix`;
-  $("#reviewer-badge").textContent = `${review.resolved}/${review.total} resolved`;
-  $("#audit-meter-fill").style.width = `${audit.passed / audit.total * 100}%`;
-  $("#audit-list").innerHTML = audit.rows.map((row) => `<div class="audit-row ${row.is_valid === "True" ? "" : "is-fail"}"><i data-lucide="${row.is_valid === "True" ? "check-circle-2" : "circle-x"}"></i><div><strong>${escapeHtml(row.check)}</strong><span>${escapeHtml(row.detail || "registered check")}</span></div></div>`).join("");
-  renderReviewerTable();
-  const preferred = benchmark.filter((row) => row.stratum === "melanoma_core_high_evidence").slice(0, 3);
-  $("#benchmark-grid").innerHTML = preferred.length ? preferred.map((row) => `<div class="benchmark-item"><span>${escapeHtml(pretty(row.endpoint))}</span><strong>${number(row.pooled_AUROC, 3)}</strong><small>pooled AUROC · ${row.n_samples} samples · ${row.n_cohorts} cohorts</small><b>${escapeHtml(row.evaluation_modes || "LODO")}</b></div>`).join("") : `<div class="benchmark-item"><span>Registered output</span><strong>RESULT_PENDING</strong><small>No benchmark summary available in this bundle.</small></div>`;
-  refreshIcons();
-}
-
-function renderReviewerTable() {
-  const query = $("#review-search").value.trim().toLowerCase();
-  const rows = state.manifest.review.rows.filter((row) => !query || Object.values(row).join(" ").toLowerCase().includes(query));
-  $("#review-table tbody").innerHTML = rows.map((row) => `<tr><td>${escapeHtml(row.comment_id)}</td><td>${escapeHtml(row.issue)}</td><td>${escapeHtml(row.evidence)}</td><td>${escapeHtml(row.status)}</td></tr>`).join("");
-}
-
 function renderPanel() {
   if (!state.manifest) return;
   const query = $("#gene-search").value.trim().toLowerCase();
@@ -271,8 +248,8 @@ function init() {
   $("#clear-input").addEventListener("click", () => { state.matrixText = ""; state.matrix = null; state.scores = null; $("#selected-file").textContent = "No file loaded"; $("#output-status").textContent = "waiting for input"; $("#empty-output").classList.remove("is-hidden"); $("#score-results").classList.add("is-hidden"); $("#expression-file").value = ""; });
   $("#run-score").addEventListener("click", () => { if (!state.matrix) { showToast("Load an expression matrix first."); return; } state.scores = scoreMatrix(state.matrix); renderResults(state.scores); if (!state.scores.audit.ready) showToast("Score generated with audit warnings. Review coverage and context before using the export."); });
   $("#download-csv").addEventListener("click", downloadScores); $("#download-audit").addEventListener("click", downloadAudit);
-  $("#review-search").addEventListener("input", renderReviewerTable); $("#gene-search").addEventListener("input", renderPanel); $("#endpoint-select").addEventListener("change", () => { if (state.scores) renderResults(state.scores); });
-  fetch("data/portal_manifest.json").then((response) => { if (!response.ok) throw new Error("Portal manifest unavailable"); return response.json(); }).then((manifest) => { state.manifest = manifest; renderOverview(); initPanelFilters(); renderPanel(); const hash = location.hash.replace("#", ""); setView(["overview", "score", "evidence", "panel", "reproducibility"].includes(hash) ? hash : "overview"); }).catch((error) => showToast(error.message));
+  $("#gene-search").addEventListener("input", renderPanel); $("#endpoint-select").addEventListener("change", () => { if (state.scores) renderResults(state.scores); });
+  fetch("data/portal_manifest.json").then((response) => { if (!response.ok) throw new Error("Portal manifest unavailable"); return response.json(); }).then((manifest) => { state.manifest = manifest; renderOverview(); initPanelFilters(); renderPanel(); const hash = location.hash.replace("#", ""); setView(["overview", "score", "panel", "reproducibility"].includes(hash) ? hash : "overview"); }).catch((error) => showToast(error.message));
   refreshIcons();
 }
 

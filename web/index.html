@@ -42,14 +42,11 @@
             <button class="nav-item" type="button" data-view="score">
               <i data-lucide="scan-line"></i><span>Score &amp; audit</span><span class="nav-key">02</span>
             </button>
-            <button class="nav-item" type="button" data-view="evidence">
-              <i data-lucide="clipboard-check"></i><span>Evidence map</span><span class="nav-key">03</span>
-            </button>
             <button class="nav-item" type="button" data-view="panel">
-              <i data-lucide="dna"></i><span>62-gene panel</span><span class="nav-key">04</span>
+              <i data-lucide="dna"></i><span>62-gene panel</span><span class="nav-key">03</span>
             </button>
             <button class="nav-item" type="button" data-view="reproducibility">
-              <i data-lucide="file-code-2"></i><span>Reproducibility</span><span class="nav-key">05</span>
+              <i data-lucide="file-code-2"></i><span>Reproducibility</span><span class="nav-key">04</span>
             </button>
           </nav>
           <div class="sidebar-note">
@@ -69,7 +66,7 @@
               </div>
               <div class="heading-actions">
                 <button class="button button-primary" type="button" data-go-view="score"><i data-lucide="scan-line"></i>Open scoring workbench</button>
-                <button class="button button-secondary" type="button" data-go-view="evidence"><i data-lucide="clipboard-check"></i>Inspect evidence</button>
+                <button class="button button-secondary" type="button" data-go-view="panel"><i data-lucide="dna"></i>Explore gene panel</button>
               </div>
             </div>
 
@@ -77,7 +74,7 @@
               <div class="metric-card"><span class="metric-label">Panel genes</span><strong class="metric-value">--</strong><span class="metric-foot">unique HGNC symbols</span></div>
               <div class="metric-card"><span class="metric-label">Ecological modules</span><strong class="metric-value">--</strong><span class="metric-foot">signed prior weights</span></div>
               <div class="metric-card"><span class="metric-label">Locked endpoints</span><strong class="metric-value">--</strong><span class="metric-foot">discovery thresholds frozen</span></div>
-              <div class="metric-card metric-card-accent"><span class="metric-label">Revision audit</span><strong class="metric-value">--</strong><span class="metric-foot">reviewer items resolved</span></div>
+              <div class="metric-card metric-card-accent"><span class="metric-label">Local compute</span><strong class="metric-value">ON</strong><span class="metric-foot">files stay in browser</span></div>
             </div>
 
             <div class="overview-grid">
@@ -107,7 +104,7 @@
               <div class="section-head"><div><span class="section-index">C</span><h2>Study architecture</h2></div><button class="text-button" type="button" data-go-view="reproducibility">view source files <i data-lucide="arrow-up-right"></i></button></div>
               <div class="figure-layout">
                 <div class="figure-frame"><img src="assets/fig1_study_design_benchmark.png" alt="EcoNiche-Opt study design and evidence chain" /></div>
-                <div class="figure-notes"><div class="figure-note"><span class="note-rule teal"></span><div><strong>Registered data flow</strong><p>Access status, cohort roles, endpoint harmonization and module coverage remain visible instead of being compressed into a single score.</p></div></div><div class="figure-note"><span class="note-rule coral"></span><div><strong>Independent use</strong><p>Upload an expression matrix to inspect coverage and produce a label-free preview in the scoring workbench.</p></div></div><div class="figure-note"><span class="note-rule gold"></span><div><strong>Reproducible handoff</strong><p>Every download includes the release tag, endpoint thresholds and an audit snapshot.</p></div></div></div>
+                <div class="figure-notes"><div class="figure-note"><span class="note-rule teal"></span><div><strong>Module scoring</strong><p>Seven immune-ecology modules convert a sample-by-gene matrix into inspectable response and resistance activity.</p></div></div><div class="figure-note"><span class="note-rule coral"></span><div><strong>Independent use</strong><p>Upload an expression matrix to inspect coverage and produce a label-free preview in the scoring workbench.</p></div></div><div class="figure-note"><span class="note-rule gold"></span><div><strong>Reproducible handoff</strong><p>Every download carries the release tag, endpoint thresholds and the sample-level coverage summary.</p></div></div></div>
               </div>
             </section>
           </section>
@@ -140,26 +137,20 @@
             <section class="panel-card method-note"><div class="method-icon"><i data-lucide="info"></i></div><div><strong>Interpretation boundary</strong><p>This browser preview follows the registered locked scorer's module-prior calculation and frozen endpoint calibration. It is a computational demonstration and coverage audit; it does not establish independent clinical performance without a prespecified cohort, manifest, labels and the repository command-line workflow.</p></div></section>
           </section>
 
-          <section class="view" id="view-evidence" data-view-panel="evidence">
-            <div class="page-heading compact-heading"><div><div class="eyebrow">AUDIT TRAIL / 03</div><h1>Evidence map</h1><p class="heading-copy">A compact view of what was resolved, where it is documented, and which checks are generated from source artifacts.</p></div><div class="audit-score" id="audit-score">-- / --<span>audit checks passed</span></div></div>
-            <div class="evidence-grid"><section class="panel-card audit-card"><div class="section-head"><div><span class="section-index">A</span><h2>Revision audit</h2></div><span class="section-meta" id="audit-subtitle">loading…</span></div><div class="audit-meter"><div id="audit-meter-fill"></div></div><div class="audit-list" id="audit-list"></div></section><section class="panel-card reviewer-card"><div class="section-head"><div><span class="section-index">B</span><h2>Reviewer resolution</h2></div><span class="section-meta" id="reviewer-subtitle">loading…</span></div><div class="filter-row"><div class="search-box"><i data-lucide="search"></i><input id="review-search" type="search" placeholder="Filter comments" aria-label="Filter reviewer comments" /></div><span class="resolved-badge" id="reviewer-badge">--</span></div><div class="table-wrap evidence-table-wrap"><table class="data-table evidence-table" id="review-table"><thead><tr><th>ID</th><th>Issue</th><th>Evidence</th><th>Status</th></tr></thead><tbody></tbody></table></div></section></div>
-            <section class="panel-card benchmark-card"><div class="section-head"><div><span class="section-index">C</span><h2>Registered benchmark outputs</h2></div><span class="section-meta">repository-generated, not browser-generated</span></div><div class="benchmark-grid" id="benchmark-grid"></div></section>
-          </section>
-
           <section class="view" id="view-panel" data-view-panel="panel">
-            <div class="page-heading compact-heading"><div><div class="eyebrow">PANEL TRANSLATION / 04</div><h1>62-gene panel</h1><p class="heading-copy">Explore the frozen gene-to-module mapping, signed biological direction and prior weight carried into the locked validation package.</p></div><div class="panel-count"><strong id="panel-count">--</strong><span>unique genes</span></div></div>
+            <div class="page-heading compact-heading"><div><div class="eyebrow">MODEL COMPONENTS / 03</div><h1>62-gene panel</h1><p class="heading-copy">Explore the frozen gene-to-module mapping, signed biological direction and prior weight carried into the locked validation package.</p></div><div class="panel-count"><strong id="panel-count">--</strong><span>unique genes</span></div></div>
             <div class="panel-toolbar"><div class="search-box panel-search"><i data-lucide="search"></i><input id="gene-search" type="search" placeholder="Search gene or module" aria-label="Search gene or module" /></div><div class="module-filters" id="module-filters"></div><a class="button button-secondary" href="data/locked_panel_genes.tsv" download><i data-lucide="download"></i>Download panel TSV</a></div>
             <section class="panel-card panel-table-card"><div class="table-wrap"><table class="data-table gene-table" id="gene-table"><thead><tr><th>Gene</th><th>Module</th><th>Prior weight</th><th>Direction</th><th>Role</th></tr></thead><tbody></tbody></table></div></section>
           </section>
 
           <section class="view" id="view-reproducibility" data-view-panel="reproducibility">
-            <div class="page-heading compact-heading"><div><div class="eyebrow">REPRODUCIBILITY / 05</div><h1>Reproducibility kit</h1><p class="heading-copy">The portal is a public-facing window into the repository. The formal analysis remains scriptable, versioned and inspectable from the command line.</p></div><a class="button button-primary" href="https://doi.org/10.5281/zenodo.20419694" target="_blank" rel="noreferrer"><i data-lucide="external-link"></i>Open archived release</a></div>
+            <div class="page-heading compact-heading"><div><div class="eyebrow">REPRODUCIBILITY / 04</div><h1>Reproducibility kit</h1><p class="heading-copy">The portal is a public-facing window into the model. The formal analysis remains scriptable, versioned and inspectable from the command line.</p></div><a class="button button-primary" href="https://doi.org/10.5281/zenodo.20419694" target="_blank" rel="noreferrer"><i data-lucide="external-link"></i>Open archived release</a></div>
             <div class="repro-grid"><section class="panel-card command-card"><div class="section-head"><div><span class="section-index">A</span><h2>Formal scoring command</h2></div><span class="section-meta">server / local execution</span></div><pre><code>econiche-opt score-locked-validation \
   --package-dir deliverables/prospective_validation \
   --expression independent_expression.tsv \
   --sample-manifest assay_sample_manifest.tsv \
   --clinical-annotation clinical_annotation.tsv \
-  --out-dir results/independent_locked_validation</code></pre><div class="command-foot"><i data-lucide="lock-keyhole"></i><span>Never retrains or calibrates on the independent cohort.</span></div></section><section class="panel-card artifact-card"><div class="section-head"><div><span class="section-index">B</span><h2>Public artifacts</h2></div><span class="section-meta">generated from source</span></div><div class="artifact-list"><a href="data/portal_manifest.json" download><span class="artifact-icon"><i data-lucide="file-json-2"></i></span><span><strong>Portal manifest</strong><small>specification, audit and registered outputs</small></span><i data-lucide="download"></i></a><a href="data/locked_scoring_spec.json" download><span class="artifact-icon"><i data-lucide="braces"></i></span><span><strong>Locked scoring specification</strong><small>release-tagged model contract</small></span><i data-lucide="download"></i></a><a href="data/locked_panel_genes.tsv" download><span class="artifact-icon"><i data-lucide="table-2"></i></span><span><strong>62-gene panel map</strong><small>gene, module, direction and weight</small></span><i data-lucide="download"></i></a></div></section></div>
+  --out-dir results/independent_locked_validation</code></pre><div class="command-foot"><i data-lucide="lock-keyhole"></i><span>Never retrains or calibrates on the independent cohort.</span></div></section><section class="panel-card artifact-card"><div class="section-head"><div><span class="section-index">B</span><h2>Public artifacts</h2></div><span class="section-meta">generated from source</span></div><div class="artifact-list"><a href="data/portal_manifest.json" download><span class="artifact-icon"><i data-lucide="file-json-2"></i></span><span><strong>Portal manifest</strong><small>model specification and reproducibility metadata</small></span><i data-lucide="download"></i></a><a href="data/locked_scoring_spec.json" download><span class="artifact-icon"><i data-lucide="braces"></i></span><span><strong>Locked scoring specification</strong><small>release-tagged model contract</small></span><i data-lucide="download"></i></a><a href="data/locked_panel_genes.tsv" download><span class="artifact-icon"><i data-lucide="table-2"></i></span><span><strong>62-gene panel map</strong><small>gene, module, direction and weight</small></span><i data-lucide="download"></i></a></div></section></div>
             <section class="panel-card boundaries-card"><div class="section-head"><div><span class="section-index">C</span><h2>Boundary ledger</h2></div><span class="section-meta">carried into manuscript and portal</span></div><div class="boundary-grid"><div><span class="ledger-label">INTENDED</span><p id="intended-context">loading…</p></div><div><span class="ledger-label">UNSUPPORTED WITHOUT NEW TRAINING</span><p id="unsupported-context-repro">loading…</p></div><div><span class="ledger-label">ALLOWED CLAIM</span><p id="allowed-claim">loading…</p></div><div><span class="ledger-label">FORBIDDEN BEFORE SAP FREEZE</span><p id="forbidden-claim">loading…</p></div></div></section>
           </section>
 

@@ -16,7 +16,6 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = ROOT / "deliverables" / "prospective_validation"
-BMC = ROOT / "paper" / "BMC_Bioinformatics_revision_20260808"
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
@@ -51,8 +50,6 @@ def build_bundle() -> dict[str, Any]:
             }
         )
 
-    review_rows = read_tsv(BMC / "reviewer_comment_resolution_matrix.tsv")
-    audit_rows = read_tsv(BMC / "bmc_revision_pre_submission_audit.tsv")
     figure_rows = read_tsv(ROOT / "figures" / "article" / "figure_manifest.tsv")
 
     benchmark_rows = read_tsv(ROOT / "results" / "endpoint_modules_heuristic_core_locked_gpu" / "endpoint_module_summary.tsv")
@@ -101,14 +98,11 @@ def build_bundle() -> dict[str, Any]:
             }
         )
 
-    audit_pass = sum(row.get("is_valid", "").lower() == "true" for row in audit_rows)
     return {
         "generated_by": "scripts/web/build_portal_data.py",
         "source_files": [
             "deliverables/prospective_validation/locked_scoring_spec.json",
             "deliverables/prospective_validation/locked_panel_genes.tsv",
-            "paper/BMC_Bioinformatics_revision_20260808/reviewer_comment_resolution_matrix.tsv",
-            "paper/BMC_Bioinformatics_revision_20260808/bmc_revision_pre_submission_audit.tsv",
             "figures/article/figure_manifest.tsv",
             "results/endpoint_modules_heuristic_core_locked_gpu/endpoint_module_summary.tsv",
             "results/locked_external_panel_validation_calibrated_20260519/locked_external_metrics.tsv",
@@ -132,17 +126,6 @@ def build_bundle() -> dict[str, Any]:
         "endpoints": spec.get("endpoint_thresholds", []),
         "comparators": spec.get("predeclared_comparators", []),
         "required_metrics": spec.get("required_primary_report_metrics", []),
-        "review": {
-            "total": len(review_rows),
-            "resolved": sum(row.get("status", "").lower() == "resolved" for row in review_rows),
-            "rows": review_rows,
-        },
-        "audit": {
-            "total": len(audit_rows),
-            "passed": audit_pass,
-            "failed": len(audit_rows) - audit_pass,
-            "rows": audit_rows,
-        },
         "figures": {
             "count": len(figure_rows),
             "rows": figure_rows,
